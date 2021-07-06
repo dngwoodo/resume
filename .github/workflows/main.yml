@@ -1,0 +1,76 @@
+name: Build & Publish
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  next-build:
+    runs-on: ubuntu-20.04
+    container: node:lts # Use node LTS container version, same as Dockerfile base image
+    steps:
+      # 가상 호스트에 코드 복사
+      - name: Checkout
+        uses: actions/checkout@v2 
+      - run: npm ci
+      - run: npm run build
+        # env:
+      # artifact에 파일 업로드
+      - name: Upload Next build
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: |
+            .next
+            public
+          retention-days: 7 # 최대 30일 저장 가능
+
+  
+  next-deploy:
+    # main 브랜치일 때
+    if: ${{ github.ref == 'refs/heads/main' }}
+
+    # next-build artifact가 있어야 실행
+    needs: next-build
+    runs-on: ubuntu-latest
+    steps:
+      # 가상 호스트에 코드 복사
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # artifact에 있는 파일 다운로드
+      - name: Download next build
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+
+      # Github Container Registry에 로그인
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.CR_PAT }}
+
+      # 도커 이미지 생성 후 Github Container Registry에 저장
+      - name: Build and Push Docker Images
+        run: |
+          echo ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
+          docker build -t ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA .
+          docker push ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
+      # AWS에 배포하기   
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ec2-18-118-156-189.us-east-2.compute.amazonaws.com
+          username: ec2-user
+          key: ${{ secrets.AWS_PRIVATE_KEY }}
+          envs: GITHUB_SHA, GITHUB_REPOSITORY
+          script: |
+            echo ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
+            docker pull ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
+            docker tag ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA resume
+            docker stop server
+            docker run --rm -d -p 80:3000 --name server resume
