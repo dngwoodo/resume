@@ -29,8 +29,8 @@ jobs:
 
   
   next-deploy:
-    # main 브랜치일 때
-    if: ${{ github.ref == 'refs/heads/main' }}
+    # master 브랜치일 때 실행
+    if: ${{ github.ref == 'refs/heads/master' }}
 
     # next-build artifact가 있어야 실행
     needs: next-build
