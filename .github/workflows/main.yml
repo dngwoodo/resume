@@ -70,6 +70,7 @@ jobs:
           envs: GITHUB_SHA, GITHUB_REPOSITORY
           script: |
             echo ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
+            echo ${{ secrets.CR_PAT }} | docker login ghcr.io -u $GITHUB_REPOSITORY --password-stdin
             docker pull ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
             docker tag ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA resume
             docker stop server
