@@ -17,6 +17,7 @@ jobs:
       - run: npm ci
       - run: npm run build
         # env:
+
       # artifact에 파일 업로드
       - name: Upload Next build
         uses: actions/upload-artifact@v2
@@ -27,7 +28,14 @@ jobs:
             public
           retention-days: 7 # 최대 30일 저장 가능
 
-  
+      # lint
+      - name: Run Lint
+        run: npm run lint
+        
+      # test
+      - name: Run Test
+        run: npm run test
+
   next-deploy:
     # master 브랜치일 때 실행
     if: ${{ github.ref == 'refs/heads/master' }}

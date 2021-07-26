@@ -6,6 +6,6 @@ describe('Home', () => {
   it('renders post titles', () => {
     const { getByText } = render(<Home />);
 
-    expect(getByText('Hello')).toBeInTheDocument();
+    expect(getByText('Hello!')).toBeInTheDocument();
   });
 });
