@@ -69,6 +69,7 @@ module.exports = {
       { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
     ],
     'react/react-in-jsx-scope': 'off',
+    'jsx-a11y/label-has-associated-control': 'off',
   },
   ignorePatterns: ['plopfile.js', 'plop-templates'],
 };
