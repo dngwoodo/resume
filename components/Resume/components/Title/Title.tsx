@@ -3,20 +3,21 @@ import Image from 'next/image';
 import styled from '@emotion/styled';
 import { ChangeEvent, useRef } from 'react';
 
-const TitleControl = styled.div({
+const Container = styled.div({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  marginBottom: '80px',
   '& > div:nth-of-type(1)': {
     height: '60px',
+    marginRight: '8px',
+    color: '#11142D',
+    fontSize: '40px',
     fontFamily: 'Poppins',
     fontWeight: 600,
-    fontSize: '40px',
-    letterSpacing: '-1px',
-    color: '#11142D',
-    marginRight: '8px',
-    lineHeight: '60px',
     outline: 'none',
+    lineHeight: '60px',
+    letterSpacing: '-1px',
     '&:focus': {
       borderBottom: '1px solid #11142D',
     },
@@ -49,7 +50,7 @@ export default function Title({ onInput, onClick }: Props) {
   }
 
   return (
-    <TitleControl>
+    <Container>
       <div
         ref={inputRef}
         role='textbox'
@@ -72,6 +73,6 @@ export default function Title({ onInput, onClick }: Props) {
       >
         <Image src='/edit/edit@3x.png' layout='fill' alt='title-control' />
       </div>
-    </TitleControl>
+    </Container>
   );
 }
