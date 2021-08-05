@@ -1,10 +1,10 @@
 import { fireEvent, render } from '@testing-library/react';
 
-import ResumeTitle from './ResumeTitleContainer';
+import TitleContainer from './TitleContainer';
 
-describe('ResumeTitle', () => {
+describe('TitleContainer', () => {
   it('listens change event', () => {
-    const { getByText } = render(<ResumeTitle />);
+    const { getByText } = render(<TitleContainer />);
 
     expect(getByText('이력서 제목')).toBeInTheDocument();
 
@@ -16,7 +16,7 @@ describe('ResumeTitle', () => {
   });
 
   it('listens click event', () => {
-    const { getByText, getByTestId } = render(<ResumeTitle />);
+    const { getByText, getByTestId } = render(<TitleContainer />);
 
     expect(getByText('이력서 제목')).not.toHaveFocus();
 

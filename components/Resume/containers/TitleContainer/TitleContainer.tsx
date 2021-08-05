@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-import ResumeTitle from '@/components/ResumeTitle';
+import Title from '@/components/Resume/components/Title';
 
-export default function ResumeTitleContainer() {
+export default function TitleContainer() {
   // eslint-disable-next-line no-unused-vars
   const [title, setTitle] = useState<string>('이력서 제목');
 
@@ -15,9 +15,6 @@ export default function ResumeTitleContainer() {
   }
 
   return (
-    <ResumeTitle
-      onInput={handleInputTitle}
-      onClick={handleClickInputControlFocus}
-    />
+    <Title onInput={handleInputTitle} onClick={handleClickInputControlFocus} />
   );
 }
