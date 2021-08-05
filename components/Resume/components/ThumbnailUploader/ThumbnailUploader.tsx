@@ -6,6 +6,7 @@ const Container = styled.div({
   justifyContent: 'space-between',
   width: '432px',
   height: '80px',
+  marginBottom: '40px',
 });
 
 const ImageWrapper = styled.div({
