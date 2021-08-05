@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 const Container = styled.div({
   display: 'flex',
   width: '100%',
+  padding: '100px 64px',
 });
 
 const LeftSide = styled.div({
