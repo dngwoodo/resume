@@ -1,9 +1,11 @@
-import ResumeTitleContainer from '@/containers/ResumeTitleContainer';
+import ResumeControls from '@/components/Resume/Developer/ResumeControls';
+import PdfViewer from '@/components/Resume/Developer/PdfViewer';
 
 export default function Resume() {
   return (
     <>
-      <ResumeTitleContainer />
+      <ResumeControls />
+      <PdfViewer />
     </>
   );
 }

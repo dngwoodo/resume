@@ -37,7 +37,7 @@ type Props = {
   onClick: (element: HTMLDivElement) => void;
 };
 
-export default function ResumeTitle({ onInput, onClick }: Props) {
+export default function Title({ onInput, onClick }: Props) {
   const inputRef = useRef<HTMLDivElement>(null);
 
   function handleInput(event: ChangeEvent<HTMLDivElement>) {
