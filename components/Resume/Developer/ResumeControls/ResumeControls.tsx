@@ -1,6 +1,7 @@
-import ProgressBarContainer from '../../containers/ProgressBarContainer';
-import ThumbnailUploaderContainer from '../../containers/ThumbnailUploaderContainer';
 import TitleContainer from '../../containers/TitleContainer';
+import ThumbnailUploaderContainer from '../../containers/ThumbnailUploaderContainer';
+import ProgressBarContainer from '../../containers/ProgressBarContainer';
+import BasicContainer from '../../containers/BasicContainer';
 
 export default function ResumeControls() {
   return (
@@ -8,6 +9,7 @@ export default function ResumeControls() {
       <TitleContainer />
       <ThumbnailUploaderContainer />
       <ProgressBarContainer />
+      <BasicContainer />
     </>
   );
 }

@@ -9,6 +9,7 @@
       "@/hooks/*": ["hooks/*"],
       "@/types/*": ["types/*"],
       "@/fixtures/*": ["fixtures/*"],
+      "@/redux/*": ["redux/*"],
     },
     "target": "es5",
     "lib": [
