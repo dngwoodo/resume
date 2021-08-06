@@ -11,6 +11,7 @@ const Bottom = styled.div({
   '& div': {
     position: 'relative',
     height: '4px',
+    marginBottom: '80px',
     backgroundColor: '#E4E4E4',
     '&:before': {
       position: 'absolute',
