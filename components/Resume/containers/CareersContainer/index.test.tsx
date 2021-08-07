@@ -1,6 +1,10 @@
-import { CAREER_PLACEHOLDERS } from '@/fixtures/placeholders';
 import { fireEvent, render } from '@testing-library/react';
+
 import { useDispatch, useSelector } from 'react-redux';
+
+import { CAREER_PLACEHOLDERS } from '@/fixtures/placeholders';
+import CAREERS from '@/fixtures/careers';
+
 import CareersContainer from './CareersContainer';
 
 jest.mock('react-redux');
@@ -15,18 +19,7 @@ describe('CareersContainer', () => {
     (useSelector as jest.Mock).mockImplementation((selector) =>
       selector({
         resume: {
-          careers: [
-            {
-              id: '0',
-              title: '',
-              jobDetail: '',
-              company: '',
-              startDate: '',
-              endDate: '',
-              region: '',
-              description: '',
-            },
-          ],
+          careers: CAREERS,
         },
       })
     );

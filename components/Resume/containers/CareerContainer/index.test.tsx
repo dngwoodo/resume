@@ -1,25 +1,17 @@
 import { fireEvent, render } from '@testing-library/react';
 
+import CAREERS from '@/fixtures/careers';
+
 import CareerContainer from './CareerContainer';
 
 describe('CareerContainer', () => {
-  const CAREER = {
-    id: '',
-    title: '',
-    jobDetail: '',
-    company: '',
-    startDate: '',
-    endDate: '',
-    region: '',
-    description: '',
-  };
   const handleChange = jest.fn();
   const handleClick = jest.fn();
 
   it('listens click event', () => {
     const { getByTestId } = render(
       <CareerContainer
-        career={CAREER}
+        career={CAREERS[0]}
         onChange={handleChange}
         onClickDeleteCareer={handleClick}
       />

@@ -1,28 +1,13 @@
-/* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface ResumeState {
+import { Basic, Career, CareerInputName } from '@/types/Resume';
+
+type ResumeState = {
   newId: number;
   title: string;
-  basic: {
-    name: string;
-    occupation: string;
-    email: string;
-    phoneNumber: string;
-    address: string;
-    introduction: string;
-  };
-  careers: {
-    id: number;
-    title: string;
-    jobDetail: string;
-    company: string;
-    startDate: string;
-    endDate: string;
-    region: string;
-    description: string;
-  }[];
-}
+  basic: Basic;
+  careers: Career[];
+};
 
 export const initialState: ResumeState = {
   newId: 100,
@@ -80,14 +65,8 @@ export const { reducer, actions } = createSlice({
         careers: [
           ...state.careers,
           {
+            ...initialState.careers[0],
             id: state.newId,
-            title: '',
-            jobDetail: '',
-            company: '',
-            startDate: '',
-            endDate: '',
-            region: '',
-            description: '',
           },
         ],
       };
@@ -106,17 +85,11 @@ export const { reducer, actions } = createSlice({
         payload: { id, name, value },
       }: PayloadAction<{
         id: number;
-        name:
-          | 'title'
-          | 'jobDetail'
-          | 'company'
-          | 'startDate'
-          | 'endDate'
-          | 'region'
-          | 'description';
+        name: CareerInputName;
         value: string;
       }>
     ) {
+      // eslint-disable-next-line no-param-reassign
       state.careers.find((career) => career.id === id)![name] = value;
     },
   },

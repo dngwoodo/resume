@@ -5,6 +5,8 @@ import Image from 'next/image';
 
 import styled from '@emotion/styled';
 
+import { CareerInputName } from '@/types/Resume';
+
 type Props = {
   id: number;
   title: string;
@@ -20,14 +22,7 @@ type Props = {
     value,
   }: {
     id: number;
-    name:
-      | 'title'
-      | 'jobDetail'
-      | 'company'
-      | 'startDate'
-      | 'endDate'
-      | 'region'
-      | 'description';
+    name: CareerInputName;
     value: string;
   }) => void;
   isShowDetail: boolean;
@@ -60,14 +55,7 @@ export default function Career({
   ) {
     onChange({
       id,
-      name: event.target.name as
-        | 'title'
-        | 'jobDetail'
-        | 'company'
-        | 'startDate'
-        | 'endDate'
-        | 'region'
-        | 'description',
+      name: event.target.name as CareerInputName,
       value: event.target.value,
     });
   }

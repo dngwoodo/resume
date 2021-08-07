@@ -1,5 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { useState } from 'react';
+
+import { CareerInputName } from '@/types/Resume';
+
 import Career from '../../components/Career';
 
 type Props = {
@@ -19,14 +22,7 @@ type Props = {
     value,
   }: {
     id: number;
-    name:
-      | 'title'
-      | 'jobDetail'
-      | 'company'
-      | 'startDate'
-      | 'endDate'
-      | 'region'
-      | 'description';
+    name: CareerInputName;
     value: string;
   }) => void;
   onClickDeleteCareer: (id: number) => void;

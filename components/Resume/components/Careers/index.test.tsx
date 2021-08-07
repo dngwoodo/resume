@@ -1,24 +1,13 @@
 import { fireEvent, render } from '@testing-library/react';
 
+import CAREERS from '@/fixtures/careers';
+
 import Careers from './Careers';
 
 describe('Careers', () => {
   const handleChange = jest.fn();
   const handleClickDeleteCareer = jest.fn();
   const handleClickAddCareer = jest.fn();
-
-  const CAREERS = [
-    {
-      id: 0,
-      title: '',
-      jobDetail: '',
-      company: '',
-      startDate: '',
-      endDate: '',
-      region: '',
-      description: '',
-    },
-  ];
 
   function renderCareers() {
     return render(
