@@ -39,27 +39,9 @@ export default function CareerContainer({
     setIsShowDetail(!isShowDetail);
   }
 
-  const {
-    id,
-    title,
-    jobDetail,
-    company,
-    startDate,
-    endDate,
-    region,
-    description,
-  } = career;
-
   return (
     <Career
-      id={id}
-      title={title}
-      jobDetail={jobDetail}
-      company={company}
-      startDate={startDate}
-      endDate={endDate}
-      region={region}
-      description={description}
+      career={career}
       onChange={onChange}
       isShowDetail={isShowDetail}
       onClickToggle={handleClickToggle}

@@ -3,6 +3,8 @@ import { fireEvent, render } from '@testing-library/react';
 import { CAREER_LABELS } from '@/fixtures/labels';
 import { CAREER_PLACEHOLDERS } from '@/fixtures/placeholders';
 
+import CAREERS from '@/fixtures/careers';
+
 import Career from './Career';
 
 describe('Career', () => {
@@ -13,14 +15,7 @@ describe('Career', () => {
   function renderCareer() {
     return render(
       <Career
-        id={0}
-        title=''
-        jobDetail=''
-        company=''
-        startDate=''
-        endDate=''
-        region=''
-        description=''
+        career={CAREERS[0]}
         onChange={handleChange}
         isShowDetail={false}
         onClickToggle={handleClickToggle}

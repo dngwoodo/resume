@@ -5,17 +5,10 @@ import Image from 'next/image';
 
 import styled from '@emotion/styled';
 
-import { CareerInputName } from '@/types/Resume';
+import { Career as CareerType, CareerInputName } from '@/types/Resume';
 
 type Props = {
-  id: number;
-  title: string;
-  jobDetail: string;
-  company: string;
-  startDate: string;
-  endDate: string;
-  region: string;
-  description: string;
+  career: CareerType;
   onChange: ({
     id,
     name,
@@ -37,19 +30,23 @@ const CareerDetail = styled.div(
 );
 
 export default function Career({
-  id,
-  title,
-  jobDetail,
-  company,
-  startDate,
-  endDate,
-  region,
-  description,
+  career,
   onChange,
   isShowDetail,
   onClickToggle,
   onClickDeleteCareer,
 }: Props) {
+  const {
+    id,
+    title,
+    jobDetail,
+    company,
+    startDate,
+    endDate,
+    region,
+    description,
+  } = career;
+
   function handleChange(
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ) {

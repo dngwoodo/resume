@@ -42,7 +42,7 @@ describe('CareersContainer', () => {
 
     expect(dispatch).toBeCalledWith({
       type: 'resume/deleteCareer',
-      payload: '0',
+      payload: 0,
     });
   });
 
