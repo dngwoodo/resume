@@ -63,7 +63,7 @@ describe('Career', () => {
 
     fireEvent.click(getByTestId('career-title'));
 
-    expect(getByTestId('career-detail')).toHaveStyle('height: auto');
+    expect(handleClickToggle).toBeCalled();
   });
 
   it("listens 'delete-career' click events", () => {

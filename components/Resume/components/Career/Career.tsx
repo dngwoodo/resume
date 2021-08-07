@@ -99,7 +99,7 @@ export default function Career({
           />
         </button>
       </div>
-      <CareerDetail data-testid='career-detail' isShowDetail>
+      <CareerDetail data-testid='career-detail' isShowDetail={isShowDetail}>
         <div>
           <label htmlFor='career-job-detail'>직무 내용</label>
           <input

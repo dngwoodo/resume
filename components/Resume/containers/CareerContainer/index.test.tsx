@@ -17,6 +17,8 @@ describe('CareerContainer', () => {
       />
     );
 
+    expect(getByTestId('career-detail')).toHaveStyle('height: 0px');
+
     fireEvent.click(getByTestId('career-title'));
 
     expect(getByTestId('career-detail')).toHaveStyle('height: auto');
