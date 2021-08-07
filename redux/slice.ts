@@ -1,6 +1,8 @@
+/* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export interface ResumeState {
+interface ResumeState {
+  newId: number;
   title: string;
   basic: {
     name: string;
@@ -10,9 +12,20 @@ export interface ResumeState {
     address: string;
     introduction: string;
   };
+  careers: {
+    id: number;
+    title: string;
+    jobDetail: string;
+    company: string;
+    startDate: string;
+    endDate: string;
+    region: string;
+    description: string;
+  }[];
 }
 
-const initialState: ResumeState = {
+export const initialState: ResumeState = {
+  newId: 100,
   title: '이력서 제목',
   basic: {
     name: '',
@@ -22,6 +35,18 @@ const initialState: ResumeState = {
     address: '',
     introduction: '',
   },
+  careers: [
+    {
+      id: 0,
+      title: '',
+      jobDetail: '',
+      company: '',
+      startDate: '',
+      endDate: '',
+      region: '',
+      description: '',
+    },
+  ],
 };
 
 export const { reducer, actions } = createSlice({
@@ -48,9 +73,61 @@ export const { reducer, actions } = createSlice({
         },
       };
     },
+    addCareer(state) {
+      return {
+        ...state,
+        newId: state.newId + 1,
+        careers: [
+          ...state.careers,
+          {
+            id: state.newId,
+            title: '',
+            jobDetail: '',
+            company: '',
+            startDate: '',
+            endDate: '',
+            region: '',
+            description: '',
+          },
+        ],
+      };
+    },
+    deleteCareer(state, { payload: id }: PayloadAction<number>) {
+      const newCareers = state.careers.filter((career) => career.id !== id);
+
+      return {
+        ...state,
+        careers: newCareers,
+      };
+    },
+    changeCareerField(
+      state,
+      {
+        payload: { id, name, value },
+      }: PayloadAction<{
+        id: number;
+        name:
+          | 'title'
+          | 'jobDetail'
+          | 'company'
+          | 'startDate'
+          | 'endDate'
+          | 'region'
+          | 'description';
+        value: string;
+      }>
+    ) {
+      state.careers.find((career) => career.id === id)![name] = value;
+    },
   },
 });
 
-export const { setTitle, changeResumeField } = actions;
+export const {
+  setTitle,
+  changeResumeField,
+  addCareer,
+  deleteCareer,
+  changeCareerField,
+} = actions;
 
 export default reducer;
