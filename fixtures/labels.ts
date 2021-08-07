@@ -7,4 +7,10 @@ export const BASIC_LABELS = [
   'Introduction',
 ];
 
-export default {};
+export const CAREER_LABELS = [
+  '직무 내용',
+  '회사명',
+  '근무 기간',
+  '지역',
+  '경력 기술',
+];

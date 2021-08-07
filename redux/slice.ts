@@ -1,18 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export interface ResumeState {
-  title: string;
-  basic: {
-    name: string;
-    occupation: string;
-    email: string;
-    phoneNumber: string;
-    address: string;
-    introduction: string;
-  };
-}
+import { Basic, Career, CareerInputName } from '@/types/Resume';
 
-const initialState: ResumeState = {
+type ResumeState = {
+  newId: number;
+  title: string;
+  basic: Basic;
+  careers: Career[];
+};
+
+export const initialState: ResumeState = {
+  newId: 100,
   title: '이력서 제목',
   basic: {
     name: '',
@@ -22,6 +20,18 @@ const initialState: ResumeState = {
     address: '',
     introduction: '',
   },
+  careers: [
+    {
+      id: 0,
+      title: '',
+      jobDetail: '',
+      company: '',
+      startDate: '',
+      endDate: '',
+      region: '',
+      description: '',
+    },
+  ],
 };
 
 export const { reducer, actions } = createSlice({
@@ -48,9 +58,49 @@ export const { reducer, actions } = createSlice({
         },
       };
     },
+    addCareer(state) {
+      return {
+        ...state,
+        newId: state.newId + 1,
+        careers: [
+          ...state.careers,
+          {
+            ...initialState.careers[0],
+            id: state.newId,
+          },
+        ],
+      };
+    },
+    deleteCareer(state, { payload: id }: PayloadAction<number>) {
+      const newCareers = state.careers.filter((career) => career.id !== id);
+
+      return {
+        ...state,
+        careers: newCareers,
+      };
+    },
+    changeCareerField(
+      state,
+      {
+        payload: { id, name, value },
+      }: PayloadAction<{
+        id: number;
+        name: CareerInputName;
+        value: string;
+      }>
+    ) {
+      // eslint-disable-next-line no-param-reassign
+      state.careers.find((career) => career.id === id)![name] = value;
+    },
   },
 });
 
-export const { setTitle, changeResumeField } = actions;
+export const {
+  setTitle,
+  changeResumeField,
+  addCareer,
+  deleteCareer,
+  changeCareerField,
+} = actions;
 
 export default reducer;
