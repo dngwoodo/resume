@@ -1,4 +1,5 @@
 import { fireEvent, render } from '@testing-library/react';
+import given from 'given2';
 
 import { CAREER_LABELS } from '@/fixtures/labels';
 import { CAREER_PLACEHOLDERS } from '@/fixtures/placeholders';
@@ -15,7 +16,12 @@ describe('Career', () => {
   function renderCareer() {
     return render(
       <Career
-        career={CAREERS[0]}
+        career={{
+          ...CAREERS[0],
+          jobDetail: given.jobDetail,
+          startDate: given.startDate,
+          endDate: given.endDate,
+        }}
         onChange={handleChange}
         isShowDetail={false}
         onClickToggle={handleClickToggle}
@@ -24,13 +30,44 @@ describe('Career', () => {
     );
   }
 
-  it('renders input controls, period, dropdown-toggle', () => {
+  it('renders title, period', () => {
+    const { getByText } = renderCareer();
+
+    expect(getByText('제목을 입력해주세요.')).toBeInTheDocument();
+    expect(getByText('근무 기간을 입력해주세요.')).toBeInTheDocument();
+  });
+
+  context('with jobTitle', () => {
+    beforeEach(() => {
+      given('jobDetail', () => '프론트엔드');
+    });
+
+    it('renders jobDetail', () => {
+      const { getByText } = renderCareer();
+
+      expect(getByText('프론트엔드')).toBeInTheDocument();
+    });
+  });
+
+  context('with startDate, endDate', () => {
+    beforeEach(() => {
+      given('startDate', () => '2020.01');
+      given('endDate', () => '2021.03');
+    });
+
+    it('renders startDate, endDate', () => {
+      const { getByText } = renderCareer();
+
+      expect(getByText('2020.01 - 2021.03')).toBeInTheDocument();
+    });
+  });
+
+  it('renders input controls, dropdown-toggle', () => {
     const {
       getByLabelText,
       getAllByLabelText,
       getByPlaceholderText,
       getByTestId,
-      getByText,
     } = renderCareer();
 
     CAREER_PLACEHOLDERS.forEach((CAREER_PLACEHOLDER) => {
@@ -47,7 +84,6 @@ describe('Career', () => {
       expect(getByLabelText(CAREER_LABEL)).toBeInTheDocument();
     });
 
-    expect(getByText('근무 기간을 입력해주세요.')).toBeInTheDocument();
     expect(getByTestId('dropdown-toggle')).toBeInTheDocument();
   });
 
