@@ -3,9 +3,10 @@ import { ChangeEvent } from 'react';
 
 import Image from 'next/image';
 
-import styled from '@emotion/styled';
-
 import { Career as CareerType, CareerInputName } from '@/types/Resume';
+
+import { Container, Title, CareerDetail, PeriodInputWrapper } from './style';
+import { InputWrapper, TextAreaWrapper } from '../Basic/style';
 
 type Props = {
   career: CareerType;
@@ -23,12 +24,6 @@ type Props = {
   onClickDeleteCareer: (id: number) => void;
 };
 
-const CareerDetail = styled.div(
-  ({ isShowDetail }: { isShowDetail: boolean }) => ({
-    height: isShowDetail ? 'auto' : '0px',
-  })
-);
-
 export default function Career({
   career,
   onChange,
@@ -36,16 +31,8 @@ export default function Career({
   onClickToggle,
   onClickDeleteCareer,
 }: Props) {
-  const {
-    id,
-    title,
-    jobDetail,
-    company,
-    startDate,
-    endDate,
-    region,
-    description,
-  } = career;
+  const { id, jobDetail, company, startDate, endDate, region, description } =
+    career;
 
   function handleChange(
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
@@ -62,28 +49,18 @@ export default function Career({
   }
 
   return (
-    <li>
+    <Container isShowDetail={isShowDetail}>
       <button type='button' onClick={handleClick}>
-        <Image
-          src='/assets/delete'
-          alt='add-career'
-          layout='fill'
-          data-testid='delete-career'
-        />
+        <div data-testid='delete-career' />
       </button>
-      <div
+      <Title
+        isShowDetail={isShowDetail}
         data-testid='career-title'
         onClick={onClickToggle}
         aria-hidden='true'
       >
         <div>
-          <input
-            type='text'
-            name='title'
-            value={title}
-            onChange={handleChange}
-            placeholder='제목'
-          />
+          <p>{jobDetail || '제목을 입력해주세요.'}</p>
           <p>
             {startDate && endDate
               ? `${startDate} - ${endDate}`
@@ -98,9 +75,9 @@ export default function Career({
             data-testid='dropdown-toggle'
           />
         </button>
-      </div>
+      </Title>
       <CareerDetail data-testid='career-detail' isShowDetail={isShowDetail}>
-        <div>
+        <InputWrapper>
           <label htmlFor='career-job-detail'>직무 내용</label>
           <input
             id='career-job-detail'
@@ -110,8 +87,8 @@ export default function Career({
             onChange={handleChange}
             placeholder='직무를 입력해주세요.'
           />
-        </div>
-        <div>
+        </InputWrapper>
+        <InputWrapper>
           <label htmlFor='career-company'>회사명</label>
           <input
             id='career-company'
@@ -121,26 +98,29 @@ export default function Career({
             onChange={handleChange}
             placeholder='회사명을 입력하세요.'
           />
-        </div>
-        <div>
-          <label htmlFor='career-period'>근무 기간</label>
-          <input
-            id='career-period'
-            type='text'
-            name='startDate'
-            value={startDate}
-            onChange={handleChange}
-            placeholder='2020.10'
-          />
-          <input
-            type='text'
-            name='endDate'
-            value={endDate}
-            onChange={handleChange}
-            placeholder='2021.03'
-          />
-        </div>
-        <div>
+        </InputWrapper>
+        <PeriodInputWrapper>
+          <label id='career-period'>근무 기간</label>
+          <div>
+            <input
+              aria-labelledby='career-period'
+              type='text'
+              name='startDate'
+              value={startDate}
+              onChange={handleChange}
+              placeholder='2020.10'
+            />
+            <input
+              aria-labelledby='career-period'
+              type='text'
+              name='endDate'
+              value={endDate}
+              onChange={handleChange}
+              placeholder='2021.03'
+            />
+          </div>
+        </PeriodInputWrapper>
+        <InputWrapper>
           <label htmlFor='career-region'>지역</label>
           <input
             type='text'
@@ -150,8 +130,8 @@ export default function Career({
             onChange={handleChange}
             placeholder='지역을 입력해주세요.'
           />
-        </div>
-        <div>
+        </InputWrapper>
+        <TextAreaWrapper>
           <label htmlFor='career-description'>경력 기술</label>
           <textarea
             id='career-description'
@@ -160,8 +140,8 @@ export default function Career({
             onChange={handleChange}
             placeholder='간단한 자기소개를 통해 이력서를 돋보이게 만들어보세요.'
           />
-        </div>
+        </TextAreaWrapper>
       </CareerDetail>
-    </li>
+    </Container>
   );
 }

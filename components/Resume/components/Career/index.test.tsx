@@ -25,14 +25,25 @@ describe('Career', () => {
   }
 
   it('renders input controls, period, dropdown-toggle', () => {
-    const { getByLabelText, getByPlaceholderText, getByTestId, getByText } =
-      renderCareer();
+    const {
+      getByLabelText,
+      getAllByLabelText,
+      getByPlaceholderText,
+      getByTestId,
+      getByText,
+    } = renderCareer();
 
     CAREER_PLACEHOLDERS.forEach((CAREER_PLACEHOLDER) => {
       expect(getByPlaceholderText(CAREER_PLACEHOLDER)).toBeInTheDocument();
     });
 
     CAREER_LABELS.forEach((CAREER_LABEL) => {
+      if (CAREER_LABEL === '근무 기간') {
+        expect(getAllByLabelText(CAREER_LABEL)[0]).toBeInTheDocument();
+        expect(getAllByLabelText(CAREER_LABEL)[1]).toBeInTheDocument();
+        return;
+      }
+
       expect(getByLabelText(CAREER_LABEL)).toBeInTheDocument();
     });
 

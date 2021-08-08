@@ -9,7 +9,6 @@ export type Basic = {
 
 export type Career = {
   id: number;
-  title: string;
   jobDetail: string;
   company: string;
   startDate: string;
@@ -19,7 +18,6 @@ export type Career = {
 };
 
 export type CareerInputName =
-  | 'title'
   | 'jobDetail'
   | 'company'
   | 'startDate'

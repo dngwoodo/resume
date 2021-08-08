@@ -1,21 +1,14 @@
 /* eslint-disable no-unused-vars */
 import Image from 'next/image';
 
-import { CareerInputName } from '@/types/Resume';
+import { CareerInputName, Career as CareerType } from '@/types/Resume';
 
 import CareerContainer from '../../containers/CareerContainer';
 
+import Container from './style';
+
 type Props = {
-  careers: {
-    id: number;
-    title: string;
-    jobDetail: string;
-    company: string;
-    startDate: string;
-    endDate: string;
-    region: string;
-    description: string;
-  }[];
+  careers: CareerType[];
   onChange: ({
     id,
     name,
@@ -36,7 +29,9 @@ export default function Careers({
   onClickAddCareer,
 }: Props) {
   return (
-    <div>
+    <Container>
+      <h5>경력</h5>
+      <p>근무 경력을 최근순으로 입력해주세요.</p>
       <ul>
         {careers.map((career) => (
           <CareerContainer
@@ -49,10 +44,12 @@ export default function Careers({
       </ul>
       <button type='button' onClick={onClickAddCareer}>
         <div>
-          <Image src='/assets/plus.png' alt='add-career' layout='fill' />
+          <div>
+            <Image src='/assets/plus.png' alt='add-career' layout='fill' />
+          </div>
         </div>
-        경력 추가하기
+        <span>경력 추가하기</span>
       </button>
-    </div>
+    </Container>
   );
 }
