@@ -1,23 +1,14 @@
 /* eslint-disable no-unused-vars */
 import Image from 'next/image';
 
-import { CareerInputName } from '@/types/Resume';
+import { CareerInputName, Career as CareerType } from '@/types/Resume';
 
 import CareerContainer from '../../containers/CareerContainer';
 
 import Container from './style';
 
 type Props = {
-  careers: {
-    id: number;
-    title: string;
-    jobDetail: string;
-    company: string;
-    startDate: string;
-    endDate: string;
-    region: string;
-    description: string;
-  }[];
+  careers: CareerType[];
   onChange: ({
     id,
     name,

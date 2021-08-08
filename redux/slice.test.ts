@@ -49,10 +49,10 @@ describe('slice', () => {
     it('changes field of career', () => {
       const { careers } = reducer(
         initialState,
-        changeCareerField({ id: 0, name: 'title', value: '프론트엔드' })
+        changeCareerField({ id: 0, name: 'jobDetail', value: '프론트엔드' })
       );
 
-      expect(careers.find((career) => career.id === 0)!.title).toBe(
+      expect(careers.find((career) => career.id === 0)!.jobDetail).toBe(
         '프론트엔드'
       );
     });

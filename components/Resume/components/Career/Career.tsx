@@ -31,16 +31,8 @@ export default function Career({
   onClickToggle,
   onClickDeleteCareer,
 }: Props) {
-  const {
-    id,
-    title,
-    jobDetail,
-    company,
-    startDate,
-    endDate,
-    region,
-    description,
-  } = career;
+  const { id, jobDetail, company, startDate, endDate, region, description } =
+    career;
 
   function handleChange(
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
@@ -108,10 +100,10 @@ export default function Career({
           />
         </InputWrapper>
         <PeriodInputWrapper>
-          <label>근무 기간</label>
+          <label id='career-period'>근무 기간</label>
           <div>
             <input
-              aria-label='career-start-date'
+              aria-labelledby='career-period'
               type='text'
               name='startDate'
               value={startDate}
@@ -119,7 +111,7 @@ export default function Career({
               placeholder='2020.10'
             />
             <input
-              aria-label='career-end-date'
+              aria-labelledby='career-period'
               type='text'
               name='endDate'
               value={endDate}

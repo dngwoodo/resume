@@ -23,7 +23,6 @@ export const initialState: ResumeState = {
   careers: [
     {
       id: 0,
-      title: '',
       jobDetail: '',
       company: '',
       startDate: '',

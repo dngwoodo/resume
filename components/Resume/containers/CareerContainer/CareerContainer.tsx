@@ -1,21 +1,12 @@
 /* eslint-disable no-unused-vars */
 import { useState } from 'react';
 
-import { CareerInputName } from '@/types/Resume';
+import { Career as CareerType, CareerInputName } from '@/types/Resume';
 
 import Career from '../../components/Career';
 
 type Props = {
-  career: {
-    id: number;
-    title: string;
-    jobDetail: string;
-    company: string;
-    startDate: string;
-    endDate: string;
-    region: string;
-    description: string;
-  };
+  career: CareerType;
   onChange: ({
     id,
     name,
