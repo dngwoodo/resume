@@ -1,29 +1,46 @@
-import configureStore from 'redux-mock-store';
+import { ThunkDispatch } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
+import configureStore from 'redux-mock-store';
 
 import {
-  loadCareers,
+  loadResume,
+  changeResume,
   createCareer,
   deleteCareer,
-  changeResume,
 } from '@/redux/thunks';
-import { setResume } from '@/redux/slice';
 
 jest.mock('@/services/resume');
 
+type AppState = Record<string, never>; // {} 를 의미
+
 const middlewares = [thunk];
-const mockStore = configureStore(middlewares);
+const mockStore = configureStore<AppState, ThunkDispatch<AppState, any, any>>(
+  middlewares
+);
 
 describe('thunks', () => {
-  it('dispatches loadCareers action', async () => {
+  it('dispatches loadResume action', async () => {
     const store = mockStore({});
 
-    await store.dispatch<any>(loadCareers());
+    await store.dispatch(loadResume());
 
     const actions = store.getActions();
 
     expect(actions[0]).toEqual({
-      type: 'resume/setCareers',
+      type: 'resume/setResume',
+      payload: undefined,
+    });
+  });
+
+  it('dispatches changeResume action', async () => {
+    const store = mockStore({});
+
+    await store.dispatch(changeResume());
+
+    const actions = store.getActions();
+
+    expect(actions[0]).toEqual({
+      type: 'resume/setResume',
       payload: undefined,
     });
   });
@@ -31,7 +48,7 @@ describe('thunks', () => {
   it('dispatches createCareer action', async () => {
     const store = mockStore({});
 
-    await store.dispatch<any>(createCareer());
+    await store.dispatch(createCareer());
 
     const actions = store.getActions();
 
@@ -44,7 +61,7 @@ describe('thunks', () => {
   it('dispatches deleteCareer action', async () => {
     const store = mockStore({});
 
-    await store.dispatch<any>(deleteCareer('First'));
+    await store.dispatch(deleteCareer('First'));
 
     const actions = store.getActions();
 
@@ -52,15 +69,5 @@ describe('thunks', () => {
       type: 'resume/setCareers',
       payload: undefined,
     });
-  });
-
-  it('dispatches changeResume action', async () => {
-    const store = mockStore({});
-
-    await store.dispatch<any>(changeResume());
-
-    const actions = store.getActions();
-
-    expect(actions[0]).toEqual(setResume());
   });
 });

@@ -50,6 +50,6 @@ describe('CareersContainer', () => {
       });
     });
 
-    expect(dispatch).toBeCalledTimes(CAREER_PLACEHOLDERS.length + 1);
+    expect(dispatch).toBeCalledTimes(CAREER_PLACEHOLDERS.length);
   });
 });

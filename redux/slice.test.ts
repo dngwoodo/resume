@@ -1,16 +1,21 @@
-import CAREERS from '@/fixtures/careers';
-
 import reducer, {
+  setResume,
   changeCareerField,
   changeResumeField,
   initialState,
   setCareers,
   setTitle,
-} from './slice';
+  resumeState,
+} from '@/redux/slice';
+import CAREERS from '@/fixtures/careers';
 
 describe('slice', () => {
   describe('setResume', () => {
-    it('changes resume', () => {});
+    it('changes resume', () => {
+      const state = reducer(initialState, setResume(resumeState));
+
+      expect(state).toEqual(resumeState);
+    });
   });
 
   describe('setTitle', () => {
@@ -18,6 +23,14 @@ describe('slice', () => {
       const { title } = reducer(initialState, setTitle('열정! 열정! 열정!'));
 
       expect(title).toBe('열정! 열정! 열정!');
+    });
+  });
+
+  describe('setCareers', () => {
+    it('changes careers', () => {
+      const { careers } = reducer(initialState, setCareers(CAREERS));
+
+      expect(careers).toEqual(CAREERS);
     });
   });
 
@@ -37,10 +50,7 @@ describe('slice', () => {
   describe('changeCareerField', () => {
     it('changes career field', () => {
       const { careers } = reducer(
-        {
-          ...initialState,
-          careers: CAREERS,
-        },
+        { ...initialState, careers: CAREERS },
         changeCareerField({
           id: 'First',
           name: 'jobDetail',
@@ -49,37 +59,6 @@ describe('slice', () => {
       );
 
       expect(careers[0].jobDetail).toBe('프론트엔드');
-    });
-  });
-
-  describe('setCareers', () => {
-    it('changes careers', () => {
-      const { careers } = reducer(
-        initialState,
-        setCareers([
-          {
-            id: 'Second',
-            jobDetail: '',
-            company: '',
-            startDate: '',
-            endDate: '',
-            region: '',
-            description: '',
-          },
-        ])
-      );
-
-      expect(careers).toEqual([
-        {
-          id: 'Second',
-          jobDetail: '',
-          company: '',
-          startDate: '',
-          endDate: '',
-          region: '',
-          description: '',
-        },
-      ]);
     });
   });
 });

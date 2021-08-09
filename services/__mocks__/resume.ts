@@ -1,5 +1,9 @@
-export function fetchCareers() {
+export function fetchResume() {
   return [];
+}
+
+export async function updateResume() {
+  return {};
 }
 
 export function addCareer() {
@@ -8,8 +12,4 @@ export function addCareer() {
 
 export function removeCareer() {
   return [];
-}
-
-export async function updateResume() {
-  return {};
 }

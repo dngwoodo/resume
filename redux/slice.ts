@@ -8,7 +8,7 @@ type ResumeState = {
   careers: Career[];
 };
 
-export const initialState: ResumeState = {
+export const resumeState: ResumeState = {
   title: '이력서 제목',
   basic: {
     name: '',
@@ -21,19 +21,30 @@ export const initialState: ResumeState = {
   careers: [],
 };
 
+export const initialState: ResumeState = {
+  ...resumeState,
+};
+
 export const { reducer, actions } = createSlice({
   name: 'resume',
   initialState,
   reducers: {
-    setResume(state) {
+    setResume(state, { payload: newResumeState }) {
       return {
         ...state,
+        ...newResumeState,
       };
     },
     setTitle(state, { payload: title }: PayloadAction<string>) {
       return {
         ...state,
         title,
+      };
+    },
+    setCareers(state, { payload: careers }: PayloadAction<Career[]>) {
+      return {
+        ...state,
+        careers,
       };
     },
     changeResumeField(
@@ -60,14 +71,8 @@ export const { reducer, actions } = createSlice({
         value: string;
       }>
     ) {
-      // eslint-disable-next-line no-param-reassign
-      state.careers.find((career) => career.id === id)![name] = value;
-    },
-    setCareers(state, { payload: careers }: PayloadAction<Career[]>) {
-      return {
-        ...state,
-        careers,
-      };
+      const newCareers = [...state.careers];
+      newCareers.find((newCareer) => newCareer.id === id)![name] = value;
     },
   },
 });

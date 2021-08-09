@@ -45,4 +45,10 @@ describe('ResumeControls', () => {
 
     expect(getByText('이력서 제목')).toBeInTheDocument();
   });
+
+  it('loads resume', () => {
+    render(<ResumeControls />);
+
+    expect(dispatch).toBeCalledTimes(1);
+  });
 });
