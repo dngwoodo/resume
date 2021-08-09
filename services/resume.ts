@@ -46,6 +46,6 @@ export async function removeCareer(id: string) {
   return { data: dummyCareers };
 }
 
-export async function changeResume() {
+export async function updateResume() {
   await sleep(200);
 }

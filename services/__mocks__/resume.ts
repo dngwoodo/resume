@@ -10,6 +10,6 @@ export function removeCareer() {
   return [];
 }
 
-export async function changeResume() {
+export async function updateResume() {
   return {};
 }
