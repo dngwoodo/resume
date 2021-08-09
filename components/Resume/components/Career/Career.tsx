@@ -15,13 +15,13 @@ type Props = {
     name,
     value,
   }: {
-    id: number;
+    id: string;
     name: CareerInputName;
     value: string;
   }) => void;
   isShowDetail: boolean;
   onClickToggle: () => void;
-  onClickDeleteCareer: (id: number) => void;
+  onClickDeleteCareer: (id: string) => void;
 };
 
 export default function Career({

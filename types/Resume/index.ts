@@ -8,7 +8,7 @@ export type Basic = {
 };
 
 export type Career = {
-  id: number;
+  id: string;
   jobDetail: string;
   company: string;
   startDate: string;

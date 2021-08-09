@@ -14,11 +14,11 @@ type Props = {
     name,
     value,
   }: {
-    id: number;
+    id: string;
     name: CareerInputName;
     value: string;
   }) => void;
-  onClickDeleteCareer: (id: number) => void;
+  onClickDeleteCareer: (id: string) => void;
   onClickAddCareer: () => void;
 };
 
