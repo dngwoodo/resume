@@ -1,38 +1,41 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
+
 import {
   addCareer,
   removeCareer,
   updateResume,
-  fetchCareers,
+  fetchResume,
 } from '@/services/resume';
 
-import { setResume, setCareers } from '@/redux/slice';
+export const loadResume = createAsyncThunk('resume/loadResume', async () => {
+  return fetchResume()
+    .then((res) => res.data)
+    .catch((error) => error);
+});
 
-export function loadCareers() {
-  return async (dispatch: any) => {
-    const { data } = await fetchCareers();
-    dispatch(setCareers(data));
-  };
-}
+export const changeResume = createAsyncThunk(
+  'resume/changeResume',
+  async () => {
+    return updateResume()
+      .then((res) => res) // res.data로 나중에 변경 필요
+      .catch((error) => error);
+  }
+);
 
-export function createCareer() {
-  return async (dispatch: any) => {
-    const { data } = await addCareer();
-    dispatch(setCareers(data));
-  };
-}
+export const createCareer = createAsyncThunk(
+  'resume/createCareer',
+  async () => {
+    return addCareer()
+      .then((res) => res.data)
+      .catch((error) => error);
+  }
+);
 
-export function deleteCareer(id: string) {
-  return async (dispatch: any) => {
-    const { data } = await removeCareer(id);
-    dispatch(setCareers(data));
-  };
-}
-
-// TODO: 실제로는 데이터를 받아서 반환해주는 로직으로 변경 해야함.
-export function changeResume() {
-  return async (dispatch: any) => {
-    await updateResume();
-
-    dispatch(setResume()); // setResume에 받아온 데이터를 넣어야함.
-  };
-}
+export const deleteCareer = createAsyncThunk(
+  'resume/deleteCareer',
+  async (id: string) => {
+    return removeCareer(id)
+      .then((res) => res.data)
+      .catch((error) => error);
+  }
+);

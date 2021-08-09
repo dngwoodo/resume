@@ -2,10 +2,10 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
 import {
-  loadCareers,
+  loadResume,
+  changeResume,
   createCareer,
   deleteCareer,
-  changeResume,
 } from '@/redux/thunks';
 import { setResume } from '@/redux/slice';
 
@@ -15,10 +15,10 @@ const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 describe('thunks', () => {
-  it('dispatches loadCareers action', async () => {
+  it('dispatches loadResume action', async () => {
     const store = mockStore({});
 
-    await store.dispatch<any>(loadCareers());
+    await store.dispatch<any>(loadResume());
 
     const actions = store.getActions();
 
@@ -26,6 +26,16 @@ describe('thunks', () => {
       type: 'resume/setCareers',
       payload: undefined,
     });
+  });
+
+  it('dispatches changeResume action', async () => {
+    const store = mockStore({});
+
+    await store.dispatch<any>(changeResume());
+
+    const actions = store.getActions();
+
+    expect(actions[0]).toEqual(setResume());
   });
 
   it('dispatches createCareer action', async () => {
@@ -52,15 +62,5 @@ describe('thunks', () => {
       type: 'resume/setCareers',
       payload: undefined,
     });
-  });
-
-  it('dispatches changeResume action', async () => {
-    const store = mockStore({});
-
-    await store.dispatch<any>(changeResume());
-
-    const actions = store.getActions();
-
-    expect(actions[0]).toEqual(setResume());
   });
 });

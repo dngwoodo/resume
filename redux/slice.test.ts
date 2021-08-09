@@ -4,7 +4,6 @@ import reducer, {
   changeCareerField,
   changeResumeField,
   initialState,
-  setCareers,
   setTitle,
 } from './slice';
 
@@ -49,37 +48,6 @@ describe('slice', () => {
       );
 
       expect(careers[0].jobDetail).toBe('프론트엔드');
-    });
-  });
-
-  describe('setCareers', () => {
-    it('changes careers', () => {
-      const { careers } = reducer(
-        initialState,
-        setCareers([
-          {
-            id: 'Second',
-            jobDetail: '',
-            company: '',
-            startDate: '',
-            endDate: '',
-            region: '',
-            description: '',
-          },
-        ])
-      );
-
-      expect(careers).toEqual([
-        {
-          id: 'Second',
-          jobDetail: '',
-          company: '',
-          startDate: '',
-          endDate: '',
-          region: '',
-          description: '',
-        },
-      ]);
     });
   });
 });
