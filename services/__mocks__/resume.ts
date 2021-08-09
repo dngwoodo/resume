@@ -1,15 +1,7 @@
-export function fetchResume() {
-  return [];
-}
+export const fetchResume = jest.fn();
 
-export async function updateResume() {
-  return {};
-}
+export const updateResume = jest.fn();
 
-export function addCareer() {
-  return [];
-}
+export const addCareer = jest.fn();
 
-export function removeCareer() {
-  return [];
-}
+export const removeCareer = jest.fn();

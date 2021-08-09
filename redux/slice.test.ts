@@ -1,23 +1,13 @@
 import reducer, {
-  setResume,
   changeCareerField,
   changeBasicField,
   initialState,
   setCareers,
   setTitle,
-  resumeState,
 } from '@/redux/slice';
 import CAREERS from '@/fixtures/careers';
 
 describe('slice', () => {
-  describe('setResume', () => {
-    it('changes resume', () => {
-      const state = reducer(initialState, setResume(resumeState));
-
-      expect(state).toEqual(resumeState);
-    });
-  });
-
   describe('setTitle', () => {
     it('changes title', () => {
       const { title } = reducer(initialState, setTitle('열정! 열정! 열정!'));
