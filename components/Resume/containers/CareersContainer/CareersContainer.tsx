@@ -1,9 +1,11 @@
 import useAppDispatch from '@/hooks/useAppDispatch';
 import useAppSelector from '@/hooks/useAppSelector';
 
-import { addCareer, changeCareerField, deleteCareer } from '@/redux/slice';
+import { changeCareerField } from '@/redux/slice';
+import { createCareer, deleteCareer, loadCareers } from '@/redux/thunks';
 
 import { CareerInputName } from '@/types/Resume';
+import { useEffect } from 'react';
 
 import Careers from '../../components/Careers';
 
@@ -16,20 +18,24 @@ export default function CareersContainer() {
     name,
     value,
   }: {
-    id: number;
+    id: string;
     name: CareerInputName;
     value: string;
   }) {
     dispatch(changeCareerField({ id, name, value }));
   }
 
-  function handleClickDeleteCareer(id: number) {
+  function handleClickDeleteCareer(id: string) {
     dispatch(deleteCareer(id));
   }
 
   function handleClickAddCareer() {
-    dispatch(addCareer());
+    dispatch(createCareer());
   }
+
+  useEffect(() => {
+    dispatch(loadCareers());
+  }, [dispatch]);
 
   return (
     <Careers
