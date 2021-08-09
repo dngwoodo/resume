@@ -30,9 +30,7 @@ describe('CareersContainer', () => {
 
     fireEvent.click(getByText('경력 추가하기'));
 
-    expect(dispatch).toBeCalledWith({
-      type: 'resume/addCareer',
-    });
+    expect(dispatch).toBeCalled();
   });
 
   it("listens 'delete-career' click event", () => {
@@ -40,10 +38,7 @@ describe('CareersContainer', () => {
 
     fireEvent.click(getByTestId('delete-career'));
 
-    expect(dispatch).toBeCalledWith({
-      type: 'resume/deleteCareer',
-      payload: 0,
-    });
+    expect(dispatch).toBeCalled();
   });
 
   it('listens change event', () => {
@@ -55,6 +50,6 @@ describe('CareersContainer', () => {
       });
     });
 
-    expect(dispatch).toBeCalledTimes(CAREER_PLACEHOLDERS.length);
+    expect(dispatch).toBeCalledTimes(CAREER_PLACEHOLDERS.length + 1);
   });
 });

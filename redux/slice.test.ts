@@ -1,13 +1,18 @@
+import CAREERS from '@/fixtures/careers';
+
 import reducer, {
-  addCareer,
   changeCareerField,
   changeResumeField,
-  deleteCareer,
   initialState,
+  setCareers,
   setTitle,
 } from './slice';
 
 describe('slice', () => {
+  describe('setResume', () => {
+    it('changes resume', () => {});
+  });
+
   describe('setTitle', () => {
     it('changes title', () => {
       const { title } = reducer(initialState, setTitle('열정! 열정! 열정!'));
@@ -29,32 +34,52 @@ describe('slice', () => {
     });
   });
 
-  describe('addCareer', () => {
-    it('adds career of resume', () => {
-      const { careers } = reducer(initialState, addCareer());
-
-      expect(careers).toHaveLength(2);
-    });
-  });
-
-  describe('deleteCareer', () => {
-    it('deletes career of resume', () => {
-      const { careers } = reducer(initialState, deleteCareer(0));
-
-      expect(careers).toHaveLength(0);
-    });
-  });
-
   describe('changeCareerField', () => {
-    it('changes field of career', () => {
+    it('changes career field', () => {
+      const { careers } = reducer(
+        {
+          ...initialState,
+          careers: CAREERS,
+        },
+        changeCareerField({
+          id: 'First',
+          name: 'jobDetail',
+          value: '프론트엔드',
+        })
+      );
+
+      expect(careers[0].jobDetail).toBe('프론트엔드');
+    });
+  });
+
+  describe('setCareers', () => {
+    it('changes careers', () => {
       const { careers } = reducer(
         initialState,
-        changeCareerField({ id: 0, name: 'jobDetail', value: '프론트엔드' })
+        setCareers([
+          {
+            id: 'Second',
+            jobDetail: '',
+            company: '',
+            startDate: '',
+            endDate: '',
+            region: '',
+            description: '',
+          },
+        ])
       );
 
-      expect(careers.find((career) => career.id === 0)!.jobDetail).toBe(
-        '프론트엔드'
-      );
+      expect(careers).toEqual([
+        {
+          id: 'Second',
+          jobDetail: '',
+          company: '',
+          startDate: '',
+          endDate: '',
+          region: '',
+          description: '',
+        },
+      ]);
     });
   });
 });

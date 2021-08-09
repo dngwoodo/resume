@@ -3,14 +3,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Basic, Career, CareerInputName } from '@/types/Resume';
 
 type ResumeState = {
-  newId: number;
   title: string;
   basic: Basic;
   careers: Career[];
 };
 
 export const initialState: ResumeState = {
-  newId: 100,
   title: '이력서 제목',
   basic: {
     name: '',
@@ -20,23 +18,18 @@ export const initialState: ResumeState = {
     address: '',
     introduction: '',
   },
-  careers: [
-    {
-      id: 0,
-      jobDetail: '',
-      company: '',
-      startDate: '',
-      endDate: '',
-      region: '',
-      description: '',
-    },
-  ],
+  careers: [],
 };
 
 export const { reducer, actions } = createSlice({
   name: 'resume',
   initialState,
   reducers: {
+    setResume(state) {
+      return {
+        ...state,
+      };
+    },
     setTitle(state, { payload: title }: PayloadAction<string>) {
       return {
         ...state,
@@ -57,33 +50,12 @@ export const { reducer, actions } = createSlice({
         },
       };
     },
-    addCareer(state) {
-      return {
-        ...state,
-        newId: state.newId + 1,
-        careers: [
-          ...state.careers,
-          {
-            ...initialState.careers[0],
-            id: state.newId,
-          },
-        ],
-      };
-    },
-    deleteCareer(state, { payload: id }: PayloadAction<number>) {
-      const newCareers = state.careers.filter((career) => career.id !== id);
-
-      return {
-        ...state,
-        careers: newCareers,
-      };
-    },
     changeCareerField(
       state,
       {
         payload: { id, name, value },
       }: PayloadAction<{
-        id: number;
+        id: string;
         name: CareerInputName;
         value: string;
       }>
@@ -91,15 +63,21 @@ export const { reducer, actions } = createSlice({
       // eslint-disable-next-line no-param-reassign
       state.careers.find((career) => career.id === id)![name] = value;
     },
+    setCareers(state, { payload: careers }: PayloadAction<Career[]>) {
+      return {
+        ...state,
+        careers,
+      };
+    },
   },
 });
 
 export const {
+  setResume,
   setTitle,
   changeResumeField,
-  addCareer,
-  deleteCareer,
   changeCareerField,
+  setCareers,
 } = actions;
 
 export default reducer;
