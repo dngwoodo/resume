@@ -1,7 +1,7 @@
 import useAppDispatch from '@/hooks/useAppDispatch';
 import useAppSelector from '@/hooks/useAppSelector';
 
-import { changeResumeField } from '@/redux/slice';
+import { changeBasicField } from '@/redux/slice';
 
 import Basic from '../../components/Basic';
 
@@ -10,7 +10,7 @@ export default function BasicContainer() {
   const { basic } = useAppSelector((state) => state.resume);
 
   function handleChange({ name, value }: { name: string; value: string }) {
-    dispatch(changeResumeField({ name, value }));
+    dispatch(changeBasicField({ name, value }));
   }
 
   const { name, occupation, email, phoneNumber, address, introduction } = basic;

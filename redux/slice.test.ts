@@ -1,7 +1,7 @@
 import reducer, {
   setResume,
   changeCareerField,
-  changeResumeField,
+  changeBasicField,
   initialState,
   setCareers,
   setTitle,
@@ -34,13 +34,13 @@ describe('slice', () => {
     });
   });
 
-  describe('changeResumeField', () => {
+  describe('changeBasicField', () => {
     it('changes resume field', () => {
       const {
         basic: { name },
       } = reducer(
         initialState,
-        changeResumeField({ name: 'name', value: '김동우' })
+        changeBasicField({ name: 'name', value: '김동우' })
       );
 
       expect(name).toBe('김동우');

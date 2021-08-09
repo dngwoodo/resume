@@ -47,7 +47,8 @@ export const { reducer, actions } = createSlice({
         careers,
       };
     },
-    changeResumeField(
+
+    changeBasicField(
       state,
       {
         payload: { name, value },
@@ -80,7 +81,7 @@ export const { reducer, actions } = createSlice({
 export const {
   setResume,
   setTitle,
-  changeResumeField,
+  changeBasicField,
   changeCareerField,
   setCareers,
 } = actions;
