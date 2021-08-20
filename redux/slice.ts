@@ -45,15 +45,6 @@ export const { reducer, actions } = createSlice({
   name: 'resume',
   initialState,
   reducers: {
-    setEmploymentHistories(
-      state,
-      { payload: employmentHistories }: PayloadAction<EmploymentHistory[]>
-    ) {
-      return {
-        ...state,
-        employmentHistories,
-      };
-    },
     // change
     changeTitle(state, { payload: title }: PayloadAction<string>) {
       return {
@@ -235,7 +226,6 @@ export const {
   changeTitle,
   changeBasicField,
   changeEmploymentHistoryField,
-  setEmploymentHistories,
   startLoadResume,
   completeLoadResume,
   failLoadResume,

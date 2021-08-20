@@ -1,6 +1,5 @@
 import reducer, {
   initialState,
-  setEmploymentHistories,
   changeTitle,
   changeEmploymentHistoryField,
   changeBasicField,
@@ -8,17 +7,6 @@ import reducer, {
 import EMPLOYMENT_HISTORIES from '@/fixtures/employmentHistories';
 
 describe('slice', () => {
-  describe('setEmploymentHistories', () => {
-    it('changes employmentHistories', () => {
-      const { employmentHistories } = reducer(
-        initialState,
-        setEmploymentHistories(EMPLOYMENT_HISTORIES)
-      );
-
-      expect(employmentHistories).toEqual(EMPLOYMENT_HISTORIES);
-    });
-  });
-
   describe('changeTitle', () => {
     it('changes title', () => {
       const { title } = reducer(initialState, changeTitle('열정! 열정! 열정!'));
