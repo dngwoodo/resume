@@ -1,10 +1,10 @@
 export type Basic = {
   name: string;
-  occupation: string;
+  jobTitle: string;
   email: string;
-  phoneNumber: string;
+  phone: string;
   address: string;
-  introduction: string;
+  selfIntroduction: string;
 };
 
 export type Career = {
@@ -17,10 +17,4 @@ export type Career = {
   description: string;
 };
 
-export type CareerInputName =
-  | 'jobDetail'
-  | 'company'
-  | 'startDate'
-  | 'endDate'
-  | 'region'
-  | 'description';
+export type InputName<T> = keyof T;

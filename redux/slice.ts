@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { Basic, Career, CareerInputName } from '@/types/Resume';
+import { Basic, Career, InputName } from '@/types/Resume';
 
 type ResumeState = {
   title: string;
@@ -25,11 +25,11 @@ export const initialState: ResumeState & InitialState = {
   title: '이력서 제목',
   basic: {
     name: '',
-    occupation: '',
+    jobTitle: '',
     email: '',
-    phoneNumber: '',
+    phone: '',
     address: '',
-    introduction: '',
+    selfIntroduction: '',
   },
   careers: [],
   errors: {
@@ -65,7 +65,7 @@ export const { reducer, actions } = createSlice({
       state,
       {
         payload: { name, value },
-      }: PayloadAction<{ name: string; value: string }>
+      }: PayloadAction<{ name: InputName<Basic>; value: string }>
     ) {
       return {
         ...state,
@@ -81,7 +81,7 @@ export const { reducer, actions } = createSlice({
         payload: { id, name, value },
       }: PayloadAction<{
         id: string;
-        name: CareerInputName;
+        name: InputName<Career>;
         value: string;
       }>
     ) {

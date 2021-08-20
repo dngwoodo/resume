@@ -3,7 +3,7 @@ import { ChangeEvent } from 'react';
 
 import Image from 'next/image';
 
-import { Career as CareerType, CareerInputName } from '@/types/Resume';
+import { Career as CareerType, InputName } from '@/types/Resume';
 
 import { Container, Title, CareerDetail, PeriodInputWrapper } from './style';
 import { InputWrapper, TextAreaWrapper } from '../Basic/style';
@@ -16,7 +16,7 @@ type Props = {
     value,
   }: {
     id: string;
-    name: CareerInputName;
+    name: InputName<CareerType>;
     value: string;
   }) => void;
   isShowDetail: boolean;
@@ -39,7 +39,7 @@ export default function Career({
   ) {
     onChange({
       id,
-      name: event.target.name as CareerInputName,
+      name: event.target.name as InputName<CareerType>,
       value: event.target.value,
     });
   }

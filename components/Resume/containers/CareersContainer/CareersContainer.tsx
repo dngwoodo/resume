@@ -4,7 +4,7 @@ import useAppSelector from '@/hooks/useAppSelector';
 import { changeCareerField } from '@/redux/slice';
 import { createCareer, deleteCareer } from '@/redux/thunks';
 
-import { CareerInputName } from '@/types/Resume';
+import { Career, InputName } from '@/types/Resume';
 
 import Careers from '../../components/Careers';
 
@@ -18,7 +18,7 @@ export default function CareersContainer() {
     value,
   }: {
     id: string;
-    name: CareerInputName;
+    name: InputName<Career>;
     value: string;
   }) {
     dispatch(changeCareerField({ id, name, value }));

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import Image from 'next/image';
 
-import { CareerInputName, Career as CareerType } from '@/types/Resume';
+import { InputName, Career as CareerType } from '@/types/Resume';
 
 import CareerContainer from '../../containers/CareerContainer';
 
@@ -15,7 +15,7 @@ type Props = {
     value,
   }: {
     id: string;
-    name: CareerInputName;
+    name: InputName<CareerType>;
     value: string;
   }) => void;
   onClickDeleteCareer: (id: string) => void;
