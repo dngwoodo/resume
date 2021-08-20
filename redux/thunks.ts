@@ -1,8 +1,8 @@
 import { Dispatch } from 'redux';
 
 import {
-  addCareer,
-  removeCareer,
+  addEmploymentHistory,
+  removeEmploymentHistory,
   updateResume,
   fetchResume,
 } from '@/services/resume';
@@ -11,12 +11,12 @@ import {
   startLoadResume,
   completeLoadResume,
   failLoadResume,
-  startCreateCareer,
-  completeCreateCareer,
-  failCreateCareer,
-  startDeleteCareer,
-  completeDeleteCareer,
-  failDeleteCareer,
+  startCreateEmploymentHistory,
+  completeCreateEmploymentHistory,
+  failCreateEmploymentHistory,
+  startDeleteEmploymentHistory,
+  completeDeleteEmploymentHistory,
+  failDeleteEmploymentHistory,
 } from '@/redux/slice';
 
 export function loadResume() {
@@ -43,26 +43,26 @@ export function changeResume() {
   };
 }
 
-export function createCareer() {
+export function createEmploymentHistory() {
   return async (dispatch: Dispatch) => {
-    dispatch(startCreateCareer());
+    dispatch(startCreateEmploymentHistory());
     try {
-      const { data } = await addCareer();
-      dispatch(completeCreateCareer(data));
+      const { data } = await addEmploymentHistory();
+      dispatch(completeCreateEmploymentHistory(data));
     } catch (error) {
-      dispatch(failCreateCareer(error));
+      dispatch(failCreateEmploymentHistory(error));
     }
   };
 }
 
-export function deleteCareer(id: string) {
+export function deleteEmploymentHistory(id: string) {
   return async (dispatch: Dispatch) => {
-    dispatch(startDeleteCareer());
+    dispatch(startDeleteEmploymentHistory());
     try {
-      const { data } = await removeCareer(id);
-      dispatch(completeDeleteCareer(data));
+      const { data } = await removeEmploymentHistory(id);
+      dispatch(completeDeleteEmploymentHistory(data));
     } catch (error) {
-      dispatch(failDeleteCareer(error));
+      dispatch(failDeleteEmploymentHistory(error));
     }
   };
 }

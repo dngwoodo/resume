@@ -1,8 +1,8 @@
 import reducer, {
-  changeCareerField,
+  changeEmploymentHistoryField,
   changeBasicField,
   initialState,
-  setCareers,
+  setEmploymentHistories,
   setTitle,
 } from '@/redux/slice';
 import EMPLOYMENT_HISTORIES from '@/fixtures/employmentHistories';
@@ -16,11 +16,11 @@ describe('slice', () => {
     });
   });
 
-  describe('setCareers', () => {
-    it('changes careers', () => {
+  describe('setEmploymentHistories', () => {
+    it('changes employmentHistories', () => {
       const { employmentHistories } = reducer(
         initialState,
-        setCareers(EMPLOYMENT_HISTORIES)
+        setEmploymentHistories(EMPLOYMENT_HISTORIES)
       );
 
       expect(employmentHistories).toEqual(EMPLOYMENT_HISTORIES);
@@ -40,11 +40,11 @@ describe('slice', () => {
     });
   });
 
-  describe('changeCareerField', () => {
-    it('changes career field', () => {
+  describe('changeEmploymentHistoryField', () => {
+    it('changes employment history field', () => {
       const { employmentHistories } = reducer(
         { ...initialState, employmentHistories: EMPLOYMENT_HISTORIES },
-        changeCareerField({
+        changeEmploymentHistoryField({
           id: 'First',
           name: 'jobTitle',
           value: '프론트엔드',

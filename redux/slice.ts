@@ -11,13 +11,13 @@ type ResumeState = {
 type InitialState = {
   errors: {
     loadResume: string | null;
-    createCareer: string | null;
-    deleteCareer: string | null;
+    createEmploymentHistory: string | null;
+    deleteEmploymentHistory: string | null;
   };
   loadings: {
     loadResume: boolean;
-    createCareer: boolean;
-    deleteCareer: boolean;
+    createEmploymentHistory: boolean;
+    deleteEmploymentHistory: boolean;
   };
 };
 
@@ -34,13 +34,13 @@ export const initialState: ResumeState & InitialState = {
   employmentHistories: [],
   errors: {
     loadResume: null,
-    createCareer: null,
-    deleteCareer: null,
+    createEmploymentHistory: null,
+    deleteEmploymentHistory: null,
   },
   loadings: {
     loadResume: false,
-    createCareer: false,
-    deleteCareer: false,
+    createEmploymentHistory: false,
+    deleteEmploymentHistory: false,
   },
 };
 
@@ -54,7 +54,7 @@ export const { reducer, actions } = createSlice({
         title,
       };
     },
-    setCareers(
+    setEmploymentHistories(
       state,
       { payload: employmentHistories }: PayloadAction<EmploymentHistory[]>
     ) {
@@ -78,7 +78,7 @@ export const { reducer, actions } = createSlice({
         },
       };
     },
-    changeCareerField(
+    changeEmploymentHistoryField(
       state,
       {
         payload: { id, name, value },
@@ -148,89 +148,89 @@ export const { reducer, actions } = createSlice({
         },
       };
     },
-    // createCareer
-    startCreateCareer(state) {
+    // createEmploymentHistory
+    startCreateEmploymentHistory(state) {
       const { loadings } = state;
 
       return {
         ...state,
         loadings: {
           ...loadings,
-          createCareers: true,
+          createEmploymentHistory: true,
         },
       };
     },
-    completeCreateCareer(state, { payload: newCareer }) {
+    completeCreateEmploymentHistory(state, { payload: employmentHistories }) {
       const { loadings, errors } = state;
 
       return {
         ...state,
-        careers: newCareer,
+        employmentHistories,
         loadings: {
           ...loadings,
-          createCareer: false,
+          createEmploymentHistory: false,
         },
         errors: {
           ...errors,
-          createCareer: null,
+          createEmploymentHistory: null,
         },
       };
     },
-    failCreateCareer(state, { payload: error }) {
+    failCreateEmploymentHistory(state, { payload: error }) {
       const { loadings, errors } = state;
 
       return {
         ...state,
         loadings: {
           ...loadings,
-          createCareer: false,
+          createEmploymentHistory: false,
         },
         errors: {
           ...errors,
-          createCareer: error,
+          createEmploymentHistory: error,
         },
       };
     },
-    // deleteCareer
-    startDeleteCareer(state) {
+    // deleteEmploymentHistory
+    startDeleteEmploymentHistory(state) {
       const { loadings } = state;
 
       return {
         ...state,
         loadings: {
           ...loadings,
-          deleteCareers: true,
+          deleteEmploymentHistory: true,
         },
       };
     },
-    completeDeleteCareer(state, { payload: newCareer }) {
+    completeDeleteEmploymentHistory(state, { payload: employmentHistories }) {
       const { loadings, errors } = state;
 
       return {
         ...state,
-        careers: newCareer,
+        employmentHistories,
         loadings: {
           ...loadings,
-          deleteCareer: false,
+          deleteEmploymentHistory: false,
         },
         errors: {
           ...errors,
-          deleteCareer: null,
+          deleteEmploymentHistory: null,
         },
       };
     },
-    failDeleteCareer(state, { payload: error }) {
+    failDeleteEmploymentHistory(state, { payload: error }) {
       const { loadings, errors } = state;
 
       return {
         ...state,
         loadings: {
           ...loadings,
-          deleteCareer: false,
+          deleteEmploymentHistory: false,
         },
         errors: {
           ...errors,
-          deleteCareer: error,
+          deleteEmploymentHistory: error,
         },
       };
     },
@@ -240,17 +240,17 @@ export const { reducer, actions } = createSlice({
 export const {
   setTitle,
   changeBasicField,
-  changeCareerField,
-  setCareers,
+  changeEmploymentHistoryField,
+  setEmploymentHistories,
   startLoadResume,
   completeLoadResume,
   failLoadResume,
-  startCreateCareer,
-  completeCreateCareer,
-  failCreateCareer,
-  startDeleteCareer,
-  completeDeleteCareer,
-  failDeleteCareer,
+  startCreateEmploymentHistory,
+  completeCreateEmploymentHistory,
+  failCreateEmploymentHistory,
+  startDeleteEmploymentHistory,
+  completeDeleteEmploymentHistory,
+  failDeleteEmploymentHistory,
 } = actions;
 
 export default reducer;

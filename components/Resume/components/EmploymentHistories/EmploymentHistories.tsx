@@ -5,7 +5,7 @@ import {
   EmploymentHistory as EmploymentHistoryType,
 } from '@/types/Resume';
 
-import CareerContainer from '../../containers/CareerContainer';
+import EmploymentHistoryContainer from '../../containers/EmploymentHistoryContainer';
 
 import Container from './style';
 
@@ -20,15 +20,15 @@ type Props = {
     name: InputName<EmploymentHistoryType>;
     value: string;
   }) => void;
-  onClickDeleteCareer: (id: string) => void;
-  onClickAddCareer: () => void;
+  onClickDeleteEmploymentHistory: (id: string) => void;
+  onClickAddEmploymentHistory: () => void;
 };
 
-export default function Careers({
+export default function EmploymentHistories({
   employmentHistories,
   onChange,
-  onClickDeleteCareer,
-  onClickAddCareer,
+  onClickDeleteEmploymentHistory,
+  onClickAddEmploymentHistory,
 }: Props) {
   return (
     <Container>
@@ -36,18 +36,22 @@ export default function Careers({
       <p>근무 경력을 최근순으로 입력해주세요.</p>
       <ul>
         {employmentHistories.map((employmentHistory) => (
-          <CareerContainer
+          <EmploymentHistoryContainer
             key={employmentHistory.id}
             employmentHistory={employmentHistory}
             onChange={onChange}
-            onClickDeleteCareer={onClickDeleteCareer}
+            onClickDeleteEmploymentHistory={onClickDeleteEmploymentHistory}
           />
         ))}
       </ul>
-      <button type='button' onClick={onClickAddCareer}>
+      <button type='button' onClick={onClickAddEmploymentHistory}>
         <div>
           <div>
-            <Image src='/assets/plus.png' alt='add-career' layout='fill' />
+            <Image
+              src='/assets/plus.png'
+              alt='add-employment-history'
+              layout='fill'
+            />
           </div>
         </div>
         <span>경력 추가하기</span>

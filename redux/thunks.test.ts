@@ -5,15 +5,15 @@ import configureStore from 'redux-mock-store';
 import {
   loadResume,
   changeResume,
-  createCareer,
-  deleteCareer,
+  createEmploymentHistory,
+  deleteEmploymentHistory,
 } from '@/redux/thunks';
 
 import {
-  addCareer,
+  addEmploymentHistory,
+  removeEmploymentHistory,
   fetchResume,
   updateResume,
-  removeCareer,
 } from '../services/resume';
 
 jest.mock('@/services/resume');
@@ -30,8 +30,8 @@ describe('thunks', () => {
     beforeEach(() => {
       (fetchResume as jest.Mock).mockResolvedValue({});
       (updateResume as jest.Mock).mockResolvedValue({});
-      (addCareer as jest.Mock).mockResolvedValue([]);
-      (removeCareer as jest.Mock).mockResolvedValue([]);
+      (addEmploymentHistory as jest.Mock).mockResolvedValue([]);
+      (removeEmploymentHistory as jest.Mock).mockResolvedValue([]);
     });
 
     it('dispatches loadResume action', async () => {
@@ -70,38 +70,38 @@ describe('thunks', () => {
       });
     });
 
-    it('dispatches createCareer action', async () => {
+    it('dispatches createEmploymentHistory action', async () => {
       const store = mockStore({});
 
-      await store.dispatch(createCareer());
+      await store.dispatch(createEmploymentHistory());
 
       const actions = store.getActions();
 
       expect(actions[0]).toEqual({
-        type: 'resume/startCreateCareer',
+        type: 'resume/startCreateEmploymentHistory',
         payload: undefined,
       });
 
       expect(actions[1]).toEqual({
-        type: 'resume/completeCreateCareer',
+        type: 'resume/completeCreateEmploymentHistory',
         payload: undefined,
       });
     });
 
-    it('dispatches deleteCareer action', async () => {
+    it('dispatches deleteEmploymentHistory action', async () => {
       const store = mockStore({});
 
-      await store.dispatch(deleteCareer('First'));
+      await store.dispatch(deleteEmploymentHistory('First'));
 
       const actions = store.getActions();
 
       expect(actions[0]).toEqual({
-        type: 'resume/startDeleteCareer',
+        type: 'resume/startDeleteEmploymentHistory',
         payload: undefined,
       });
 
       expect(actions[1]).toEqual({
-        type: 'resume/completeDeleteCareer',
+        type: 'resume/completeDeleteEmploymentHistory',
         payload: undefined,
       });
     });
@@ -113,8 +113,8 @@ describe('thunks', () => {
     beforeEach(() => {
       (fetchResume as jest.Mock).mockRejectedValue(error);
       (updateResume as jest.Mock).mockRejectedValue(error);
-      (addCareer as jest.Mock).mockRejectedValue(error);
-      (removeCareer as jest.Mock).mockRejectedValue(error);
+      (addEmploymentHistory as jest.Mock).mockRejectedValue(error);
+      (removeEmploymentHistory as jest.Mock).mockRejectedValue(error);
     });
 
     it('dispatches loadResume action', async () => {
@@ -153,38 +153,38 @@ describe('thunks', () => {
       });
     });
 
-    it('dispatches createCareer action', async () => {
+    it('dispatches createEmploymentHistory action', async () => {
       const store = mockStore({});
 
-      await store.dispatch(createCareer());
+      await store.dispatch(createEmploymentHistory());
 
       const actions = store.getActions();
 
       expect(actions[0]).toEqual({
-        type: 'resume/startCreateCareer',
+        type: 'resume/startCreateEmploymentHistory',
         payload: undefined,
       });
 
       expect(actions[1]).toEqual({
-        type: 'resume/failCreateCareer',
+        type: 'resume/failCreateEmploymentHistory',
         payload: error,
       });
     });
 
-    it('dispatches deleteCareer action', async () => {
+    it('dispatches deleteEmploymentHistory action', async () => {
       const store = mockStore({});
 
-      await store.dispatch(deleteCareer('First'));
+      await store.dispatch(deleteEmploymentHistory('First'));
 
       const actions = store.getActions();
 
       expect(actions[0]).toEqual({
-        type: 'resume/startDeleteCareer',
+        type: 'resume/startDeleteEmploymentHistory',
         payload: undefined,
       });
 
       expect(actions[1]).toEqual({
-        type: 'resume/failDeleteCareer',
+        type: 'resume/failDeleteEmploymentHistory',
         payload: error,
       });
     });

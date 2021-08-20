@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { EMPLOYMENT_HISTORY_PLACEHOLDERS } from '@/fixtures/placeholders';
 import EMPLOYMENT_HISTORIES from '@/fixtures/employmentHistories';
 
-import CareersContainer from './CareersContainer';
+import EmploymentHistoriesContainer from './EmploymentHistoriesContainer';
 
 jest.mock('react-redux');
 
-describe('CareersContainer', () => {
+describe('EmploymentHistoriesContainer', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => {
@@ -26,23 +26,23 @@ describe('CareersContainer', () => {
   });
 
   it("listens '경력 추가하기' click event", () => {
-    const { getByText } = render(<CareersContainer />);
+    const { getByText } = render(<EmploymentHistoriesContainer />);
 
     fireEvent.click(getByText('경력 추가하기'));
 
     expect(dispatch).toBeCalled();
   });
 
-  it("listens 'delete-career' click event", () => {
-    const { getByTestId } = render(<CareersContainer />);
+  it("listens 'delete-employment-history' click event", () => {
+    const { getByTestId } = render(<EmploymentHistoriesContainer />);
 
-    fireEvent.click(getByTestId('delete-career'));
+    fireEvent.click(getByTestId('delete-employment-history'));
 
     expect(dispatch).toBeCalled();
   });
 
   it('listens change event', () => {
-    const { getByPlaceholderText } = render(<CareersContainer />);
+    const { getByPlaceholderText } = render(<EmploymentHistoriesContainer />);
 
     EMPLOYMENT_HISTORY_PLACEHOLDERS.forEach(
       (EMPLOYMENT_HISTORY_PLACEHOLDER) => {

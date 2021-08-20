@@ -1,11 +1,11 @@
 import { v4 as uuid } from 'uuid';
 
-import { Career } from '@/types/Resume';
+import { EmploymentHistory } from '@/types/Resume';
 
-import { resumeState } from '@/redux/slice';
+import { initialState } from '@/redux/slice';
 import { store } from '@/redux/store';
 
-let dummyCareers: Career[] = [];
+let dummyEmploymentHistories: EmploymentHistory[] = [];
 
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -14,42 +14,48 @@ function sleep(ms: number) {
 export async function fetchResume() {
   await sleep(200);
 
-  return { data: resumeState };
+  return { data: initialState };
 }
 
 export async function updateResume() {
   await sleep(200);
 
   const {
-    resume: { title, basic, careers },
+    resume: { title, basic, employmentHistories },
   } = store.getState();
 
-  return { data: { title, basic, careers } };
+  return { data: { title, basic, employmentHistories } };
 }
 
-export async function addCareer() {
+export async function addEmploymentHistory() {
   await sleep(200);
 
-  dummyCareers = [
-    ...dummyCareers,
+  const {
+    resume: { employmentHistories },
+  } = store.getState();
+
+  dummyEmploymentHistories = [
+    ...employmentHistories,
     {
       id: uuid(),
-      jobDetail: '',
-      company: '',
+      jobTitle: '',
+      employer: '',
       startDate: '',
       endDate: '',
-      region: '',
+      address: '',
       description: '',
     },
   ];
 
-  return { data: dummyCareers };
+  return { data: dummyEmploymentHistories };
 }
 
-export async function removeCareer(id: string) {
+export async function removeEmploymentHistory(id: string) {
   await sleep(200);
 
-  dummyCareers = dummyCareers.filter((CAREER) => CAREER.id !== id);
+  dummyEmploymentHistories = dummyEmploymentHistories.filter(
+    (dummyEmploymentHistory) => dummyEmploymentHistory.id !== id
+  );
 
-  return { data: dummyCareers };
+  return { data: dummyEmploymentHistories };
 }

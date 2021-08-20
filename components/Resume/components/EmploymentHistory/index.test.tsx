@@ -6,16 +6,16 @@ import { EMPLOYMENT_HISTORY_PLACEHOLDERS } from '@/fixtures/placeholders';
 
 import EMPLOYMENT_HISTORIES from '@/fixtures/employmentHistories';
 
-import Career from './Career';
+import EmploymentHistory from './EmploymentHistory';
 
-describe('Career', () => {
+describe('EmploymentHistory', () => {
   const handleChange = jest.fn();
   const handleClickToggle = jest.fn();
-  const handleClickDeleteCareer = jest.fn();
+  const handleClickDeleteEmploymentHistory = jest.fn();
 
-  function renderCareer() {
+  function renderEmploymentHistory() {
     return render(
-      <Career
+      <EmploymentHistory
         employmentHistory={{
           ...EMPLOYMENT_HISTORIES[0],
           jobTitle: given.jobTitle,
@@ -25,13 +25,13 @@ describe('Career', () => {
         onChange={handleChange}
         isShowDetail={false}
         onClickToggle={handleClickToggle}
-        onClickDeleteCareer={handleClickDeleteCareer}
+        onClickDeleteEmploymentHistory={handleClickDeleteEmploymentHistory}
       />
     );
   }
 
   it('renders title, period', () => {
-    const { getByText } = renderCareer();
+    const { getByText } = renderEmploymentHistory();
 
     expect(getByText('제목을 입력해주세요.')).toBeInTheDocument();
     expect(getByText('근무 기간을 입력해주세요.')).toBeInTheDocument();
@@ -43,7 +43,7 @@ describe('Career', () => {
     });
 
     it('renders jobTitle', () => {
-      const { getByText } = renderCareer();
+      const { getByText } = renderEmploymentHistory();
 
       expect(getByText('프론트엔드')).toBeInTheDocument();
     });
@@ -56,7 +56,7 @@ describe('Career', () => {
     });
 
     it('renders startDate, endDate', () => {
-      const { getByText } = renderCareer();
+      const { getByText } = renderEmploymentHistory();
 
       expect(getByText('2020.01 - 2021.03')).toBeInTheDocument();
     });
@@ -68,7 +68,7 @@ describe('Career', () => {
       getAllByLabelText,
       getByPlaceholderText,
       getByTestId,
-    } = renderCareer();
+    } = renderEmploymentHistory();
 
     EMPLOYMENT_HISTORY_PLACEHOLDERS.forEach(
       (EMPLOYMENT_HISTORY_PLACEHOLDER) => {
@@ -95,14 +95,14 @@ describe('Career', () => {
     expect(getByTestId('dropdown-toggle')).toBeInTheDocument();
   });
 
-  it("renders 'delete-career' button", () => {
-    const { getByTestId } = renderCareer();
+  it("renders 'delete-employment-history' button", () => {
+    const { getByTestId } = renderEmploymentHistory();
 
-    expect(getByTestId('delete-career')).toBeInTheDocument();
+    expect(getByTestId('delete-employment-history')).toBeInTheDocument();
   });
 
   it('listens change events', () => {
-    const { getByPlaceholderText } = renderCareer();
+    const { getByPlaceholderText } = renderEmploymentHistory();
 
     EMPLOYMENT_HISTORY_PLACEHOLDERS.forEach(
       (EMPLOYMENT_HISTORY_PLACEHOLDER) => {
@@ -117,19 +117,19 @@ describe('Career', () => {
     );
   });
 
-  it("listens 'career-title' click events", () => {
-    const { getByTestId } = renderCareer();
+  it("listens 'employment-history-title' click events", () => {
+    const { getByTestId } = renderEmploymentHistory();
 
-    fireEvent.click(getByTestId('career-title'));
+    fireEvent.click(getByTestId('employment-history-title'));
 
     expect(handleClickToggle).toBeCalled();
   });
 
-  it("listens 'delete-career' click events", () => {
-    const { getByTestId } = renderCareer();
+  it("listens 'delete-employment-history' click events", () => {
+    const { getByTestId } = renderEmploymentHistory();
 
-    fireEvent.click(getByTestId('delete-career'));
+    fireEvent.click(getByTestId('delete-employment-history'));
 
-    expect(handleClickDeleteCareer).toBeCalled();
+    expect(handleClickDeleteEmploymentHistory).toBeCalled();
   });
 });

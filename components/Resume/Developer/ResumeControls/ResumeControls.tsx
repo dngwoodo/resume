@@ -8,7 +8,7 @@ import TitleContainer from '../../containers/TitleContainer';
 import ThumbnailUploaderContainer from '../../containers/ThumbnailUploaderContainer';
 import ProgressBarContainer from '../../containers/ProgressBarContainer';
 import BasicContainer from '../../containers/BasicContainer';
-import CareersContainer from '../../containers/CareersContainer';
+import EmploymentHistoriesContainer from '../../containers/EmploymentHistoriesContainer';
 
 export default function ResumeControls() {
   const dispatch = useAppDispatch();
@@ -23,7 +23,7 @@ export default function ResumeControls() {
       <ThumbnailUploaderContainer />
       <ProgressBarContainer />
       <BasicContainer />
-      <CareersContainer />
+      <EmploymentHistoriesContainer />
     </>
   );
 }

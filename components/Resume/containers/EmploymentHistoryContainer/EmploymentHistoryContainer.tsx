@@ -5,7 +5,7 @@ import {
   InputName,
 } from '@/types/Resume';
 
-import Career from '../../components/Career';
+import EmploymentHistory from '../../components/EmploymentHistory';
 
 type Props = {
   employmentHistory: EmploymentHistoryType;
@@ -18,13 +18,13 @@ type Props = {
     name: InputName<EmploymentHistoryType>;
     value: string;
   }) => void;
-  onClickDeleteCareer: (id: string) => void;
+  onClickDeleteEmploymentHistory: (id: string) => void;
 };
 
-export default function CareerContainer({
+export default function EmploymentHistoryContainer({
   employmentHistory,
   onChange,
-  onClickDeleteCareer,
+  onClickDeleteEmploymentHistory,
 }: Props) {
   const [isShowDetail, setIsShowDetail] = useState<boolean>(false);
 
@@ -33,12 +33,12 @@ export default function CareerContainer({
   }
 
   return (
-    <Career
+    <EmploymentHistory
       employmentHistory={employmentHistory}
       onChange={onChange}
       isShowDetail={isShowDetail}
       onClickToggle={handleClickToggle}
-      onClickDeleteCareer={onClickDeleteCareer}
+      onClickDeleteEmploymentHistory={onClickDeleteEmploymentHistory}
     />
   );
 }
