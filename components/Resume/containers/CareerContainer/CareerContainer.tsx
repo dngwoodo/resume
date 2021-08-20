@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useState } from 'react';
 
 import { Career as CareerType, InputName } from '@/types/Resume';

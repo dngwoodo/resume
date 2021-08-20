@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import Image from 'next/image';
 
 import { InputName, Career as CareerType } from '@/types/Resume';
