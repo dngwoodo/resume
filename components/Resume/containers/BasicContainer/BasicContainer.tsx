@@ -8,7 +8,7 @@ import Basic from '../../components/Basic';
 
 export default function BasicContainer() {
   const dispatch = useAppDispatch();
-  const { basic } = useAppSelector((state) => state.resume);
+  const basic = useAppSelector((state) => state.resume);
 
   function handleChange({
     name,
@@ -20,17 +20,5 @@ export default function BasicContainer() {
     dispatch(changeBasicField({ name, value }));
   }
 
-  const { name, jobTitle, email, phone, address, selfIntroduction } = basic;
-
-  return (
-    <Basic
-      name={name}
-      jobTitle={jobTitle}
-      email={email}
-      phone={phone}
-      address={address}
-      selfIntroduction={selfIntroduction}
-      onChange={handleChange}
-    />
-  );
+  return <Basic basic={basic} onChange={handleChange} />;
 }

@@ -16,14 +16,12 @@ describe('BasicContainer', () => {
     (useSelector as jest.Mock).mockImplementation((selector) =>
       selector({
         resume: {
-          basic: {
-            name: '',
-            occupation: '',
-            email: '',
-            phoneNumber: '',
-            address: '',
-            introduction: '',
-          },
+          name: '',
+          occupation: '',
+          email: '',
+          phoneNumber: '',
+          address: '',
+          introduction: '',
         },
       })
     );

@@ -4,12 +4,7 @@ import { ChangeEvent } from 'react';
 import { Container, InputWrapper, TextAreaWrapper } from './style';
 
 type Props = {
-  name: string;
-  jobTitle: string;
-  email: string;
-  phone: string;
-  address: string;
-  selfIntroduction: string;
+  basic: BasicType;
   onChange: ({
     name,
     value,
@@ -19,15 +14,9 @@ type Props = {
   }) => void;
 };
 
-export default function Basic({
-  name,
-  jobTitle,
-  email,
-  phone,
-  address,
-  selfIntroduction,
-  onChange,
-}: Props) {
+export default function Basic({ basic, onChange }: Props) {
+  const { name, jobTitle, email, phone, address, selfIntroduction } = basic;
+
   function handleChange(
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ) {
