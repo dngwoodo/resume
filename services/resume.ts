@@ -21,10 +21,30 @@ export async function updateResume() {
   await sleep(200);
 
   const {
-    resume: { title, basic, employmentHistories },
+    resume: {
+      title,
+      name,
+      jobTitle,
+      email,
+      phone,
+      address,
+      selfIntroduction,
+      employmentHistories,
+    },
   } = store.getState();
 
-  return { data: { title, basic, employmentHistories } };
+  return {
+    data: {
+      title,
+      name,
+      jobTitle,
+      email,
+      phone,
+      address,
+      selfIntroduction,
+      employmentHistories,
+    },
+  };
 }
 
 export async function addEmploymentHistory() {

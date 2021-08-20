@@ -4,9 +4,8 @@ import { Basic, EmploymentHistory, InputName } from '@/types/Resume';
 
 type ResumeState = {
   title: string;
-  basic: Basic;
   employmentHistories: EmploymentHistory[];
-};
+} & Basic;
 
 type InitialState = {
   errors: {
@@ -23,14 +22,12 @@ type InitialState = {
 
 export const initialState: ResumeState & InitialState = {
   title: '이력서 제목',
-  basic: {
-    name: '',
-    jobTitle: '',
-    email: '',
-    phone: '',
-    address: '',
-    selfIntroduction: '',
-  },
+  name: '',
+  jobTitle: '',
+  email: '',
+  phone: '',
+  address: '',
+  selfIntroduction: '',
   employmentHistories: [],
   errors: {
     loadResume: null,
@@ -72,10 +69,7 @@ export const { reducer, actions } = createSlice({
     ) {
       return {
         ...state,
-        basic: {
-          ...state.basic,
-          [name]: value,
-        },
+        [name]: value,
       };
     },
     changeEmploymentHistoryField(

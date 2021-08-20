@@ -16,14 +16,12 @@ describe('ResumeControls', () => {
       selector({
         resume: {
           title: '이력서 제목',
-          basic: {
-            name: '',
-            jobTitle: '',
-            email: '',
-            phone: '',
-            address: '',
-            selfIntroduction: '',
-          },
+          name: '',
+          jobTitle: '',
+          email: '',
+          phone: '',
+          address: '',
+          selfIntroduction: '',
           employmentHistories: [
             {
               id: '0',

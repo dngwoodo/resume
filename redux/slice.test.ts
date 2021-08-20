@@ -29,9 +29,7 @@ describe('slice', () => {
 
   describe('changeBasicField', () => {
     it('changes resume field', () => {
-      const {
-        basic: { name },
-      } = reducer(
+      const { name } = reducer(
         initialState,
         changeBasicField({ name: 'name', value: '김동우' })
       );

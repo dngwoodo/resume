@@ -10,12 +10,14 @@ describe('Basic', () => {
   function renderBasic() {
     return render(
       <Basic
-        name=''
-        occupation=''
-        email=''
-        phoneNumber=''
-        address=''
-        introduction=''
+        basic={{
+          name: '',
+          jobTitle: '',
+          email: '',
+          phone: '',
+          address: '',
+          selfIntroduction: '',
+        }}
         onChange={handleChange}
       />
     );
