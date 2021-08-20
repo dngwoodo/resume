@@ -21,7 +21,7 @@ type InitialState = {
   };
 };
 
-export const resumeState: ResumeState = {
+export const initialState: ResumeState & InitialState = {
   title: '이력서 제목',
   basic: {
     name: '',
@@ -32,10 +32,6 @@ export const resumeState: ResumeState = {
     introduction: '',
   },
   careers: [],
-};
-
-export const initialState: ResumeState & InitialState = {
-  ...resumeState,
   errors: {
     loadResume: null,
     createCareer: null,
