@@ -1,10 +1,10 @@
 import Title from '@/components/Resume/components/Title';
 
-import { setTitle } from '@/redux/slice';
+import { changeTitle } from '@/redux/slice';
 
 export default function TitleContainer() {
   function handleInputTitle(newTitle: string) {
-    setTitle(newTitle);
+    changeTitle(newTitle);
   }
 
   function handleClickInputControlFocus(element: HTMLElement) {

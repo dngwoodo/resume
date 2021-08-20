@@ -1,21 +1,13 @@
 import reducer, {
-  changeEmploymentHistoryField,
-  changeBasicField,
   initialState,
   setEmploymentHistories,
-  setTitle,
+  changeTitle,
+  changeEmploymentHistoryField,
+  changeBasicField,
 } from '@/redux/slice';
 import EMPLOYMENT_HISTORIES from '@/fixtures/employmentHistories';
 
 describe('slice', () => {
-  describe('setTitle', () => {
-    it('changes title', () => {
-      const { title } = reducer(initialState, setTitle('열정! 열정! 열정!'));
-
-      expect(title).toBe('열정! 열정! 열정!');
-    });
-  });
-
   describe('setEmploymentHistories', () => {
     it('changes employmentHistories', () => {
       const { employmentHistories } = reducer(
@@ -24,6 +16,14 @@ describe('slice', () => {
       );
 
       expect(employmentHistories).toEqual(EMPLOYMENT_HISTORIES);
+    });
+  });
+
+  describe('changeTitle', () => {
+    it('changes title', () => {
+      const { title } = reducer(initialState, changeTitle('열정! 열정! 열정!'));
+
+      expect(title).toBe('열정! 열정! 열정!');
     });
   });
 
