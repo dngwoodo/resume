@@ -1,10 +1,10 @@
 import { fireEvent, render } from '@testing-library/react';
 import given from 'given2';
 
-import { CAREER_LABELS } from '@/fixtures/labels';
-import { CAREER_PLACEHOLDERS } from '@/fixtures/placeholders';
+import { EMPLOYMENT_HISTORY_LABELS } from '@/fixtures/labels';
+import { EMPLOYMENT_HISTORY_PLACEHOLDERS } from '@/fixtures/placeholders';
 
-import CAREERS from '@/fixtures/careers';
+import EMPLOYMENT_HISTORIES from '@/fixtures/employmentHistories';
 
 import Career from './Career';
 
@@ -16,9 +16,9 @@ describe('Career', () => {
   function renderCareer() {
     return render(
       <Career
-        career={{
-          ...CAREERS[0],
-          jobDetail: given.jobDetail,
+        employmentHistory={{
+          ...EMPLOYMENT_HISTORIES[0],
+          jobTitle: given.jobTitle,
           startDate: given.startDate,
           endDate: given.endDate,
         }}
@@ -39,10 +39,10 @@ describe('Career', () => {
 
   context('with jobTitle', () => {
     beforeEach(() => {
-      given('jobDetail', () => '프론트엔드');
+      given('jobTitle', () => '프론트엔드');
     });
 
-    it('renders jobDetail', () => {
+    it('renders jobTitle', () => {
       const { getByText } = renderCareer();
 
       expect(getByText('프론트엔드')).toBeInTheDocument();
@@ -70,18 +70,26 @@ describe('Career', () => {
       getByTestId,
     } = renderCareer();
 
-    CAREER_PLACEHOLDERS.forEach((CAREER_PLACEHOLDER) => {
-      expect(getByPlaceholderText(CAREER_PLACEHOLDER)).toBeInTheDocument();
-    });
+    EMPLOYMENT_HISTORY_PLACEHOLDERS.forEach(
+      (EMPLOYMENT_HISTORY_PLACEHOLDER) => {
+        expect(
+          getByPlaceholderText(EMPLOYMENT_HISTORY_PLACEHOLDER)
+        ).toBeInTheDocument();
+      }
+    );
 
-    CAREER_LABELS.forEach((CAREER_LABEL) => {
-      if (CAREER_LABEL === '근무 기간') {
-        expect(getAllByLabelText(CAREER_LABEL)[0]).toBeInTheDocument();
-        expect(getAllByLabelText(CAREER_LABEL)[1]).toBeInTheDocument();
+    EMPLOYMENT_HISTORY_LABELS.forEach((EMPLOYMENT_HISTORY_LABEL) => {
+      if (EMPLOYMENT_HISTORY_LABEL === '근무 기간') {
+        expect(
+          getAllByLabelText(EMPLOYMENT_HISTORY_LABEL)[0]
+        ).toBeInTheDocument();
+        expect(
+          getAllByLabelText(EMPLOYMENT_HISTORY_LABEL)[1]
+        ).toBeInTheDocument();
         return;
       }
 
-      expect(getByLabelText(CAREER_LABEL)).toBeInTheDocument();
+      expect(getByLabelText(EMPLOYMENT_HISTORY_LABEL)).toBeInTheDocument();
     });
 
     expect(getByTestId('dropdown-toggle')).toBeInTheDocument();
@@ -96,13 +104,17 @@ describe('Career', () => {
   it('listens change events', () => {
     const { getByPlaceholderText } = renderCareer();
 
-    CAREER_PLACEHOLDERS.forEach((CAREER_PLACEHOLDER) => {
-      fireEvent.change(getByPlaceholderText(CAREER_PLACEHOLDER), {
-        target: { value: 'test' },
-      });
-    });
+    EMPLOYMENT_HISTORY_PLACEHOLDERS.forEach(
+      (EMPLOYMENT_HISTORY_PLACEHOLDER) => {
+        fireEvent.change(getByPlaceholderText(EMPLOYMENT_HISTORY_PLACEHOLDER), {
+          target: { value: 'test' },
+        });
+      }
+    );
 
-    expect(handleChange).toBeCalledTimes(CAREER_PLACEHOLDERS.length);
+    expect(handleChange).toBeCalledTimes(
+      EMPLOYMENT_HISTORY_PLACEHOLDERS.length
+    );
   });
 
   it("listens 'career-title' click events", () => {

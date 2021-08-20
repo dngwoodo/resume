@@ -7,13 +7,13 @@ export type Basic = {
   selfIntroduction: string;
 };
 
-export type Career = {
+export type EmploymentHistory = {
   id: string;
-  jobDetail: string;
-  company: string;
+  jobTitle: string;
+  employer: string;
   startDate: string;
   endDate: string;
-  region: string;
+  address: string;
   description: string;
 };
 

@@ -1,20 +1,23 @@
 import Image from 'next/image';
 
-import { InputName, Career as CareerType } from '@/types/Resume';
+import {
+  InputName,
+  EmploymentHistory as EmploymentHistoryType,
+} from '@/types/Resume';
 
 import CareerContainer from '../../containers/CareerContainer';
 
 import Container from './style';
 
 type Props = {
-  careers: CareerType[];
+  employmentHistories: EmploymentHistoryType[];
   onChange: ({
     id,
     name,
     value,
   }: {
     id: string;
-    name: InputName<CareerType>;
+    name: InputName<EmploymentHistoryType>;
     value: string;
   }) => void;
   onClickDeleteCareer: (id: string) => void;
@@ -22,7 +25,7 @@ type Props = {
 };
 
 export default function Careers({
-  careers,
+  employmentHistories,
   onChange,
   onClickDeleteCareer,
   onClickAddCareer,
@@ -32,10 +35,10 @@ export default function Careers({
       <h5>경력</h5>
       <p>근무 경력을 최근순으로 입력해주세요.</p>
       <ul>
-        {careers.map((career) => (
+        {employmentHistories.map((employmentHistory) => (
           <CareerContainer
-            key={career.id}
-            career={career}
+            key={employmentHistory.id}
+            employmentHistory={employmentHistory}
             onChange={onChange}
             onClickDeleteCareer={onClickDeleteCareer}
           />

@@ -2,8 +2,8 @@ import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { CAREER_PLACEHOLDERS } from '@/fixtures/placeholders';
-import CAREERS from '@/fixtures/careers';
+import { EMPLOYMENT_HISTORY_PLACEHOLDERS } from '@/fixtures/placeholders';
+import EMPLOYMENT_HISTORIES from '@/fixtures/employmentHistories';
 
 import CareersContainer from './CareersContainer';
 
@@ -19,7 +19,7 @@ describe('CareersContainer', () => {
     (useSelector as jest.Mock).mockImplementation((selector) =>
       selector({
         resume: {
-          careers: CAREERS,
+          employmentHistories: EMPLOYMENT_HISTORIES,
         },
       })
     );
@@ -44,12 +44,14 @@ describe('CareersContainer', () => {
   it('listens change event', () => {
     const { getByPlaceholderText } = render(<CareersContainer />);
 
-    CAREER_PLACEHOLDERS.forEach((CAREER_PLACEHOLDER) => {
-      fireEvent.change(getByPlaceholderText(CAREER_PLACEHOLDER), {
-        target: { value: 'test' },
-      });
-    });
+    EMPLOYMENT_HISTORY_PLACEHOLDERS.forEach(
+      (EMPLOYMENT_HISTORY_PLACEHOLDER) => {
+        fireEvent.change(getByPlaceholderText(EMPLOYMENT_HISTORY_PLACEHOLDER), {
+          target: { value: 'test' },
+        });
+      }
+    );
 
-    expect(dispatch).toBeCalledTimes(CAREER_PLACEHOLDERS.length);
+    expect(dispatch).toBeCalledTimes(EMPLOYMENT_HISTORY_PLACEHOLDERS.length);
   });
 });

@@ -1,4 +1,4 @@
-export const CAREER_PLACEHOLDERS = [
+export const EMPLOYMENT_HISTORY_PLACEHOLDERS = [
   '직무를 입력해주세요.',
   '회사명을 입력하세요.',
   '2020.10',

@@ -1,6 +1,6 @@
 import { fireEvent, render } from '@testing-library/react';
 
-import CAREERS from '@/fixtures/careers';
+import EMPLOYMENT_HISTORIES from '@/fixtures/employmentHistories';
 
 import CareerContainer from './CareerContainer';
 
@@ -11,7 +11,7 @@ describe('CareerContainer', () => {
   it('listens click event', () => {
     const { getByTestId } = render(
       <CareerContainer
-        career={CAREERS[0]}
+        employmentHistory={EMPLOYMENT_HISTORIES[0]}
         onChange={handleChange}
         onClickDeleteCareer={handleClick}
       />

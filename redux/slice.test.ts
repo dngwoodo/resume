@@ -5,7 +5,7 @@ import reducer, {
   setCareers,
   setTitle,
 } from '@/redux/slice';
-import CAREERS from '@/fixtures/careers';
+import EMPLOYMENT_HISTORIES from '@/fixtures/employmentHistories';
 
 describe('slice', () => {
   describe('setTitle', () => {
@@ -18,9 +18,12 @@ describe('slice', () => {
 
   describe('setCareers', () => {
     it('changes careers', () => {
-      const { careers } = reducer(initialState, setCareers(CAREERS));
+      const { employmentHistories } = reducer(
+        initialState,
+        setCareers(EMPLOYMENT_HISTORIES)
+      );
 
-      expect(careers).toEqual(CAREERS);
+      expect(employmentHistories).toEqual(EMPLOYMENT_HISTORIES);
     });
   });
 
@@ -39,16 +42,16 @@ describe('slice', () => {
 
   describe('changeCareerField', () => {
     it('changes career field', () => {
-      const { careers } = reducer(
-        { ...initialState, careers: CAREERS },
+      const { employmentHistories } = reducer(
+        { ...initialState, employmentHistories: EMPLOYMENT_HISTORIES },
         changeCareerField({
           id: 'First',
-          name: 'jobDetail',
+          name: 'jobTitle',
           value: '프론트엔드',
         })
       );
 
-      expect(careers[0].jobDetail).toBe('프론트엔드');
+      expect(employmentHistories[0].jobTitle).toBe('프론트엔드');
     });
   });
 });

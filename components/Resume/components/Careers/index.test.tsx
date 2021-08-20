@@ -1,6 +1,6 @@
 import { fireEvent, render } from '@testing-library/react';
 
-import CAREERS from '@/fixtures/careers';
+import EMPLOYMENT_HISTORIES from '@/fixtures/employmentHistories';
 
 import Careers from './Careers';
 
@@ -12,7 +12,7 @@ describe('Careers', () => {
   function renderCareers() {
     return render(
       <Careers
-        careers={CAREERS}
+        employmentHistories={EMPLOYMENT_HISTORIES}
         onChange={handleChange}
         onClickDeleteCareer={handleClickDeleteCareer}
         onClickAddCareer={handleClickAddCareer}

@@ -1,25 +1,28 @@
 import { useState } from 'react';
 
-import { Career as CareerType, InputName } from '@/types/Resume';
+import {
+  EmploymentHistory as EmploymentHistoryType,
+  InputName,
+} from '@/types/Resume';
 
 import Career from '../../components/Career';
 
 type Props = {
-  career: CareerType;
+  employmentHistory: EmploymentHistoryType;
   onChange: ({
     id,
     name,
     value,
   }: {
     id: string;
-    name: InputName<CareerType>;
+    name: InputName<EmploymentHistoryType>;
     value: string;
   }) => void;
   onClickDeleteCareer: (id: string) => void;
 };
 
 export default function CareerContainer({
-  career,
+  employmentHistory,
   onChange,
   onClickDeleteCareer,
 }: Props) {
@@ -31,7 +34,7 @@ export default function CareerContainer({
 
   return (
     <Career
-      career={career}
+      employmentHistory={employmentHistory}
       onChange={onChange}
       isShowDetail={isShowDetail}
       onClickToggle={handleClickToggle}

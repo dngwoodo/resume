@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { Basic, Career, InputName } from '@/types/Resume';
+import { Basic, EmploymentHistory, InputName } from '@/types/Resume';
 
 type ResumeState = {
   title: string;
   basic: Basic;
-  careers: Career[];
+  employmentHistories: EmploymentHistory[];
 };
 
 type InitialState = {
@@ -31,7 +31,7 @@ export const initialState: ResumeState & InitialState = {
     address: '',
     selfIntroduction: '',
   },
-  careers: [],
+  employmentHistories: [],
   errors: {
     loadResume: null,
     createCareer: null,
@@ -54,10 +54,13 @@ export const { reducer, actions } = createSlice({
         title,
       };
     },
-    setCareers(state, { payload: careers }: PayloadAction<Career[]>) {
+    setCareers(
+      state,
+      { payload: employmentHistories }: PayloadAction<EmploymentHistory[]>
+    ) {
       return {
         ...state,
-        careers,
+        employmentHistories,
       };
     },
     // change
@@ -81,14 +84,17 @@ export const { reducer, actions } = createSlice({
         payload: { id, name, value },
       }: PayloadAction<{
         id: string;
-        name: InputName<Career>;
+        name: InputName<EmploymentHistory>;
         value: string;
       }>
     ) {
       return {
         ...state,
-        careers: state.careers.map((career) =>
-          career.id === id ? { ...career, [name]: value } : career
+        employmentHistories: state.employmentHistories.map(
+          (employmentHistory) =>
+            employmentHistory.id === id
+              ? { ...employmentHistory, [name]: value }
+              : employmentHistory
         ),
       };
     },

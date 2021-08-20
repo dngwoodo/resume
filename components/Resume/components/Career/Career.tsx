@@ -2,20 +2,23 @@ import { ChangeEvent } from 'react';
 
 import Image from 'next/image';
 
-import { Career as CareerType, InputName } from '@/types/Resume';
+import {
+  EmploymentHistory as EmploymentHistoryType,
+  InputName,
+} from '@/types/Resume';
 
 import { Container, Title, CareerDetail, PeriodInputWrapper } from './style';
 import { InputWrapper, TextAreaWrapper } from '../Basic/style';
 
 type Props = {
-  career: CareerType;
+  employmentHistory: EmploymentHistoryType;
   onChange: ({
     id,
     name,
     value,
   }: {
     id: string;
-    name: InputName<CareerType>;
+    name: InputName<EmploymentHistoryType>;
     value: string;
   }) => void;
   isShowDetail: boolean;
@@ -24,21 +27,21 @@ type Props = {
 };
 
 export default function Career({
-  career,
+  employmentHistory,
   onChange,
   isShowDetail,
   onClickToggle,
   onClickDeleteCareer,
 }: Props) {
-  const { id, jobDetail, company, startDate, endDate, region, description } =
-    career;
+  const { id, jobTitle, employer, startDate, endDate, address, description } =
+    employmentHistory;
 
   function handleChange(
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ) {
     onChange({
       id,
-      name: event.target.name as InputName<CareerType>,
+      name: event.target.name as InputName<EmploymentHistoryType>,
       value: event.target.value,
     });
   }
@@ -59,7 +62,7 @@ export default function Career({
         aria-hidden='true'
       >
         <div>
-          <p>{jobDetail || '제목을 입력해주세요.'}</p>
+          <p>{jobTitle || '제목을 입력해주세요.'}</p>
           <p>
             {startDate && endDate
               ? `${startDate} - ${endDate}`
@@ -81,19 +84,19 @@ export default function Career({
           <input
             id='career-job-detail'
             type='text'
-            name='jobDetail'
-            value={jobDetail}
+            name='jobTitle'
+            value={jobTitle}
             onChange={handleChange}
             placeholder='직무를 입력해주세요.'
           />
         </InputWrapper>
         <InputWrapper>
-          <label htmlFor='career-company'>회사명</label>
+          <label htmlFor='career-employer'>회사명</label>
           <input
-            id='career-company'
+            id='career-employer'
             type='text'
-            name='company'
-            value={company}
+            name='employer'
+            value={employer}
             onChange={handleChange}
             placeholder='회사명을 입력하세요.'
           />
@@ -120,12 +123,12 @@ export default function Career({
           </div>
         </PeriodInputWrapper>
         <InputWrapper>
-          <label htmlFor='career-region'>지역</label>
+          <label htmlFor='career-address'>지역</label>
           <input
             type='text'
-            id='career-region'
-            name='region'
-            value={region}
+            id='career-address'
+            name='address'
+            value={address}
             onChange={handleChange}
             placeholder='지역을 입력해주세요.'
           />
