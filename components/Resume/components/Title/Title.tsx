@@ -32,9 +32,7 @@ const Container = styled.div({
 });
 
 type Props = {
-  // eslint-disable-next-line no-unused-vars
   onInput: (newTitle: string) => void;
-  // eslint-disable-next-line no-unused-vars
   onClick: (element: HTMLDivElement) => void;
 };
 
