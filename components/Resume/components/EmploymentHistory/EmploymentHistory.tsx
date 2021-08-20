@@ -1,66 +1,73 @@
-/* eslint-disable no-unused-vars */
 import { ChangeEvent } from 'react';
 
 import Image from 'next/image';
 
-import { Career as CareerType, CareerInputName } from '@/types/Resume';
+import {
+  EmploymentHistory as EmploymentHistoryType,
+  InputName,
+} from '@/types/Resume';
 
-import { Container, Title, CareerDetail, PeriodInputWrapper } from './style';
+import {
+  Container,
+  Title,
+  EmploymentHistoryDetail,
+  PeriodInputWrapper,
+} from './style';
 import { InputWrapper, TextAreaWrapper } from '../Basic/style';
 
 type Props = {
-  career: CareerType;
+  employmentHistory: EmploymentHistoryType;
   onChange: ({
     id,
     name,
     value,
   }: {
     id: string;
-    name: CareerInputName;
+    name: InputName<EmploymentHistoryType>;
     value: string;
   }) => void;
   isShowDetail: boolean;
   onClickToggle: () => void;
-  onClickDeleteCareer: (id: string) => void;
+  onClickDeleteEmploymentHistory: (id: string) => void;
 };
 
-export default function Career({
-  career,
+export default function EmploymentHistory({
+  employmentHistory,
   onChange,
   isShowDetail,
   onClickToggle,
-  onClickDeleteCareer,
+  onClickDeleteEmploymentHistory,
 }: Props) {
-  const { id, jobDetail, company, startDate, endDate, region, description } =
-    career;
+  const { id, jobTitle, employer, startDate, endDate, address, description } =
+    employmentHistory;
 
   function handleChange(
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ) {
     onChange({
       id,
-      name: event.target.name as CareerInputName,
+      name: event.target.name as InputName<EmploymentHistoryType>,
       value: event.target.value,
     });
   }
 
   function handleClick() {
-    onClickDeleteCareer(id);
+    onClickDeleteEmploymentHistory(id);
   }
 
   return (
     <Container isShowDetail={isShowDetail}>
       <button type='button' onClick={handleClick}>
-        <div data-testid='delete-career' />
+        <div data-testid='delete-employment-history' />
       </button>
       <Title
         isShowDetail={isShowDetail}
-        data-testid='career-title'
+        data-testid='employment-history-title'
         onClick={onClickToggle}
         aria-hidden='true'
       >
         <div>
-          <p>{jobDetail || '제목을 입력해주세요.'}</p>
+          <p>{jobTitle || '제목을 입력해주세요.'}</p>
           <p>
             {startDate && endDate
               ? `${startDate} - ${endDate}`
@@ -76,34 +83,37 @@ export default function Career({
           />
         </button>
       </Title>
-      <CareerDetail data-testid='career-detail' isShowDetail={isShowDetail}>
+      <EmploymentHistoryDetail
+        data-testid='employment-history-detail'
+        isShowDetail={isShowDetail}
+      >
         <InputWrapper>
-          <label htmlFor='career-job-detail'>직무 내용</label>
+          <label htmlFor='employment-history-job-detail'>직무 내용</label>
           <input
-            id='career-job-detail'
+            id='employment-history-job-detail'
             type='text'
-            name='jobDetail'
-            value={jobDetail}
+            name='jobTitle'
+            value={jobTitle}
             onChange={handleChange}
             placeholder='직무를 입력해주세요.'
           />
         </InputWrapper>
         <InputWrapper>
-          <label htmlFor='career-company'>회사명</label>
+          <label htmlFor='employment-history-employer'>회사명</label>
           <input
-            id='career-company'
+            id='employment-history-employer'
             type='text'
-            name='company'
-            value={company}
+            name='employer'
+            value={employer}
             onChange={handleChange}
             placeholder='회사명을 입력하세요.'
           />
         </InputWrapper>
         <PeriodInputWrapper>
-          <label id='career-period'>근무 기간</label>
+          <label id='employment-history-period'>근무 기간</label>
           <div>
             <input
-              aria-labelledby='career-period'
+              aria-labelledby='employment-history-period'
               type='text'
               name='startDate'
               value={startDate}
@@ -111,7 +121,7 @@ export default function Career({
               placeholder='2020.10'
             />
             <input
-              aria-labelledby='career-period'
+              aria-labelledby='employment-history-period'
               type='text'
               name='endDate'
               value={endDate}
@@ -121,27 +131,27 @@ export default function Career({
           </div>
         </PeriodInputWrapper>
         <InputWrapper>
-          <label htmlFor='career-region'>지역</label>
+          <label htmlFor='employment-history-address'>지역</label>
           <input
             type='text'
-            id='career-region'
-            name='region'
-            value={region}
+            id='employment-history-address'
+            name='address'
+            value={address}
             onChange={handleChange}
             placeholder='지역을 입력해주세요.'
           />
         </InputWrapper>
         <TextAreaWrapper>
-          <label htmlFor='career-description'>경력 기술</label>
+          <label htmlFor='employment-history-description'>경력 기술</label>
           <textarea
-            id='career-description'
+            id='employment-history-description'
             name='description'
             value={description}
             onChange={handleChange}
             placeholder='간단한 자기소개를 통해 이력서를 돋보이게 만들어보세요.'
           />
         </TextAreaWrapper>
-      </CareerDetail>
+      </EmploymentHistoryDetail>
     </Container>
   );
 }

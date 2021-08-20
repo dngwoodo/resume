@@ -1,32 +1,38 @@
+import { Basic as BasicType, InputName } from '@/types/Resume';
 import { ChangeEvent } from 'react';
 
 import { Container, InputWrapper, TextAreaWrapper } from './style';
 
 type Props = {
   name: string;
-  occupation: string;
+  jobTitle: string;
   email: string;
-  phoneNumber: string;
+  phone: string;
   address: string;
-  introduction: string;
-  // eslint-disable-next-line no-unused-vars
-  onChange: ({ name, value }: { name: string; value: string }) => void;
+  selfIntroduction: string;
+  onChange: ({
+    name,
+    value,
+  }: {
+    name: InputName<BasicType>;
+    value: string;
+  }) => void;
 };
 
 export default function Basic({
   name,
-  occupation,
+  jobTitle,
   email,
-  phoneNumber,
+  phone,
   address,
-  introduction,
+  selfIntroduction,
   onChange,
 }: Props) {
   function handleChange(
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ) {
     onChange({
-      name: event.target.name,
+      name: event.target.name as InputName<BasicType>,
       value: event.target.value,
     });
   }
@@ -45,12 +51,12 @@ export default function Basic({
         />
       </InputWrapper>
       <InputWrapper>
-        <label htmlFor='occupation'>직업군</label>
+        <label htmlFor='jobTitle'>직업군</label>
         <input
-          id='occupation'
+          id='jobTitle'
           type='text'
-          name='occupation'
-          value={occupation}
+          name='jobTitle'
+          value={jobTitle}
           onChange={handleChange}
           placeholder='직업군을 입력해주세요.'
         />
@@ -67,12 +73,12 @@ export default function Basic({
         />
       </InputWrapper>
       <InputWrapper>
-        <label htmlFor='phoneNumber'>휴대전화</label>
+        <label htmlFor='phone'>휴대전화</label>
         <input
-          id='phoneNumber'
+          id='phone'
           type='text'
-          name='phoneNumber'
-          value={phoneNumber}
+          name='phone'
+          value={phone}
           onChange={handleChange}
           placeholder='휴대폰 번호를 입력해주세요.'
         />
@@ -89,11 +95,11 @@ export default function Basic({
         />
       </InputWrapper>
       <TextAreaWrapper>
-        <label htmlFor='introduction'>Introduction</label>
+        <label htmlFor='selfIntroduction'>Introduction</label>
         <textarea
-          id='introduction'
-          name='introduction'
-          value={introduction}
+          id='selfIntroduction'
+          name='selfIntroduction'
+          value={selfIntroduction}
           onChange={handleChange}
           placeholder='간단한 자기소개를 통해 이력서를 돋보이게 만들어보세요.'
         />

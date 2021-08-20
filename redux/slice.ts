@@ -1,46 +1,74 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { Basic, Career, CareerInputName } from '@/types/Resume';
+import { Basic, EmploymentHistory, InputName } from '@/types/Resume';
 
 type ResumeState = {
   title: string;
   basic: Basic;
-  careers: Career[];
+  employmentHistories: EmploymentHistory[];
 };
 
-export const initialState: ResumeState = {
+type InitialState = {
+  errors: {
+    loadResume: string | null;
+    createEmploymentHistory: string | null;
+    deleteEmploymentHistory: string | null;
+  };
+  loadings: {
+    loadResume: boolean;
+    createEmploymentHistory: boolean;
+    deleteEmploymentHistory: boolean;
+  };
+};
+
+export const initialState: ResumeState & InitialState = {
   title: '이력서 제목',
   basic: {
     name: '',
-    occupation: '',
+    jobTitle: '',
     email: '',
-    phoneNumber: '',
+    phone: '',
     address: '',
-    introduction: '',
+    selfIntroduction: '',
   },
-  careers: [],
+  employmentHistories: [],
+  errors: {
+    loadResume: null,
+    createEmploymentHistory: null,
+    deleteEmploymentHistory: null,
+  },
+  loadings: {
+    loadResume: false,
+    createEmploymentHistory: false,
+    deleteEmploymentHistory: false,
+  },
 };
 
 export const { reducer, actions } = createSlice({
   name: 'resume',
   initialState,
   reducers: {
-    setResume(state) {
-      return {
-        ...state,
-      };
-    },
     setTitle(state, { payload: title }: PayloadAction<string>) {
       return {
         ...state,
         title,
       };
     },
-    changeResumeField(
+    setEmploymentHistories(
+      state,
+      { payload: employmentHistories }: PayloadAction<EmploymentHistory[]>
+    ) {
+      return {
+        ...state,
+        employmentHistories,
+      };
+    },
+    // change
+    changeBasicField(
       state,
       {
         payload: { name, value },
-      }: PayloadAction<{ name: string; value: string }>
+      }: PayloadAction<{ name: InputName<Basic>; value: string }>
     ) {
       return {
         ...state,
@@ -50,34 +78,179 @@ export const { reducer, actions } = createSlice({
         },
       };
     },
-    changeCareerField(
+    changeEmploymentHistoryField(
       state,
       {
         payload: { id, name, value },
       }: PayloadAction<{
         id: string;
-        name: CareerInputName;
+        name: InputName<EmploymentHistory>;
         value: string;
       }>
     ) {
-      // eslint-disable-next-line no-param-reassign
-      state.careers.find((career) => career.id === id)![name] = value;
-    },
-    setCareers(state, { payload: careers }: PayloadAction<Career[]>) {
       return {
         ...state,
-        careers,
+        employmentHistories: state.employmentHistories.map(
+          (employmentHistory) =>
+            employmentHistory.id === id
+              ? { ...employmentHistory, [name]: value }
+              : employmentHistory
+        ),
+      };
+    },
+    // loadResume
+    startLoadResume(state) {
+      const { loadings, errors } = state;
+
+      return {
+        ...state,
+        loadings: {
+          ...loadings,
+          loadResume: true,
+        },
+        errors: {
+          ...errors,
+          loadResume: null,
+        },
+      };
+    },
+    completeLoadResume(
+      state,
+      { payload: newResume }: PayloadAction<ResumeState>
+    ) {
+      const { loadings, errors } = state;
+
+      return {
+        ...state,
+        ...newResume,
+        loadings: {
+          ...loadings,
+          loadResume: false,
+        },
+        errors: {
+          ...errors,
+          loadResume: null,
+        },
+      };
+    },
+    failLoadResume(state, { payload: error }) {
+      const { loadings, errors } = state;
+
+      return {
+        ...state,
+        loadings: {
+          ...loadings,
+          loadResume: false,
+        },
+        errors: {
+          ...errors,
+          loadResume: error,
+        },
+      };
+    },
+    // createEmploymentHistory
+    startCreateEmploymentHistory(state) {
+      const { loadings } = state;
+
+      return {
+        ...state,
+        loadings: {
+          ...loadings,
+          createEmploymentHistory: true,
+        },
+      };
+    },
+    completeCreateEmploymentHistory(state, { payload: employmentHistories }) {
+      const { loadings, errors } = state;
+
+      return {
+        ...state,
+        employmentHistories,
+        loadings: {
+          ...loadings,
+          createEmploymentHistory: false,
+        },
+        errors: {
+          ...errors,
+          createEmploymentHistory: null,
+        },
+      };
+    },
+    failCreateEmploymentHistory(state, { payload: error }) {
+      const { loadings, errors } = state;
+
+      return {
+        ...state,
+        loadings: {
+          ...loadings,
+          createEmploymentHistory: false,
+        },
+        errors: {
+          ...errors,
+          createEmploymentHistory: error,
+        },
+      };
+    },
+    // deleteEmploymentHistory
+    startDeleteEmploymentHistory(state) {
+      const { loadings } = state;
+
+      return {
+        ...state,
+        loadings: {
+          ...loadings,
+          deleteEmploymentHistory: true,
+        },
+      };
+    },
+    completeDeleteEmploymentHistory(state, { payload: employmentHistories }) {
+      const { loadings, errors } = state;
+
+      return {
+        ...state,
+        employmentHistories,
+        loadings: {
+          ...loadings,
+          deleteEmploymentHistory: false,
+        },
+        errors: {
+          ...errors,
+          deleteEmploymentHistory: null,
+        },
+      };
+    },
+    failDeleteEmploymentHistory(state, { payload: error }) {
+      const { loadings, errors } = state;
+
+      return {
+        ...state,
+        loadings: {
+          ...loadings,
+          deleteEmploymentHistory: false,
+        },
+        errors: {
+          ...errors,
+          deleteEmploymentHistory: error,
+        },
       };
     },
   },
 });
 
 export const {
-  setResume,
   setTitle,
-  changeResumeField,
-  changeCareerField,
-  setCareers,
+  changeBasicField,
+  changeEmploymentHistoryField,
+  setEmploymentHistories,
+  startLoadResume,
+  completeLoadResume,
+  failLoadResume,
+  startCreateEmploymentHistory,
+  completeCreateEmploymentHistory,
+  failCreateEmploymentHistory,
+  startDeleteEmploymentHistory,
+  completeDeleteEmploymentHistory,
+  failDeleteEmploymentHistory,
 } = actions;
 
 export default reducer;

@@ -1,51 +1,61 @@
 import { v4 as uuid } from 'uuid';
 
-let dummyCareers = [
-  {
-    id: 'First',
-    jobDetail: '',
-    company: '',
-    startDate: '',
-    endDate: '',
-    region: '',
-    description: '',
-  },
-];
+import { EmploymentHistory } from '@/types/Resume';
+
+import { initialState } from '@/redux/slice';
+import { store } from '@/redux/store';
+
+let dummyEmploymentHistories: EmploymentHistory[] = [];
 
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export async function fetchCareers() {
-  await sleep(200);
-  return { data: dummyCareers };
-}
-
-export async function addCareer() {
+export async function fetchResume() {
   await sleep(200);
 
-  dummyCareers = [
-    ...dummyCareers,
-    {
-      id: uuid(),
-      jobDetail: '',
-      company: '',
-      startDate: '',
-      endDate: '',
-      region: '',
-      description: '',
-    },
-  ];
-  return { data: dummyCareers };
-}
-
-export async function removeCareer(id: string) {
-  await sleep(200);
-
-  dummyCareers = dummyCareers.filter((CAREER) => CAREER.id !== id);
-  return { data: dummyCareers };
+  return { data: initialState };
 }
 
 export async function updateResume() {
   await sleep(200);
+
+  const {
+    resume: { title, basic, employmentHistories },
+  } = store.getState();
+
+  return { data: { title, basic, employmentHistories } };
+}
+
+export async function addEmploymentHistory() {
+  await sleep(200);
+
+  const {
+    resume: { employmentHistories },
+  } = store.getState();
+
+  dummyEmploymentHistories = [
+    ...employmentHistories,
+    {
+      id: uuid(),
+      jobTitle: '',
+      employer: '',
+      startDate: '',
+      endDate: '',
+      address: '',
+      description: '',
+    },
+  ];
+
+  return { data: dummyEmploymentHistories };
+}
+
+export async function removeEmploymentHistory(id: string) {
+  await sleep(200);
+
+  dummyEmploymentHistories = dummyEmploymentHistories.filter(
+    (dummyEmploymentHistory) => dummyEmploymentHistory.id !== id
+  );
+
+  return { data: dummyEmploymentHistories };
 }

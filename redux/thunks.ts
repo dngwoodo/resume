@@ -1,38 +1,68 @@
+import { Dispatch } from 'redux';
+
 import {
-  addCareer,
-  removeCareer,
+  addEmploymentHistory,
+  removeEmploymentHistory,
   updateResume,
-  fetchCareers,
+  fetchResume,
 } from '@/services/resume';
 
-import { setResume, setCareers } from '@/redux/slice';
+import {
+  startLoadResume,
+  completeLoadResume,
+  failLoadResume,
+  startCreateEmploymentHistory,
+  completeCreateEmploymentHistory,
+  failCreateEmploymentHistory,
+  startDeleteEmploymentHistory,
+  completeDeleteEmploymentHistory,
+  failDeleteEmploymentHistory,
+} from '@/redux/slice';
 
-export function loadCareers() {
-  return async (dispatch: any) => {
-    const { data } = await fetchCareers();
-    dispatch(setCareers(data));
+export function loadResume() {
+  return async (dispatch: Dispatch) => {
+    dispatch(startLoadResume());
+    try {
+      const { data } = await fetchResume();
+      dispatch(completeLoadResume(data));
+    } catch (error) {
+      dispatch(failLoadResume(error));
+    }
   };
 }
 
-export function createCareer() {
-  return async (dispatch: any) => {
-    const { data } = await addCareer();
-    dispatch(setCareers(data));
-  };
-}
-
-export function deleteCareer(id: string) {
-  return async (dispatch: any) => {
-    const { data } = await removeCareer(id);
-    dispatch(setCareers(data));
-  };
-}
-
-// TODO: 실제로는 데이터를 받아서 반환해주는 로직으로 변경 해야함.
 export function changeResume() {
-  return async (dispatch: any) => {
-    await updateResume();
+  return async (dispatch: Dispatch) => {
+    dispatch(startLoadResume());
+    try {
+      const { data } = await updateResume(); // TODO: 나중에는 받아온 데이터를 넣어야함.
+      dispatch(completeLoadResume(data));
+    } catch (error) {
+      dispatch(failLoadResume(error));
+    }
+  };
+}
 
-    dispatch(setResume()); // setResume에 받아온 데이터를 넣어야함.
+export function createEmploymentHistory() {
+  return async (dispatch: Dispatch) => {
+    dispatch(startCreateEmploymentHistory());
+    try {
+      const { data } = await addEmploymentHistory();
+      dispatch(completeCreateEmploymentHistory(data));
+    } catch (error) {
+      dispatch(failCreateEmploymentHistory(error));
+    }
+  };
+}
+
+export function deleteEmploymentHistory(id: string) {
+  return async (dispatch: Dispatch) => {
+    dispatch(startDeleteEmploymentHistory());
+    try {
+      const { data } = await removeEmploymentHistory(id);
+      dispatch(completeDeleteEmploymentHistory(data));
+    } catch (error) {
+      dispatch(failDeleteEmploymentHistory(error));
+    }
   };
 }

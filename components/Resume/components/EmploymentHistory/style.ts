@@ -65,7 +65,7 @@ export const Title = styled.div(
   })
 );
 
-export const CareerDetail = styled.div(
+export const EmploymentHistoryDetail = styled.div(
   ({ isShowDetail }: { isShowDetail: boolean }) => ({
     display: 'flex',
     flexWrap: 'wrap',

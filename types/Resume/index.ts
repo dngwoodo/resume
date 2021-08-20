@@ -1,26 +1,20 @@
 export type Basic = {
   name: string;
-  occupation: string;
+  jobTitle: string;
   email: string;
-  phoneNumber: string;
+  phone: string;
   address: string;
-  introduction: string;
+  selfIntroduction: string;
 };
 
-export type Career = {
+export type EmploymentHistory = {
   id: string;
-  jobDetail: string;
-  company: string;
+  jobTitle: string;
+  employer: string;
   startDate: string;
   endDate: string;
-  region: string;
+  address: string;
   description: string;
 };
 
-export type CareerInputName =
-  | 'jobDetail'
-  | 'company'
-  | 'startDate'
-  | 'endDate'
-  | 'region'
-  | 'description';
+export type InputName<T> = keyof T;

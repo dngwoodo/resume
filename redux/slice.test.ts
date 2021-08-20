@@ -1,18 +1,13 @@
-import CAREERS from '@/fixtures/careers';
-
 import reducer, {
-  changeCareerField,
-  changeResumeField,
+  changeEmploymentHistoryField,
+  changeBasicField,
   initialState,
-  setCareers,
+  setEmploymentHistories,
   setTitle,
-} from './slice';
+} from '@/redux/slice';
+import EMPLOYMENT_HISTORIES from '@/fixtures/employmentHistories';
 
 describe('slice', () => {
-  describe('setResume', () => {
-    it('changes resume', () => {});
-  });
-
   describe('setTitle', () => {
     it('changes title', () => {
       const { title } = reducer(initialState, setTitle('열정! 열정! 열정!'));
@@ -21,65 +16,42 @@ describe('slice', () => {
     });
   });
 
-  describe('changeResumeField', () => {
+  describe('setEmploymentHistories', () => {
+    it('changes employmentHistories', () => {
+      const { employmentHistories } = reducer(
+        initialState,
+        setEmploymentHistories(EMPLOYMENT_HISTORIES)
+      );
+
+      expect(employmentHistories).toEqual(EMPLOYMENT_HISTORIES);
+    });
+  });
+
+  describe('changeBasicField', () => {
     it('changes resume field', () => {
       const {
         basic: { name },
       } = reducer(
         initialState,
-        changeResumeField({ name: 'name', value: '김동우' })
+        changeBasicField({ name: 'name', value: '김동우' })
       );
 
       expect(name).toBe('김동우');
     });
   });
 
-  describe('changeCareerField', () => {
-    it('changes career field', () => {
-      const { careers } = reducer(
-        {
-          ...initialState,
-          careers: CAREERS,
-        },
-        changeCareerField({
+  describe('changeEmploymentHistoryField', () => {
+    it('changes employment history field', () => {
+      const { employmentHistories } = reducer(
+        { ...initialState, employmentHistories: EMPLOYMENT_HISTORIES },
+        changeEmploymentHistoryField({
           id: 'First',
-          name: 'jobDetail',
+          name: 'jobTitle',
           value: '프론트엔드',
         })
       );
 
-      expect(careers[0].jobDetail).toBe('프론트엔드');
-    });
-  });
-
-  describe('setCareers', () => {
-    it('changes careers', () => {
-      const { careers } = reducer(
-        initialState,
-        setCareers([
-          {
-            id: 'Second',
-            jobDetail: '',
-            company: '',
-            startDate: '',
-            endDate: '',
-            region: '',
-            description: '',
-          },
-        ])
-      );
-
-      expect(careers).toEqual([
-        {
-          id: 'Second',
-          jobDetail: '',
-          company: '',
-          startDate: '',
-          endDate: '',
-          region: '',
-          description: '',
-        },
-      ]);
+      expect(employmentHistories[0].jobTitle).toBe('프론트엔드');
     });
   });
 });

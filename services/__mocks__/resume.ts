@@ -1,15 +1,7 @@
-export function fetchCareers() {
-  return [];
-}
+export const fetchResume = jest.fn();
 
-export function addCareer() {
-  return [];
-}
+export const updateResume = jest.fn();
 
-export function removeCareer() {
-  return [];
-}
+export const addEmploymentHistory = jest.fn();
 
-export async function updateResume() {
-  return {};
-}
+export const removeEmploymentHistory = jest.fn();

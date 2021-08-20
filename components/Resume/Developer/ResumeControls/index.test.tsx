@@ -15,23 +15,23 @@ describe('ResumeControls', () => {
     (useSelector as jest.Mock).mockImplementation((selector) =>
       selector({
         resume: {
+          title: '이력서 제목',
           basic: {
             name: '',
-            occupation: '',
+            jobTitle: '',
             email: '',
-            phoneNumber: '',
+            phone: '',
             address: '',
-            introduction: '',
+            selfIntroduction: '',
           },
-          careers: [
+          employmentHistories: [
             {
               id: '0',
-              title: '',
-              jobDetail: '',
-              company: '',
+              jobTitle: '',
+              employer: '',
               startDate: '',
               endDate: '',
-              region: '',
+              address: '',
               description: '',
             },
           ],
@@ -44,5 +44,11 @@ describe('ResumeControls', () => {
     const { getByText } = render(<ResumeControls />);
 
     expect(getByText('이력서 제목')).toBeInTheDocument();
+  });
+
+  it('loads resume', () => {
+    render(<ResumeControls />);
+
+    expect(dispatch).toBeCalledTimes(1);
   });
 });

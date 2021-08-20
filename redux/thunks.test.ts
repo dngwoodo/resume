@@ -1,66 +1,192 @@
-import configureStore from 'redux-mock-store';
+import { ThunkDispatch } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
+import configureStore from 'redux-mock-store';
 
 import {
-  loadCareers,
-  createCareer,
-  deleteCareer,
+  loadResume,
   changeResume,
+  createEmploymentHistory,
+  deleteEmploymentHistory,
 } from '@/redux/thunks';
-import { setResume } from '@/redux/slice';
+
+import {
+  addEmploymentHistory,
+  removeEmploymentHistory,
+  fetchResume,
+  updateResume,
+} from '../services/resume';
 
 jest.mock('@/services/resume');
 
+type AppState = Record<string, never>; // {} 를 의미
+
 const middlewares = [thunk];
-const mockStore = configureStore(middlewares);
+const mockStore = configureStore<AppState, ThunkDispatch<AppState, any, any>>(
+  middlewares
+);
 
 describe('thunks', () => {
-  it('dispatches loadCareers action', async () => {
-    const store = mockStore({});
+  context('when data fetching success', () => {
+    beforeEach(() => {
+      (fetchResume as jest.Mock).mockResolvedValue({});
+      (updateResume as jest.Mock).mockResolvedValue({});
+      (addEmploymentHistory as jest.Mock).mockResolvedValue([]);
+      (removeEmploymentHistory as jest.Mock).mockResolvedValue([]);
+    });
 
-    await store.dispatch<any>(loadCareers());
+    it('dispatches loadResume action', async () => {
+      const store = mockStore({});
 
-    const actions = store.getActions();
+      await store.dispatch(loadResume());
 
-    expect(actions[0]).toEqual({
-      type: 'resume/setCareers',
-      payload: undefined,
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: 'resume/startLoadResume',
+        payload: undefined,
+      });
+
+      expect(actions[1]).toEqual({
+        type: 'resume/completeLoadResume',
+        payload: undefined,
+      });
+    });
+
+    it('dispatches changeResume action', async () => {
+      const store = mockStore({});
+
+      await store.dispatch(changeResume());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: 'resume/startLoadResume',
+        payload: undefined,
+      });
+
+      expect(actions[1]).toEqual({
+        type: 'resume/completeLoadResume',
+        payload: undefined,
+      });
+    });
+
+    it('dispatches createEmploymentHistory action', async () => {
+      const store = mockStore({});
+
+      await store.dispatch(createEmploymentHistory());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: 'resume/startCreateEmploymentHistory',
+        payload: undefined,
+      });
+
+      expect(actions[1]).toEqual({
+        type: 'resume/completeCreateEmploymentHistory',
+        payload: undefined,
+      });
+    });
+
+    it('dispatches deleteEmploymentHistory action', async () => {
+      const store = mockStore({});
+
+      await store.dispatch(deleteEmploymentHistory('First'));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: 'resume/startDeleteEmploymentHistory',
+        payload: undefined,
+      });
+
+      expect(actions[1]).toEqual({
+        type: 'resume/completeDeleteEmploymentHistory',
+        payload: undefined,
+      });
     });
   });
 
-  it('dispatches createCareer action', async () => {
-    const store = mockStore({});
+  context('when data fetching fail', () => {
+    const error = new Error('Fail');
 
-    await store.dispatch<any>(createCareer());
-
-    const actions = store.getActions();
-
-    expect(actions[0]).toEqual({
-      type: 'resume/setCareers',
-      payload: undefined,
+    beforeEach(() => {
+      (fetchResume as jest.Mock).mockRejectedValue(error);
+      (updateResume as jest.Mock).mockRejectedValue(error);
+      (addEmploymentHistory as jest.Mock).mockRejectedValue(error);
+      (removeEmploymentHistory as jest.Mock).mockRejectedValue(error);
     });
-  });
 
-  it('dispatches deleteCareer action', async () => {
-    const store = mockStore({});
+    it('dispatches loadResume action', async () => {
+      const store = mockStore({});
 
-    await store.dispatch<any>(deleteCareer('First'));
+      await store.dispatch(loadResume());
 
-    const actions = store.getActions();
+      const actions = store.getActions();
 
-    expect(actions[0]).toEqual({
-      type: 'resume/setCareers',
-      payload: undefined,
+      expect(actions[0]).toEqual({
+        type: 'resume/startLoadResume',
+        payload: undefined,
+      });
+
+      expect(actions[1]).toEqual({
+        type: 'resume/failLoadResume',
+        payload: error,
+      });
     });
-  });
 
-  it('dispatches changeResume action', async () => {
-    const store = mockStore({});
+    it('dispatches changeResume action', async () => {
+      const store = mockStore({});
 
-    await store.dispatch<any>(changeResume());
+      await store.dispatch(changeResume());
 
-    const actions = store.getActions();
+      const actions = store.getActions();
 
-    expect(actions[0]).toEqual(setResume());
+      expect(actions[0]).toEqual({
+        type: 'resume/startLoadResume',
+        payload: undefined,
+      });
+
+      expect(actions[1]).toEqual({
+        type: 'resume/failLoadResume',
+        payload: error,
+      });
+    });
+
+    it('dispatches createEmploymentHistory action', async () => {
+      const store = mockStore({});
+
+      await store.dispatch(createEmploymentHistory());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: 'resume/startCreateEmploymentHistory',
+        payload: undefined,
+      });
+
+      expect(actions[1]).toEqual({
+        type: 'resume/failCreateEmploymentHistory',
+        payload: error,
+      });
+    });
+
+    it('dispatches deleteEmploymentHistory action', async () => {
+      const store = mockStore({});
+
+      await store.dispatch(deleteEmploymentHistory('First'));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: 'resume/startDeleteEmploymentHistory',
+        payload: undefined,
+      });
+
+      expect(actions[1]).toEqual({
+        type: 'resume/failDeleteEmploymentHistory',
+        payload: error,
+      });
+    });
   });
 });

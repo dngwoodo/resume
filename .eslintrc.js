@@ -52,6 +52,9 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
+    // https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-unused-vars.md
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': ['error'],
 
     // import
     'import/no-extraneous-dependencies': 'off',
