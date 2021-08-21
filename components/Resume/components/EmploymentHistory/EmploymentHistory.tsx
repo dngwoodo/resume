@@ -16,6 +16,7 @@ import {
 
 import Input from '../Input';
 import PeriodInput from '../PeriodInput';
+import TextArea from '../TextArea';
 
 type Props = {
   employmentHistory: EmploymentHistoryType;
@@ -110,8 +111,8 @@ export default function EmploymentHistory({
           id='employment-history-period'
           startDatePlaceholder='2020.10'
           endDatePlaceholder='2021.03'
-          startDateName='start-date'
-          endDateName='end-date'
+          startDateName='startDate'
+          endDateName='endDate'
           startDateValue={startDate}
           endDateValue={endDate}
           onChange={handleChange}
@@ -125,13 +126,13 @@ export default function EmploymentHistory({
           onChange={handleChange}
         />
         <TextAreaContainer>
-          <label htmlFor='employment-history-description'>경력 기술</label>
-          <textarea
+          <TextArea
+            label='경력 기술'
             id='employment-history-description'
+            placeholder='간단한 자기소개를 통해 이력서를 돋보이게 만들어보세요.'
             name='description'
             value={description}
             onChange={handleChange}
-            placeholder='간단한 자기소개를 통해 이력서를 돋보이게 만들어보세요.'
           />
         </TextAreaContainer>
       </EmploymentHistoryDetail>

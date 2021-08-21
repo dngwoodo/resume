@@ -1,8 +1,11 @@
-import { Basic as BasicType, InputName } from '@/types/Resume';
 import { ChangeEvent } from 'react';
-import Input from '../Input';
+
+import { Basic as BasicType, InputName } from '@/types/Resume';
 
 import { Container, TextAreaWrapper } from './style';
+
+import Input from '../Input';
+import TextArea from '../TextArea';
 
 type Props = {
   basic: BasicType;
@@ -70,13 +73,13 @@ export default function Basic({ basic, onChange }: Props) {
         onChange={handleChange}
       />
       <TextAreaWrapper>
-        <label htmlFor='selfIntroduction'>Introduction</label>
-        <textarea
+        <TextArea
+          label='Introduction'
           id='selfIntroduction'
+          placeholder='간단한 자기소개를 통해 이력서를 돋보이게 만들어보세요.'
           name='selfIntroduction'
           value={selfIntroduction}
           onChange={handleChange}
-          placeholder='간단한 자기소개를 통해 이력서를 돋보이게 만들어보세요.'
         />
       </TextAreaWrapper>
     </Container>
