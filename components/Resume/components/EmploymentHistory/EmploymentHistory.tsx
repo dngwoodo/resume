@@ -12,8 +12,9 @@ import {
   Title,
   EmploymentHistoryDetail,
   PeriodInputWrapper,
+  TextAreaContainer,
 } from './style';
-import { InputWrapper, TextAreaWrapper } from '../Basic/style';
+import { InputWrapper } from '../Basic/style';
 
 type Props = {
   employmentHistory: EmploymentHistoryType;
@@ -141,7 +142,7 @@ export default function EmploymentHistory({
             placeholder='지역을 입력해주세요.'
           />
         </InputWrapper>
-        <TextAreaWrapper>
+        <TextAreaContainer>
           <label htmlFor='employment-history-description'>경력 기술</label>
           <textarea
             id='employment-history-description'
@@ -150,7 +151,7 @@ export default function EmploymentHistory({
             onChange={handleChange}
             placeholder='간단한 자기소개를 통해 이력서를 돋보이게 만들어보세요.'
           />
-        </TextAreaWrapper>
+        </TextAreaContainer>
       </EmploymentHistoryDetail>
     </Container>
   );

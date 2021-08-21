@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { InputWrapper } from '../Basic/style';
+import { InputWrapper, TextAreaWrapper } from '../Basic/style';
 
 export const Container = styled.div(
   ({ isShowDetail }: { isShowDetail: boolean }) => ({
@@ -92,5 +92,16 @@ export const PeriodInputWrapper = styled(InputWrapper)({
         marginRight: '8px',
       },
     },
+  },
+});
+
+export const TextAreaContainer = styled(TextAreaWrapper)({
+  '& label': {
+    marginBottom: '16px',
+    color: '#B2B3BD',
+    fontSize: '12px',
+    fontFamily: 'Inter',
+    fontWeight: 500,
+    lineHeight: '16px',
   },
 });
