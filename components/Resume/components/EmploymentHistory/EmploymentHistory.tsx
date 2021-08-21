@@ -90,7 +90,7 @@ export default function EmploymentHistory({
         data-testid='employment-history-detail'
         isShowDetail={isShowDetail}
       >
-        <Input
+        <Input<EmploymentHistoryType>
           label='직무 내용'
           id='employment-history-job-detail'
           placeholder='직무를 입력해주세요.'
@@ -98,7 +98,7 @@ export default function EmploymentHistory({
           value={jobTitle}
           onChange={handleChange}
         />
-        <Input
+        <Input<EmploymentHistoryType>
           label='회사명'
           id='employment-history-employer'
           placeholder='회사명을 입력하세요.'
@@ -106,7 +106,7 @@ export default function EmploymentHistory({
           value={employer}
           onChange={handleChange}
         />
-        <PeriodInput
+        <PeriodInput<EmploymentHistoryType>
           label='근무 기간'
           id='employment-history-period'
           startDatePlaceholder='2020.10'
@@ -117,7 +117,7 @@ export default function EmploymentHistory({
           endDateValue={endDate}
           onChange={handleChange}
         />
-        <Input
+        <Input<EmploymentHistoryType>
           label='지역'
           id='employment-history-address'
           placeholder='지역을 입력해주세요.'
@@ -126,7 +126,7 @@ export default function EmploymentHistory({
           onChange={handleChange}
         />
         <TextAreaContainer>
-          <TextArea
+          <TextArea<EmploymentHistoryType>
             label='경력 기술'
             id='employment-history-description'
             placeholder='간단한 자기소개를 통해 이력서를 돋보이게 만들어보세요.'

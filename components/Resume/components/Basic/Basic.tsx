@@ -32,7 +32,7 @@ export default function Basic({ basic, onChange }: Props) {
 
   return (
     <Container>
-      <Input
+      <Input<BasicType>
         label='이름'
         id='basic-name'
         placeholder='이름을 입력해주세요.'
@@ -40,7 +40,7 @@ export default function Basic({ basic, onChange }: Props) {
         value={name}
         onChange={handleChange}
       />
-      <Input
+      <Input<BasicType>
         label='직업군'
         id='basic-job-title'
         placeholder='직업군을 입력해주세요.'
@@ -48,7 +48,7 @@ export default function Basic({ basic, onChange }: Props) {
         value={jobTitle}
         onChange={handleChange}
       />
-      <Input
+      <Input<BasicType>
         label='이메일'
         id='basic-email'
         placeholder='이메일을 입력해주세요'
@@ -56,7 +56,7 @@ export default function Basic({ basic, onChange }: Props) {
         value={email}
         onChange={handleChange}
       />
-      <Input
+      <Input<BasicType>
         label='휴대전화'
         id='basic-phone'
         placeholder='휴대폰 번호를 입력해주세요.'
@@ -64,7 +64,7 @@ export default function Basic({ basic, onChange }: Props) {
         value={phone}
         onChange={handleChange}
       />
-      <Input
+      <Input<BasicType>
         label='거주지'
         id='basic-address'
         placeholder='거주지를 입력해주세요.'
@@ -73,7 +73,7 @@ export default function Basic({ basic, onChange }: Props) {
         onChange={handleChange}
       />
       <TextAreaWrapper>
-        <TextArea
+        <TextArea<BasicType>
           label='Introduction'
           id='selfIntroduction'
           placeholder='간단한 자기소개를 통해 이력서를 돋보이게 만들어보세요.'
