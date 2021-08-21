@@ -1,7 +1,8 @@
 import { Basic as BasicType, InputName } from '@/types/Resume';
 import { ChangeEvent } from 'react';
+import Input from '../Input';
 
-import { Container, InputWrapper, TextAreaWrapper } from './style';
+import { Container, TextAreaWrapper } from './style';
 
 type Props = {
   basic: BasicType;
@@ -28,61 +29,46 @@ export default function Basic({ basic, onChange }: Props) {
 
   return (
     <Container>
-      <InputWrapper>
-        <label htmlFor='name'>이름</label>
-        <input
-          id='name'
-          type='text'
-          name='name'
-          value={name}
-          onChange={handleChange}
-          placeholder='이름을 입력해주세요.'
-        />
-      </InputWrapper>
-      <InputWrapper>
-        <label htmlFor='jobTitle'>직업군</label>
-        <input
-          id='jobTitle'
-          type='text'
-          name='jobTitle'
-          value={jobTitle}
-          onChange={handleChange}
-          placeholder='직업군을 입력해주세요.'
-        />
-      </InputWrapper>
-      <InputWrapper>
-        <label htmlFor='email'>이메일</label>
-        <input
-          id='email'
-          type='text'
-          name='email'
-          value={email}
-          onChange={handleChange}
-          placeholder='이메일을 입력해주세요.'
-        />
-      </InputWrapper>
-      <InputWrapper>
-        <label htmlFor='phone'>휴대전화</label>
-        <input
-          id='phone'
-          type='text'
-          name='phone'
-          value={phone}
-          onChange={handleChange}
-          placeholder='휴대폰 번호를 입력해주세요.'
-        />
-      </InputWrapper>
-      <InputWrapper>
-        <label htmlFor='address'>거주지</label>
-        <input
-          id='address'
-          type='text'
-          name='address'
-          value={address}
-          onChange={handleChange}
-          placeholder='거주지를 입력해주세요.'
-        />
-      </InputWrapper>
+      <Input
+        label='이름'
+        id='basic-name'
+        placeholder='이름을 입력해주세요.'
+        name='name'
+        value={name}
+        onChange={handleChange}
+      />
+      <Input
+        label='직업군'
+        id='basic-job-title'
+        placeholder='직업군을 입력해주세요.'
+        name='jobTitle'
+        value={jobTitle}
+        onChange={handleChange}
+      />
+      <Input
+        label='이메일'
+        id='basic-email'
+        placeholder='이메일을 입력해주세요'
+        name='email'
+        value={email}
+        onChange={handleChange}
+      />
+      <Input
+        label='휴대전화'
+        id='basic-phone'
+        placeholder='휴대폰 번호를 입력해주세요.'
+        name='phone'
+        value={phone}
+        onChange={handleChange}
+      />
+      <Input
+        label='거주지'
+        id='basic-address'
+        placeholder='거주지를 입력해주세요.'
+        name='address'
+        value={address}
+        onChange={handleChange}
+      />
       <TextAreaWrapper>
         <label htmlFor='selfIntroduction'>Introduction</label>
         <textarea

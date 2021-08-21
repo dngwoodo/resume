@@ -14,7 +14,8 @@ import {
   PeriodInputWrapper,
   TextAreaContainer,
 } from './style';
-import { InputWrapper } from '../Basic/style';
+
+import Input from '../Input';
 
 type Props = {
   employmentHistory: EmploymentHistoryType;
@@ -88,28 +89,22 @@ export default function EmploymentHistory({
         data-testid='employment-history-detail'
         isShowDetail={isShowDetail}
       >
-        <InputWrapper>
-          <label htmlFor='employment-history-job-detail'>직무 내용</label>
-          <input
-            id='employment-history-job-detail'
-            type='text'
-            name='jobTitle'
-            value={jobTitle}
-            onChange={handleChange}
-            placeholder='직무를 입력해주세요.'
-          />
-        </InputWrapper>
-        <InputWrapper>
-          <label htmlFor='employment-history-employer'>회사명</label>
-          <input
-            id='employment-history-employer'
-            type='text'
-            name='employer'
-            value={employer}
-            onChange={handleChange}
-            placeholder='회사명을 입력하세요.'
-          />
-        </InputWrapper>
+        <Input
+          label='직무 내용'
+          id='employment-history-job-detail'
+          placeholder='직무를 입력해주세요.'
+          name='jobTitle'
+          value={jobTitle}
+          onChange={handleChange}
+        />
+        <Input
+          label='회사명'
+          id='employment-history-employer'
+          placeholder='회사명을 입력하세요.'
+          name='employer'
+          value={employer}
+          onChange={handleChange}
+        />
         <PeriodInputWrapper>
           <label id='employment-history-period'>근무 기간</label>
           <div>
@@ -131,17 +126,14 @@ export default function EmploymentHistory({
             />
           </div>
         </PeriodInputWrapper>
-        <InputWrapper>
-          <label htmlFor='employment-history-address'>지역</label>
-          <input
-            type='text'
-            id='employment-history-address'
-            name='address'
-            value={address}
-            onChange={handleChange}
-            placeholder='지역을 입력해주세요.'
-          />
-        </InputWrapper>
+        <Input
+          label='지역'
+          id='employment-history-address'
+          placeholder='지역을 입력해주세요.'
+          name='address'
+          value={address}
+          onChange={handleChange}
+        />
         <TextAreaContainer>
           <label htmlFor='employment-history-description'>경력 기술</label>
           <textarea
