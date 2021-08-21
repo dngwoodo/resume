@@ -10,8 +10,15 @@ import EmploymentHistory from './EmploymentHistory';
 
 describe('EmploymentHistory', () => {
   const handleChange = jest.fn();
-  const handleClickToggle = jest.fn();
   const handleClickDeleteEmploymentHistory = jest.fn();
+
+  /**
+   * 할일
+   * label이 있어야함 v
+   * check용 input이 있어야함 v
+   * label과 input이 연결되어져 있어야함 v
+   * label을 클릭했을 때 checkbox가 check 됨 v
+   */
 
   function renderEmploymentHistory() {
     return render(
@@ -23,12 +30,27 @@ describe('EmploymentHistory', () => {
           endDate: given.endDate,
         }}
         onChange={handleChange}
-        isShowDetail={false}
-        onClickToggle={handleClickToggle}
         onClickDeleteEmploymentHistory={handleClickDeleteEmploymentHistory}
       />
     );
   }
+
+  it('renders label, input', () => {
+    const { getByTestId, getByRole } = renderEmploymentHistory();
+
+    expect(getByTestId('employment-history-title')).toBeInTheDocument();
+    expect(getByRole('checkbox')).toBeInTheDocument();
+  });
+
+  it('listens label click event', () => {
+    const { getByTestId, getByRole } = renderEmploymentHistory();
+
+    fireEvent.click(getByTestId('employment-history-title'));
+    expect((getByRole('checkbox') as HTMLInputElement).checked).toBeTruthy();
+
+    fireEvent.click(getByTestId('employment-history-title'));
+    expect((getByRole('checkbox') as HTMLInputElement).checked).toBeFalsy();
+  });
 
   it('renders title, period', () => {
     const { getByText } = renderEmploymentHistory();
@@ -115,14 +137,6 @@ describe('EmploymentHistory', () => {
     expect(handleChange).toBeCalledTimes(
       EMPLOYMENT_HISTORY_PLACEHOLDERS.length
     );
-  });
-
-  it("listens 'employment-history-title' click events", () => {
-    const { getByTestId } = renderEmploymentHistory();
-
-    fireEvent.click(getByTestId('employment-history-title'));
-
-    expect(handleClickToggle).toBeCalled();
   });
 
   it("listens 'delete-employment-history' click events", () => {
