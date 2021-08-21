@@ -1,3 +1,5 @@
+import { ChangeEvent } from 'react';
+
 import { InputWrapper } from '../Basic/style';
 
 type Props = {
@@ -6,8 +8,7 @@ type Props = {
   placeholder: string;
   name: string;
   value: string;
-  // TODO: any 변경 필요
-  onChange: (event: any) => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export default function Input({

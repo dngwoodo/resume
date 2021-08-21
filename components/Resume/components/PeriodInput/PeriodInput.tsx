@@ -1,3 +1,5 @@
+import { ChangeEvent } from 'react';
+
 import { PeriodInputWrapper } from '../EmploymentHistory/style';
 
 type Props = {
@@ -9,8 +11,7 @@ type Props = {
   endDateName: string;
   startDateValue: string;
   endDateValue: string;
-  // TODO: any 없애기
-  onChange: (event: any) => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export default function PeriodInput({
