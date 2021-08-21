@@ -36,11 +36,7 @@ describe('TextArea', () => {
     const { getByText, getByPlaceholderText } = renderTextArea();
 
     expect(getByText('경력 기술')).toBeInTheDocument();
-    expect(
-      getByPlaceholderText(
-        '간단한 자기소개를 통해 이력서를 돋보이게 만들어보세요.'
-      )
-    ).toBeInTheDocument();
+    expect(getByPlaceholderText('간단한 자기소개를 통해 이력서를 돋보이게 만들어보세요.')).toBeInTheDocument();
   });
 
   it('connects label and textarea', () => {
@@ -52,19 +48,16 @@ describe('TextArea', () => {
   it('has name attribute', () => {
     const { getByPlaceholderText } = renderTextArea();
 
-    expect(
-      getByPlaceholderText(
-        '간단한 자기소개를 통해 이력서를 돋보이게 만들어보세요.'
-      )
-    ).toHaveAttribute('name', 'textarea');
+    expect(getByPlaceholderText('간단한 자기소개를 통해 이력서를 돋보이게 만들어보세요.')).toHaveAttribute(
+      'name',
+      'textarea'
+    );
   });
 
   it('renders textarea value', () => {
     const { getByDisplayValue } = renderTextArea();
 
-    expect(
-      getByDisplayValue('저는 프론트엔드 개발자입니다.')
-    ).toBeInTheDocument();
+    expect(getByDisplayValue('저는 프론트엔드 개발자입니다.')).toBeInTheDocument();
   });
 
   it('listens change event', () => {

@@ -20,19 +20,17 @@ export const Menus = styled.ul({
   display: 'flex',
 });
 
-export const Menu = styled.li(
-  ({ isMenuSelected }: { isMenuSelected: boolean }) => ({
-    fontWeight: 600,
-    lineHeight: '20px',
-    '&:not(:last-child)': {
-      marginRight: '60px',
-    },
-    '& a': {
-      textDecoration: 'none',
-      color: isMenuSelected ? '#5F75EE' : '#808191',
-    },
-  })
-);
+export const Menu = styled.li(({ isMenuSelected }: { isMenuSelected: boolean }) => ({
+  fontWeight: 600,
+  lineHeight: '20px',
+  '&:not(:last-child)': {
+    marginRight: '60px',
+  },
+  '& a': {
+    textDecoration: 'none',
+    color: isMenuSelected ? '#5F75EE' : '#808191',
+  },
+}));
 
 export const Account = styled.div({
   display: 'flex',

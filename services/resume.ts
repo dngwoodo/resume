@@ -22,7 +22,7 @@ export async function updateResume() {
 
   const {
     resume: {
-      title,
+      title, //
       name,
       jobTitle,
       email,
@@ -35,7 +35,7 @@ export async function updateResume() {
 
   return {
     data: {
-      title,
+      title, //
       name,
       jobTitle,
       email,

@@ -44,6 +44,7 @@ module.exports = {
         jsxSingleQuote: true,
         proseWrap: 'never',
         singleQuote: true,
+        printWidth: 120,
       },
     ],
 
@@ -70,12 +71,10 @@ module.exports = {
     ],
 
     // react
-    'react/jsx-filename-extension': [
-      'error',
-      { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
-    ],
+    'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'react/react-in-jsx-scope': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
   },
   ignorePatterns: ['plopfile.js', 'plop-templates'],
 };

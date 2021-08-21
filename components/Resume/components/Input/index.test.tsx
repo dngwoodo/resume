@@ -31,15 +31,11 @@ describe('Input', () => {
   }
 
   it('renders label, input', () => {
-    const { getByText, getByPlaceholderText, getByDisplayValue } =
-      renderInput();
+    const { getByText, getByPlaceholderText, getByDisplayValue } = renderInput();
 
     expect(getByText('직무 내용')).toBeInTheDocument();
     expect(getByPlaceholderText('직무를 입력해주세요')).toBeInTheDocument();
-    expect(getByPlaceholderText('직무를 입력해주세요')).toHaveAttribute(
-      'name',
-      'jobTitle'
-    );
+    expect(getByPlaceholderText('직무를 입력해주세요')).toHaveAttribute('name', 'jobTitle');
     expect(getByDisplayValue('프론트엔드')).toBeInTheDocument();
   });
 

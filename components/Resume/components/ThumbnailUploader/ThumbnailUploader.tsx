@@ -51,12 +51,7 @@ export default function ThumbnailUploader() {
   return (
     <Container>
       <ImageWrapper>
-        <Image
-          src='/avatar/resume.png'
-          alt='avatar'
-          layout='fill'
-          objectFit='cover'
-        />
+        <Image src='/avatar/resume.png' alt='avatar' layout='fill' objectFit='cover' />
       </ImageWrapper>
       <RightSide>
         <div>

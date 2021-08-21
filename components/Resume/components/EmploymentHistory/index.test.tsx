@@ -85,29 +85,16 @@ describe('EmploymentHistory', () => {
   });
 
   it('renders input controls, dropdown-toggle', () => {
-    const {
-      getByLabelText,
-      getAllByLabelText,
-      getByPlaceholderText,
-      getByTestId,
-    } = renderEmploymentHistory();
+    const { getByLabelText, getAllByLabelText, getByPlaceholderText, getByTestId } = renderEmploymentHistory();
 
-    EMPLOYMENT_HISTORY_PLACEHOLDERS.forEach(
-      (EMPLOYMENT_HISTORY_PLACEHOLDER) => {
-        expect(
-          getByPlaceholderText(EMPLOYMENT_HISTORY_PLACEHOLDER)
-        ).toBeInTheDocument();
-      }
-    );
+    EMPLOYMENT_HISTORY_PLACEHOLDERS.forEach((EMPLOYMENT_HISTORY_PLACEHOLDER) => {
+      expect(getByPlaceholderText(EMPLOYMENT_HISTORY_PLACEHOLDER)).toBeInTheDocument();
+    });
 
     EMPLOYMENT_HISTORY_LABELS.forEach((EMPLOYMENT_HISTORY_LABEL) => {
       if (EMPLOYMENT_HISTORY_LABEL === '근무 기간') {
-        expect(
-          getAllByLabelText(EMPLOYMENT_HISTORY_LABEL)[0]
-        ).toBeInTheDocument();
-        expect(
-          getAllByLabelText(EMPLOYMENT_HISTORY_LABEL)[1]
-        ).toBeInTheDocument();
+        expect(getAllByLabelText(EMPLOYMENT_HISTORY_LABEL)[0]).toBeInTheDocument();
+        expect(getAllByLabelText(EMPLOYMENT_HISTORY_LABEL)[1]).toBeInTheDocument();
         return;
       }
 
@@ -126,17 +113,13 @@ describe('EmploymentHistory', () => {
   it('listens change events', () => {
     const { getByPlaceholderText } = renderEmploymentHistory();
 
-    EMPLOYMENT_HISTORY_PLACEHOLDERS.forEach(
-      (EMPLOYMENT_HISTORY_PLACEHOLDER) => {
-        fireEvent.change(getByPlaceholderText(EMPLOYMENT_HISTORY_PLACEHOLDER), {
-          target: { value: 'test' },
-        });
-      }
-    );
+    EMPLOYMENT_HISTORY_PLACEHOLDERS.forEach((EMPLOYMENT_HISTORY_PLACEHOLDER) => {
+      fireEvent.change(getByPlaceholderText(EMPLOYMENT_HISTORY_PLACEHOLDER), {
+        target: { value: 'test' },
+      });
+    });
 
-    expect(handleChange).toBeCalledTimes(
-      EMPLOYMENT_HISTORY_PLACEHOLDERS.length
-    );
+    expect(handleChange).toBeCalledTimes(EMPLOYMENT_HISTORY_PLACEHOLDERS.length);
   });
 
   it("listens 'delete-employment-history' click events", () => {

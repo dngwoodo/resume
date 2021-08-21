@@ -3,14 +3,14 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 
 import {
-  loadResume,
+  loadResume, //
   changeResume,
   createEmploymentHistory,
   deleteEmploymentHistory,
 } from '@/redux/thunks';
 
 import {
-  addEmploymentHistory,
+  addEmploymentHistory, //
   removeEmploymentHistory,
   fetchResume,
   updateResume,
@@ -21,9 +21,7 @@ jest.mock('@/services/resume');
 type AppState = Record<string, never>; // {} 를 의미
 
 const middlewares = [thunk];
-const mockStore = configureStore<AppState, ThunkDispatch<AppState, any, any>>(
-  middlewares
-);
+const mockStore = configureStore<AppState, ThunkDispatch<AppState, any, any>>(middlewares);
 
 describe('thunks', () => {
   context('when data fetching success', () => {

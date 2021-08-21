@@ -2,10 +2,7 @@ import useAppDispatch from '@/hooks/useAppDispatch';
 import useAppSelector from '@/hooks/useAppSelector';
 
 import { changeEmploymentHistoryField } from '@/redux/slice';
-import {
-  createEmploymentHistory,
-  deleteEmploymentHistory,
-} from '@/redux/thunks';
+import { createEmploymentHistory, deleteEmploymentHistory } from '@/redux/thunks';
 
 import { EmploymentHistory, InputName } from '@/types/Resume';
 
@@ -15,15 +12,7 @@ export default function EmploymentHistoriesContainer() {
   const { employmentHistories } = useAppSelector((state) => state.resume);
   const dispatch = useAppDispatch();
 
-  function handleChange({
-    id,
-    name,
-    value,
-  }: {
-    id: string;
-    name: InputName<EmploymentHistory>;
-    value: string;
-  }) {
+  function handleChange({ id, name, value }: { id: string; name: InputName<EmploymentHistory>; value: string }) {
     dispatch(changeEmploymentHistoryField({ id, name, value }));
   }
 

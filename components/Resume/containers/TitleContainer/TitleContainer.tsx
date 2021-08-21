@@ -11,7 +11,5 @@ export default function TitleContainer() {
     element.focus();
   }
 
-  return (
-    <Title onInput={handleInputTitle} onClick={handleClickInputControlFocus} />
-  );
+  return <Title onInput={handleInputTitle} onClick={handleClickInputControlFocus} />;
 }

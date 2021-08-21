@@ -7,22 +7,11 @@ import Link from 'next/link';
 import MENUS from '@/fixtures/menus';
 import { Container, Logo, Menus, Menu, Account } from './style';
 
-export default function Header({
-  onClick,
-  selectedMenuIndex,
-}: {
-  onClick: any;
-  selectedMenuIndex: number;
-}) {
+export default function Header({ onClick, selectedMenuIndex }: { onClick: any; selectedMenuIndex: number }) {
   return (
     <Container>
       <Logo>
-        <Image
-          src='/logo/logo@3x.png'
-          alt='logo'
-          layout='fill'
-          objectFit='cover'
-        />
+        <Image src='/logo/logo@3x.png' alt='logo' layout='fill' objectFit='cover' />
       </Logo>
       <Menus>
         {MENUS.map(({ title, link }, index) => (
@@ -37,12 +26,7 @@ export default function Header({
       </Menus>
       <Account>
         <div>
-          <Image
-            src='/avatar/avatar@3x.png'
-            alt='avatar'
-            layout='fill'
-            objectFit='cover'
-          />
+          <Image src='/avatar/avatar@3x.png' alt='avatar' layout='fill' objectFit='cover' />
         </div>
         <h6>Tam Tran</h6>
       </Account>
