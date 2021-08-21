@@ -7,13 +7,7 @@ import {
   InputName,
 } from '@/types/Resume';
 
-import {
-  Container,
-  Title,
-  EmploymentHistoryDetail,
-  TextAreaContainer,
-  CheckBox,
-} from './style';
+import { Container, Title, Detail, TextAreaContainer, CheckBox } from './style';
 
 import Input from '../Input';
 import PeriodInput from '../PeriodInput';
@@ -79,7 +73,7 @@ export default function EmploymentHistory({
           />
         </button>
       </Title>
-      <EmploymentHistoryDetail data-testid='employment-history-detail'>
+      <Detail data-testid='employment-history-detail'>
         <Input<EmploymentHistoryType>
           label='직무 내용'
           id='employment-history-job-detail'
@@ -125,7 +119,7 @@ export default function EmploymentHistory({
             onChange={handleChange}
           />
         </TextAreaContainer>
-      </EmploymentHistoryDetail>
+      </Detail>
     </Container>
   );
 }

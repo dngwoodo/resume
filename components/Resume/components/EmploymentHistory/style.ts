@@ -80,7 +80,7 @@ export const Title = styled.label({
   },
 });
 
-export const EmploymentHistoryDetail = styled.div({
+export const Detail = styled.div({
   display: 'flex',
   flexWrap: 'wrap',
   gap: '40px 32px',
