@@ -12,6 +12,7 @@ import {
   Title,
   EmploymentHistoryDetail,
   TextAreaContainer,
+  CheckBox,
 } from './style';
 
 import Input from '../Input';
@@ -29,16 +30,12 @@ type Props = {
     name: InputName<EmploymentHistoryType>;
     value: string;
   }) => void;
-  isShowDetail: boolean;
-  onClickToggle: () => void;
   onClickDeleteEmploymentHistory: (id: string) => void;
 };
 
 export default function EmploymentHistory({
   employmentHistory,
   onChange,
-  isShowDetail,
-  onClickToggle,
   onClickDeleteEmploymentHistory,
 }: Props) {
   const { id, jobTitle, employer, startDate, endDate, address, description } =
@@ -59,16 +56,12 @@ export default function EmploymentHistory({
   }
 
   return (
-    <Container isShowDetail={isShowDetail}>
+    <Container>
       <button type='button' onClick={handleClick}>
         <div data-testid='delete-employment-history' />
       </button>
-      <Title
-        isShowDetail={isShowDetail}
-        data-testid='employment-history-title'
-        onClick={onClickToggle}
-        aria-hidden='true'
-      >
+      <CheckBox id={id} type='checkbox' />
+      <Title data-testid='employment-history-title' htmlFor={id}>
         <div>
           <p>{jobTitle || '제목을 입력해주세요.'}</p>
           <p>
@@ -86,10 +79,7 @@ export default function EmploymentHistory({
           />
         </button>
       </Title>
-      <EmploymentHistoryDetail
-        data-testid='employment-history-detail'
-        isShowDetail={isShowDetail}
-      >
+      <EmploymentHistoryDetail data-testid='employment-history-detail'>
         <Input<EmploymentHistoryType>
           label='직무 내용'
           id='employment-history-job-detail'

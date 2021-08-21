@@ -5,9 +5,9 @@ import {
   EmploymentHistory as EmploymentHistoryType,
 } from '@/types/Resume';
 
-import EmploymentHistoryContainer from '../../containers/EmploymentHistoryContainer';
-
 import Container from './style';
+
+import EmploymentHistory from '../EmploymentHistory';
 
 type Props = {
   employmentHistories: EmploymentHistoryType[];
@@ -36,7 +36,7 @@ export default function EmploymentHistories({
       <p>근무 경력을 최근순으로 입력해주세요.</p>
       <ul>
         {employmentHistories.map((employmentHistory) => (
-          <EmploymentHistoryContainer
+          <EmploymentHistory
             key={employmentHistory.id}
             employmentHistory={employmentHistory}
             onChange={onChange}
