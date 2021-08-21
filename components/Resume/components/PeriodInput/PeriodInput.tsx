@@ -1,20 +1,21 @@
+import { InputName } from '@/types/Resume';
 import { ChangeEvent } from 'react';
 
 import { PeriodInputWrapper } from '../EmploymentHistory/style';
 
-type Props = {
+type Props<T> = {
   label: string;
   id: string;
   startDatePlaceholder: string;
   endDatePlaceholder: string;
-  startDateName: string;
-  endDateName: string;
+  startDateName: InputName<T>;
+  endDateName: InputName<T>;
   startDateValue: string;
   endDateValue: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function PeriodInput({
+export default function PeriodInput<T>({
   label,
   id,
   startDatePlaceholder,
@@ -24,7 +25,7 @@ export default function PeriodInput({
   startDateValue,
   endDateValue,
   onChange,
-}: Props) {
+}: Props<T>) {
   return (
     <PeriodInputWrapper>
       <label id={id}>{label}</label>

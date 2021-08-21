@@ -1,22 +1,23 @@
+import { InputName } from '@/types/Resume';
 import { ChangeEvent } from 'react';
 
-type Props = {
+type Props<T> = {
   label: string;
   id: string;
   placeholder: string;
-  name: string;
+  name: InputName<T>;
   value: string;
   onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
-export default function TextArea({
+export default function TextArea<T>({
   label,
   id,
   placeholder,
   name,
   value,
   onChange,
-}: Props) {
+}: Props<T>) {
   return (
     <>
       <label htmlFor={id}>{label}</label>

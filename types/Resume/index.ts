@@ -17,4 +17,4 @@ export type EmploymentHistory = {
   description: string;
 };
 
-export type InputName<T> = keyof T;
+export type InputName<T> = Extract<keyof T, string>;

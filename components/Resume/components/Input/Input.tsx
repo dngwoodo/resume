@@ -1,24 +1,25 @@
+import { InputName } from '@/types/Resume';
 import { ChangeEvent } from 'react';
 
 import { InputWrapper } from '../Basic/style';
 
-type Props = {
+type Props<T> = {
   label: string;
   id: string;
   placeholder: string;
-  name: string;
+  name: InputName<T>;
   value: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function Input({
+export default function Input<T>({
   label,
   id,
   placeholder,
   name,
   value,
   onChange,
-}: Props) {
+}: Props<T>) {
   return (
     <InputWrapper>
       <label htmlFor={id}>{label}</label>
