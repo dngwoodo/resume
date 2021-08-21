@@ -7,9 +7,7 @@ describe('Header', () => {
   const handleClick = jest.fn();
 
   it('renders logo, nav, avatar, nickname', () => {
-    const { getByRole, container } = render(
-      <Header selectedMenuIndex={0} onClick={handleClick} />
-    );
+    const { getByRole, container } = render(<Header selectedMenuIndex={0} onClick={handleClick} />);
 
     MENUS.forEach(({ title }) => {
       expect(getByRole('link', { name: title })).toBeInTheDocument();

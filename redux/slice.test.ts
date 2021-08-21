@@ -1,9 +1,5 @@
-import reducer, {
-  initialState,
-  changeTitle,
-  changeEmploymentHistoryField,
-  changeBasicField,
-} from '@/redux/slice';
+import reducer, { initialState, changeTitle, changeEmploymentHistoryField, changeBasicField } from '@/redux/slice';
+
 import EMPLOYMENT_HISTORIES from '@/fixtures/employmentHistories';
 
 describe('slice', () => {
@@ -17,10 +13,7 @@ describe('slice', () => {
 
   describe('changeBasicField', () => {
     it('changes resume field', () => {
-      const { name } = reducer(
-        initialState,
-        changeBasicField({ name: 'name', value: '김동우' })
-      );
+      const { name } = reducer(initialState, changeBasicField({ name: 'name', value: '김동우' }));
 
       expect(name).toBe('김동우');
     });

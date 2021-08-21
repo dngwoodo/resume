@@ -60,7 +60,6 @@ export default function Title({ onInput, onClick }: Props) {
       >
         이력서 제목
       </div>
-      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
       <div
         data-testid='title-control'
         id='title-control'

@@ -10,13 +10,7 @@ export default function BasicContainer() {
   const dispatch = useAppDispatch();
   const basic = useAppSelector((state) => state.resume);
 
-  function handleChange({
-    name,
-    value,
-  }: {
-    name: InputName<BasicType>;
-    value: string;
-  }) {
+  function handleChange({ name, value }: { name: InputName<BasicType>; value: string }) {
     dispatch(changeBasicField({ name, value }));
   }
 

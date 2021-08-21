@@ -10,19 +10,12 @@ type Props<T> = {
   onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
-export default function TextArea<T>({
-  label,
-  id,
-  placeholder,
-  name,
-  value,
-  onChange,
-}: Props<T>) {
+export default function TextArea<T>({ label, id, placeholder, name, value, onChange }: Props<T>) {
   return (
     <>
       <label htmlFor={id}>{label}</label>
       <textarea
-        id={id}
+        id={id} //
         placeholder={placeholder}
         name={name}
         value={value}

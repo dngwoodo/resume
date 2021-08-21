@@ -1,9 +1,6 @@
 import Image from 'next/image';
 
-import {
-  InputName,
-  EmploymentHistory as EmploymentHistoryType,
-} from '@/types/Resume';
+import { InputName, EmploymentHistory as EmploymentHistoryType } from '@/types/Resume';
 
 import Container from './style';
 
@@ -11,15 +8,7 @@ import EmploymentHistory from '../EmploymentHistory';
 
 type Props = {
   employmentHistories: EmploymentHistoryType[];
-  onChange: ({
-    id,
-    name,
-    value,
-  }: {
-    id: string;
-    name: InputName<EmploymentHistoryType>;
-    value: string;
-  }) => void;
+  onChange: ({ id, name, value }: { id: string; name: InputName<EmploymentHistoryType>; value: string }) => void;
   onClickDeleteEmploymentHistory: (id: string) => void;
   onClickAddEmploymentHistory: () => void;
 };
@@ -47,11 +36,7 @@ export default function EmploymentHistories({
       <button type='button' onClick={onClickAddEmploymentHistory}>
         <div>
           <div>
-            <Image
-              src='/assets/plus.png'
-              alt='add-employment-history'
-              layout='fill'
-            />
+            <Image src='/assets/plus.png' alt='add-employment-history' layout='fill' />
           </div>
         </div>
         <span>경력 추가하기</span>

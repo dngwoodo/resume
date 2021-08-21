@@ -12,19 +12,12 @@ type Props<T> = {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function Input<T>({
-  label,
-  id,
-  placeholder,
-  name,
-  value,
-  onChange,
-}: Props<T>) {
+export default function Input<T>({ label, id, placeholder, name, value, onChange }: Props<T>) {
   return (
     <InputWrapper>
       <label htmlFor={id}>{label}</label>
       <input
-        name={name}
+        name={name} //
         id={id}
         type='text'
         placeholder={placeholder}

@@ -46,17 +46,18 @@ export const { reducer, actions } = createSlice({
   initialState,
   reducers: {
     // change
-    changeTitle(state, { payload: title }: PayloadAction<string>) {
+    changeTitle(
+      state, //
+      { payload: title }: PayloadAction<string>
+    ) {
       return {
         ...state,
         title,
       };
     },
     changeBasicField(
-      state,
-      {
-        payload: { name, value },
-      }: PayloadAction<{ name: InputName<Basic>; value: string }>
+      state, //
+      { payload: { name, value } }: PayloadAction<{ name: InputName<Basic>; value: string }>
     ) {
       return {
         ...state,
@@ -64,22 +65,13 @@ export const { reducer, actions } = createSlice({
       };
     },
     changeEmploymentHistoryField(
-      state,
-      {
-        payload: { id, name, value },
-      }: PayloadAction<{
-        id: string;
-        name: InputName<EmploymentHistory>;
-        value: string;
-      }>
+      state, //
+      { payload: { id, name, value } }: PayloadAction<{ id: string; name: InputName<EmploymentHistory>; value: string }>
     ) {
       return {
         ...state,
-        employmentHistories: state.employmentHistories.map(
-          (employmentHistory) =>
-            employmentHistory.id === id
-              ? { ...employmentHistory, [name]: value }
-              : employmentHistory
+        employmentHistories: state.employmentHistories.map((employmentHistory) =>
+          employmentHistory.id === id ? { ...employmentHistory, [name]: value } : employmentHistory
         ),
       };
     },
@@ -100,7 +92,7 @@ export const { reducer, actions } = createSlice({
       };
     },
     completeLoadResume(
-      state,
+      state, //
       { payload: newResume }: PayloadAction<ResumeState>
     ) {
       const { loadings, errors } = state;
@@ -145,7 +137,10 @@ export const { reducer, actions } = createSlice({
         },
       };
     },
-    completeCreateEmploymentHistory(state, { payload: employmentHistories }) {
+    completeCreateEmploymentHistory(
+      state, //
+      { payload: employmentHistories }: PayloadAction<EmploymentHistory[]>
+    ) {
       const { loadings, errors } = state;
 
       return {
@@ -188,7 +183,10 @@ export const { reducer, actions } = createSlice({
         },
       };
     },
-    completeDeleteEmploymentHistory(state, { payload: employmentHistories }) {
+    completeDeleteEmploymentHistory(
+      state, //
+      { payload: employmentHistories }: PayloadAction<EmploymentHistory[]>
+    ) {
       const { loadings, errors } = state;
 
       return {

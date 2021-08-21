@@ -7,9 +7,7 @@ describe('Title', () => {
   const handleClick = jest.fn();
 
   it('renders title', () => {
-    const { getByText, container } = render(
-      <Title onClick={handleClick} onInput={handleInput} />
-    );
+    const { getByText, container } = render(<Title onClick={handleClick} onInput={handleInput} />);
 
     expect(getByText('이력서 제목')).toBeInTheDocument();
     expect(container).toContainHTML('<img');

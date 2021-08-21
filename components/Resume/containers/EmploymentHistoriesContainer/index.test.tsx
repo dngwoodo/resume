@@ -44,13 +44,11 @@ describe('EmploymentHistoriesContainer', () => {
   it('listens change event', () => {
     const { getByPlaceholderText } = render(<EmploymentHistoriesContainer />);
 
-    EMPLOYMENT_HISTORY_PLACEHOLDERS.forEach(
-      (EMPLOYMENT_HISTORY_PLACEHOLDER) => {
-        fireEvent.change(getByPlaceholderText(EMPLOYMENT_HISTORY_PLACEHOLDER), {
-          target: { value: 'test' },
-        });
-      }
-    );
+    EMPLOYMENT_HISTORY_PLACEHOLDERS.forEach((EMPLOYMENT_HISTORY_PLACEHOLDER) => {
+      fireEvent.change(getByPlaceholderText(EMPLOYMENT_HISTORY_PLACEHOLDER), {
+        target: { value: 'test' },
+      });
+    });
 
     expect(dispatch).toBeCalledTimes(EMPLOYMENT_HISTORY_PLACEHOLDERS.length);
   });

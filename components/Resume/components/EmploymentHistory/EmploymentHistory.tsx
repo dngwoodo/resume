@@ -2,10 +2,7 @@ import { ChangeEvent } from 'react';
 
 import Image from 'next/image';
 
-import {
-  EmploymentHistory as EmploymentHistoryType,
-  InputName,
-} from '@/types/Resume';
+import { EmploymentHistory as EmploymentHistoryType, InputName } from '@/types/Resume';
 
 import { Container, Title, Detail, TextAreaContainer, CheckBox } from './style';
 
@@ -15,29 +12,14 @@ import TextArea from '../TextArea';
 
 type Props = {
   employmentHistory: EmploymentHistoryType;
-  onChange: ({
-    id,
-    name,
-    value,
-  }: {
-    id: string;
-    name: InputName<EmploymentHistoryType>;
-    value: string;
-  }) => void;
+  onChange: ({ id, name, value }: { id: string; name: InputName<EmploymentHistoryType>; value: string }) => void;
   onClickDeleteEmploymentHistory: (id: string) => void;
 };
 
-export default function EmploymentHistory({
-  employmentHistory,
-  onChange,
-  onClickDeleteEmploymentHistory,
-}: Props) {
-  const { id, jobTitle, employer, startDate, endDate, address, description } =
-    employmentHistory;
+export default function EmploymentHistory({ employmentHistory, onChange, onClickDeleteEmploymentHistory }: Props) {
+  const { id, jobTitle, employer, startDate, endDate, address, description } = employmentHistory;
 
-  function handleChange(
-    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
-  ) {
+  function handleChange(event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) {
     onChange({
       id,
       name: event.target.name as InputName<EmploymentHistoryType>,
@@ -58,19 +40,10 @@ export default function EmploymentHistory({
       <Title data-testid='employment-history-title' htmlFor={id}>
         <div>
           <p>{jobTitle || '제목을 입력해주세요.'}</p>
-          <p>
-            {startDate && endDate
-              ? `${startDate} - ${endDate}`
-              : '근무 기간을 입력해주세요.'}
-          </p>
+          <p>{startDate && endDate ? `${startDate} - ${endDate}` : '근무 기간을 입력해주세요.'}</p>
         </div>
         <button type='button'>
-          <Image
-            src='/assets/arrow.png'
-            alt='dropdown-toggle'
-            layout='fill'
-            data-testid='dropdown-toggle'
-          />
+          <Image src='/assets/arrow.png' alt='dropdown-toggle' layout='fill' data-testid='dropdown-toggle' />
         </button>
       </Title>
       <Detail data-testid='employment-history-detail'>

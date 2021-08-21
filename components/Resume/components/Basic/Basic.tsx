@@ -9,21 +9,13 @@ import TextArea from '../TextArea';
 
 type Props = {
   basic: BasicType;
-  onChange: ({
-    name,
-    value,
-  }: {
-    name: InputName<BasicType>;
-    value: string;
-  }) => void;
+  onChange: ({ name, value }: { name: InputName<BasicType>; value: string }) => void;
 };
 
 export default function Basic({ basic, onChange }: Props) {
   const { name, jobTitle, email, phone, address, selfIntroduction } = basic;
 
-  function handleChange(
-    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
-  ) {
+  function handleChange(event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) {
     onChange({
       name: event.target.name as InputName<BasicType>,
       value: event.target.value,
