@@ -11,11 +11,11 @@ import {
   Container,
   Title,
   EmploymentHistoryDetail,
-  PeriodInputWrapper,
   TextAreaContainer,
 } from './style';
 
 import Input from '../Input';
+import PeriodInput from '../PeriodInput';
 
 type Props = {
   employmentHistory: EmploymentHistoryType;
@@ -105,27 +105,17 @@ export default function EmploymentHistory({
           value={employer}
           onChange={handleChange}
         />
-        <PeriodInputWrapper>
-          <label id='employment-history-period'>근무 기간</label>
-          <div>
-            <input
-              aria-labelledby='employment-history-period'
-              type='text'
-              name='startDate'
-              value={startDate}
-              onChange={handleChange}
-              placeholder='2020.10'
-            />
-            <input
-              aria-labelledby='employment-history-period'
-              type='text'
-              name='endDate'
-              value={endDate}
-              onChange={handleChange}
-              placeholder='2021.03'
-            />
-          </div>
-        </PeriodInputWrapper>
+        <PeriodInput
+          label='근무 기간'
+          id='employment-history-period'
+          startDatePlaceholder='2020.10'
+          endDatePlaceholder='2021.03'
+          startDateName='start-date'
+          endDateName='end-date'
+          startDateValue={startDate}
+          endDateValue={endDate}
+          onChange={handleChange}
+        />
         <Input
           label='지역'
           id='employment-history-address'
