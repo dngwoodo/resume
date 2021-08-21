@@ -11,10 +11,12 @@ import {
   Container,
   Title,
   EmploymentHistoryDetail,
-  PeriodInputWrapper,
   TextAreaContainer,
 } from './style';
-import { InputWrapper } from '../Basic/style';
+
+import Input from '../Input';
+import PeriodInput from '../PeriodInput';
+import TextArea from '../TextArea';
 
 type Props = {
   employmentHistory: EmploymentHistoryType;
@@ -88,68 +90,49 @@ export default function EmploymentHistory({
         data-testid='employment-history-detail'
         isShowDetail={isShowDetail}
       >
-        <InputWrapper>
-          <label htmlFor='employment-history-job-detail'>직무 내용</label>
-          <input
-            id='employment-history-job-detail'
-            type='text'
-            name='jobTitle'
-            value={jobTitle}
-            onChange={handleChange}
-            placeholder='직무를 입력해주세요.'
-          />
-        </InputWrapper>
-        <InputWrapper>
-          <label htmlFor='employment-history-employer'>회사명</label>
-          <input
-            id='employment-history-employer'
-            type='text'
-            name='employer'
-            value={employer}
-            onChange={handleChange}
-            placeholder='회사명을 입력하세요.'
-          />
-        </InputWrapper>
-        <PeriodInputWrapper>
-          <label id='employment-history-period'>근무 기간</label>
-          <div>
-            <input
-              aria-labelledby='employment-history-period'
-              type='text'
-              name='startDate'
-              value={startDate}
-              onChange={handleChange}
-              placeholder='2020.10'
-            />
-            <input
-              aria-labelledby='employment-history-period'
-              type='text'
-              name='endDate'
-              value={endDate}
-              onChange={handleChange}
-              placeholder='2021.03'
-            />
-          </div>
-        </PeriodInputWrapper>
-        <InputWrapper>
-          <label htmlFor='employment-history-address'>지역</label>
-          <input
-            type='text'
-            id='employment-history-address'
-            name='address'
-            value={address}
-            onChange={handleChange}
-            placeholder='지역을 입력해주세요.'
-          />
-        </InputWrapper>
+        <Input
+          label='직무 내용'
+          id='employment-history-job-detail'
+          placeholder='직무를 입력해주세요.'
+          name='jobTitle'
+          value={jobTitle}
+          onChange={handleChange}
+        />
+        <Input
+          label='회사명'
+          id='employment-history-employer'
+          placeholder='회사명을 입력하세요.'
+          name='employer'
+          value={employer}
+          onChange={handleChange}
+        />
+        <PeriodInput
+          label='근무 기간'
+          id='employment-history-period'
+          startDatePlaceholder='2020.10'
+          endDatePlaceholder='2021.03'
+          startDateName='startDate'
+          endDateName='endDate'
+          startDateValue={startDate}
+          endDateValue={endDate}
+          onChange={handleChange}
+        />
+        <Input
+          label='지역'
+          id='employment-history-address'
+          placeholder='지역을 입력해주세요.'
+          name='address'
+          value={address}
+          onChange={handleChange}
+        />
         <TextAreaContainer>
-          <label htmlFor='employment-history-description'>경력 기술</label>
-          <textarea
+          <TextArea
+            label='경력 기술'
             id='employment-history-description'
+            placeholder='간단한 자기소개를 통해 이력서를 돋보이게 만들어보세요.'
             name='description'
             value={description}
             onChange={handleChange}
-            placeholder='간단한 자기소개를 통해 이력서를 돋보이게 만들어보세요.'
           />
         </TextAreaContainer>
       </EmploymentHistoryDetail>
