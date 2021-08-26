@@ -20,6 +20,13 @@ describe('EmploymentHistories', () => {
     );
   }
 
+  it('renders title, description', () => {
+    const { getByText } = renderEmploymentHistories();
+
+    expect(getByText('경력')).toBeInTheDocument();
+    expect(getByText('근무 경력을 최근순으로 입력해주세요.')).toBeInTheDocument();
+  });
+
   it('renders button', () => {
     const { getByText } = renderEmploymentHistories();
 

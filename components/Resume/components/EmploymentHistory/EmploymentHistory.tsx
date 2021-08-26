@@ -58,7 +58,7 @@ export default function EmploymentHistory({ employmentHistory, onChange, onClick
         <Input<EmploymentHistoryType>
           label='회사명'
           id='employment-history-employer'
-          placeholder='회사명을 입력하세요.'
+          placeholder='회사명을 입력해주세요.'
           name='employer'
           value={employer}
           onChange={handleChange}
