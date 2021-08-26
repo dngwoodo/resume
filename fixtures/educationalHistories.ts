@@ -1,4 +1,4 @@
-const educationalHistory = [
+const educationalHistories = [
   {
     id: 'First',
     school: '',
@@ -10,4 +10,4 @@ const educationalHistory = [
   },
 ];
 
-export default educationalHistory;
+export default educationalHistories;
