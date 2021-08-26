@@ -1,14 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Basic, EmploymentHistory, InputName, EducationalHistory } from '@/types/Resume';
+import update from '@/utils/update';
 
-type ResumeState = {
+export type ResumeState = {
   title: string;
   employmentHistories: EmploymentHistory[];
   educationalHistories: EducationalHistory[];
 } & Basic;
 
-type InitialState = {
+export type InitialState = {
   errors: {
     loadResume: string | null;
     createEmploymentHistory: string | null;
@@ -60,30 +61,23 @@ export const { reducer, actions } = createSlice({
       state, //
       { payload: title }: PayloadAction<string>
     ) {
-      return {
-        ...state,
-        title,
-      };
+      return update(state, { title });
     },
     changeBasicField(
       state, //
       { payload: { name, value } }: PayloadAction<{ name: InputName<Basic>; value: string }>
     ) {
-      return {
-        ...state,
-        [name]: value,
-      };
+      return update(state, { [name]: value });
     },
     changeEmploymentHistoryField(
       state, //
       { payload: { id, name, value } }: PayloadAction<{ id: string; name: InputName<EmploymentHistory>; value: string }>
     ) {
-      return {
-        ...state,
-        employmentHistories: state.employmentHistories.map((employmentHistory) =>
-          employmentHistory.id === id ? { ...employmentHistory, [name]: value } : employmentHistory
-        ),
-      };
+      const employmentHistories = state.employmentHistories.map((employmentHistory) =>
+        employmentHistory.id === id ? { ...employmentHistory, [name]: value } : employmentHistory
+      );
+
+      return update(state, { employmentHistories });
     },
     changeEducationalHistoryField(
       state, //
@@ -91,246 +85,141 @@ export const { reducer, actions } = createSlice({
         payload: { id, name, value },
       }: PayloadAction<{ id: string; name: InputName<EducationalHistory>; value: string }>
     ) {
-      return {
-        ...state,
-        educationalHistories: state.educationalHistories.map((educationalHistory) =>
-          educationalHistory.id === id ? { ...educationalHistory, [name]: value } : educationalHistory
-        ),
-      };
+      const educationalHistories = state.educationalHistories.map((educationalHistory) =>
+        educationalHistory.id === id ? { ...educationalHistory, [name]: value } : educationalHistory
+      );
+
+      return update(state, { educationalHistories });
     },
     // loadResume
     startLoadResume(state) {
-      const { loadings, errors } = state;
-
-      return {
-        ...state,
-        loadings: {
-          ...loadings,
-          loadResume: true,
-        },
-        errors: {
-          ...errors,
-          loadResume: null,
-        },
-      };
+      return update(
+        state, //
+        { loadings: { loadResume: true } },
+        { errors: { loadResume: null } }
+      );
     },
     completeLoadResume(
       state, //
       { payload: newResume }: PayloadAction<ResumeState>
     ) {
-      const { loadings, errors } = state;
-
-      return {
-        ...state,
-        ...newResume,
-        loadings: {
-          ...loadings,
-          loadResume: false,
-        },
-        errors: {
-          ...errors,
-          loadResume: null,
-        },
-      };
+      return update(
+        state, //
+        newResume,
+        { loadings: { loadResume: false } },
+        { errors: { loadResume: null } }
+      );
     },
     failLoadResume(state, { payload: error }) {
-      const { loadings, errors } = state;
-
-      return {
-        ...state,
-        loadings: {
-          ...loadings,
-          loadResume: false,
-        },
-        errors: {
-          ...errors,
-          loadResume: error,
-        },
-      };
+      return update(
+        state, //
+        { loadings: { loadResume: false } },
+        { errors: { loadResume: error } }
+      );
     },
     // createEmploymentHistory
     startCreateEmploymentHistory(state) {
-      const { loadings } = state;
-
-      return {
-        ...state,
-        loadings: {
-          ...loadings,
-          createEmploymentHistory: true,
-        },
-      };
+      return update(
+        state,
+        { loadings: { createEmploymentHistory: true } },
+        { errors: { createEmploymentHistory: null } }
+      );
     },
     completeCreateEmploymentHistory(
       state, //
       { payload: employmentHistories }: PayloadAction<EmploymentHistory[]>
     ) {
-      const { loadings, errors } = state;
-
-      return {
-        ...state,
-        employmentHistories,
-        loadings: {
-          ...loadings,
-          createEmploymentHistory: false,
-        },
-        errors: {
-          ...errors,
-          createEmploymentHistory: null,
-        },
-      };
+      return update(
+        state,
+        { employmentHistories },
+        { loadings: { createEmploymentHistory: false } },
+        { errors: { createEmploymentHistory: null } }
+      );
     },
     failCreateEmploymentHistory(state, { payload: error }) {
-      const { loadings, errors } = state;
-
-      return {
-        ...state,
-        loadings: {
-          ...loadings,
-          createEmploymentHistory: false,
-        },
-        errors: {
-          ...errors,
-          createEmploymentHistory: error,
-        },
-      };
+      return update(
+        state,
+        { loadings: { createEmploymentHistory: false } },
+        { errors: { createEmploymentHistory: error } }
+      );
     },
     // deleteEmploymentHistory
     startDeleteEmploymentHistory(state) {
-      const { loadings } = state;
-
-      return {
-        ...state,
-        loadings: {
-          ...loadings,
-          deleteEmploymentHistory: true,
-        },
-      };
+      return update(
+        state,
+        { loadings: { deleteEmploymentHistory: true } },
+        { errors: { deleteEmploymentHistory: null } }
+      );
     },
     completeDeleteEmploymentHistory(
       state, //
       { payload: employmentHistories }: PayloadAction<EmploymentHistory[]>
     ) {
-      const { loadings, errors } = state;
-
-      return {
-        ...state,
-        employmentHistories,
-        loadings: {
-          ...loadings,
-          deleteEmploymentHistory: false,
-        },
-        errors: {
-          ...errors,
-          deleteEmploymentHistory: null,
-        },
-      };
+      return update(
+        state,
+        { employmentHistories },
+        { loadings: { deleteEmploymentHistory: false } },
+        { errors: { deleteEmploymentHistory: null } }
+      );
     },
     failDeleteEmploymentHistory(state, { payload: error }) {
-      const { loadings, errors } = state;
-
-      return {
-        ...state,
-        loadings: {
-          ...loadings,
-          deleteEmploymentHistory: false,
-        },
-        errors: {
-          ...errors,
-          deleteEmploymentHistory: error,
-        },
-      };
+      return update(
+        state,
+        { loadings: { deleteEmploymentHistory: false } },
+        { errors: { deleteEmploymentHistory: error } }
+      );
     },
     // createEducation
     startCreateEducationalHistory(state) {
-      const { loadings } = state;
-
-      return {
-        ...state,
-        loadings: {
-          ...loadings,
-          createEducation: true,
-        },
-      };
+      return update(
+        state,
+        { loadings: { createEducationalHistory: true } },
+        { errors: { createEducationalHistory: null } }
+      );
     },
     completeCreateEducationalHistory(
       state, //
       { payload: educationalHistories }: PayloadAction<EducationalHistory[]>
     ) {
-      const { loadings, errors } = state;
-
-      return {
-        ...state,
-        educationalHistories,
-        loadings: {
-          ...loadings,
-          createEducationalHistory: false,
-        },
-        errors: {
-          ...errors,
-          createEducationalHistory: null,
-        },
-      };
+      return update(
+        state,
+        { educationalHistories },
+        { loadings: { createEducationalHistory: false } },
+        { errors: { createEducationalHistory: null } }
+      );
     },
     failCreateEducationalHistory(state, { payload: error }) {
-      const { loadings, errors } = state;
-
-      return {
-        ...state,
-        loadings: {
-          ...loadings,
-          createEducationalHistory: false,
-        },
-        errors: {
-          ...errors,
-          createEducationalHistory: error,
-        },
-      };
+      return update(
+        state,
+        { loadings: { createEducationalHistory: false } },
+        { errors: { createEducationalHistory: error } }
+      );
     },
     // deleteEducation
     startDeleteEducationalHistory(state) {
-      const { loadings } = state;
-
-      return {
-        ...state,
-        loadings: {
-          ...loadings,
-          createEducationalHistory: true,
-        },
-      };
+      return update(
+        state,
+        { loadings: { deleteEducationalHistory: true } },
+        { errors: { deleteEducationalHistory: null } }
+      );
     },
     completeDeleteEducationalHistory(
       state, //
       { payload: educationalHistories }: PayloadAction<EducationalHistory[]>
     ) {
-      const { loadings, errors } = state;
-
-      return {
-        ...state,
-        educationalHistories,
-        loadings: {
-          ...loadings,
-          deleteEducationalHistory: false,
-        },
-        errors: {
-          ...errors,
-          deleteEducationalHistory: null,
-        },
-      };
+      return update(
+        state,
+        { educationalHistories },
+        { loadings: { deleteEducationalHistory: false } },
+        { errors: { deleteEducationalHistory: null } }
+      );
     },
     failDeleteEducationalHistory(state, { payload: error }) {
-      const { loadings, errors } = state;
-
-      return {
-        ...state,
-        loadings: {
-          ...loadings,
-          deleteEducation: false,
-        },
-        errors: {
-          ...errors,
-          deleteEducation: error,
-        },
-      };
+      return update(
+        state,
+        { loadings: { deleteEducationalHistory: false } },
+        { errors: { deleteEducationalHistory: error } }
+      );
     },
   },
 });
