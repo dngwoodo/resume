@@ -5,6 +5,8 @@ import {
   removeEmploymentHistory,
   updateResume,
   fetchResume,
+  addEducationalHistory,
+  removeEducationalHistory,
 } from '@/services/resume';
 
 import {
@@ -17,6 +19,12 @@ import {
   startDeleteEmploymentHistory,
   completeDeleteEmploymentHistory,
   failDeleteEmploymentHistory,
+  startDeleteEducationalHistory,
+  completeDeleteEducationalHistory,
+  failDeleteEducationalHistory,
+  startCreateEducationalHistory,
+  completeCreateEducationalHistory,
+  failCreateEducationalHistory,
 } from '@/redux/slice';
 
 export function loadResume() {
@@ -63,6 +71,30 @@ export function deleteEmploymentHistory(id: string) {
       dispatch(completeDeleteEmploymentHistory(data));
     } catch (error) {
       dispatch(failDeleteEmploymentHistory(error));
+    }
+  };
+}
+
+export function createEducationalHistory() {
+  return async (dispatch: Dispatch) => {
+    dispatch(startCreateEducationalHistory());
+    try {
+      const { data } = await addEducationalHistory();
+      dispatch(completeCreateEducationalHistory(data));
+    } catch (error) {
+      dispatch(failCreateEducationalHistory(error));
+    }
+  };
+}
+
+export function deleteEducationalHistory(id: string) {
+  return async (dispatch: Dispatch) => {
+    dispatch(startDeleteEducationalHistory());
+    try {
+      const { data } = await removeEducationalHistory(id);
+      dispatch(completeDeleteEducationalHistory(data));
+    } catch (error) {
+      dispatch(failDeleteEducationalHistory(error));
     }
   };
 }

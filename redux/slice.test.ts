@@ -1,6 +1,13 @@
-import reducer, { initialState, changeTitle, changeEmploymentHistoryField, changeBasicField } from '@/redux/slice';
+import reducer, {
+  initialState,
+  changeTitle,
+  changeBasicField,
+  changeEmploymentHistoryField,
+  changeEducationalHistoryField,
+} from '@/redux/slice';
 
 import EMPLOYMENT_HISTORIES from '@/fixtures/employmentHistories';
+import EDUCATIONAL_HISTORIES from '@/fixtures/educationalHistories';
 
 describe('slice', () => {
   describe('changeTitle', () => {
@@ -31,6 +38,21 @@ describe('slice', () => {
       );
 
       expect(employmentHistories[0].jobTitle).toBe('프론트엔드');
+    });
+  });
+
+  describe('changeEducationalHistoryField', () => {
+    it('changes employment history field', () => {
+      const { educationalHistories } = reducer(
+        { ...initialState, educationalHistories: EDUCATIONAL_HISTORIES },
+        changeEducationalHistoryField({
+          id: 'First',
+          name: 'school',
+          value: '동래고등학교',
+        })
+      );
+
+      expect(educationalHistories[0].school).toBe('동래고등학교');
     });
   });
 });

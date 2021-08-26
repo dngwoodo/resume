@@ -17,4 +17,14 @@ export type EmploymentHistory = {
   description: string;
 };
 
+export type EducationalHistory = {
+  id: string;
+  school: string;
+  degree: string;
+  startDate: string;
+  endDate: string;
+  grade: string;
+  description: string;
+};
+
 export type InputName<T> = Extract<keyof T, string>;

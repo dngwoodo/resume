@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { Basic, EmploymentHistory, InputName } from '@/types/Resume';
+import { Basic, EmploymentHistory, InputName, EducationalHistory } from '@/types/Resume';
 
 type ResumeState = {
   title: string;
   employmentHistories: EmploymentHistory[];
+  educationalHistories: EducationalHistory[];
 } & Basic;
 
 type InitialState = {
@@ -12,11 +13,15 @@ type InitialState = {
     loadResume: string | null;
     createEmploymentHistory: string | null;
     deleteEmploymentHistory: string | null;
+    createEducationalHistory: string | null;
+    deleteEducationalHistory: string | null;
   };
   loadings: {
     loadResume: boolean;
     createEmploymentHistory: boolean;
     deleteEmploymentHistory: boolean;
+    createEducationalHistory: boolean;
+    deleteEducationalHistory: boolean;
   };
 };
 
@@ -29,15 +34,20 @@ export const initialState: ResumeState & InitialState = {
   address: '',
   selfIntroduction: '',
   employmentHistories: [],
+  educationalHistories: [],
   errors: {
     loadResume: null,
     createEmploymentHistory: null,
     deleteEmploymentHistory: null,
+    createEducationalHistory: null,
+    deleteEducationalHistory: null,
   },
   loadings: {
     loadResume: false,
     createEmploymentHistory: false,
     deleteEmploymentHistory: false,
+    createEducationalHistory: false,
+    deleteEducationalHistory: false,
   },
 };
 
@@ -72,6 +82,19 @@ export const { reducer, actions } = createSlice({
         ...state,
         employmentHistories: state.employmentHistories.map((employmentHistory) =>
           employmentHistory.id === id ? { ...employmentHistory, [name]: value } : employmentHistory
+        ),
+      };
+    },
+    changeEducationalHistoryField(
+      state, //
+      {
+        payload: { id, name, value },
+      }: PayloadAction<{ id: string; name: InputName<EducationalHistory>; value: string }>
+    ) {
+      return {
+        ...state,
+        educationalHistories: state.educationalHistories.map((educationalHistory) =>
+          educationalHistory.id === id ? { ...educationalHistory, [name]: value } : educationalHistory
         ),
       };
     },
@@ -217,6 +240,98 @@ export const { reducer, actions } = createSlice({
         },
       };
     },
+    // createEducation
+    startCreateEducationalHistory(state) {
+      const { loadings } = state;
+
+      return {
+        ...state,
+        loadings: {
+          ...loadings,
+          createEducation: true,
+        },
+      };
+    },
+    completeCreateEducationalHistory(
+      state, //
+      { payload: educationalHistories }: PayloadAction<EducationalHistory[]>
+    ) {
+      const { loadings, errors } = state;
+
+      return {
+        ...state,
+        educationalHistories,
+        loadings: {
+          ...loadings,
+          createEducationalHistory: false,
+        },
+        errors: {
+          ...errors,
+          createEducationalHistory: null,
+        },
+      };
+    },
+    failCreateEducationalHistory(state, { payload: error }) {
+      const { loadings, errors } = state;
+
+      return {
+        ...state,
+        loadings: {
+          ...loadings,
+          createEducationalHistory: false,
+        },
+        errors: {
+          ...errors,
+          createEducationalHistory: error,
+        },
+      };
+    },
+    // deleteEducation
+    startDeleteEducationalHistory(state) {
+      const { loadings } = state;
+
+      return {
+        ...state,
+        loadings: {
+          ...loadings,
+          createEducationalHistory: true,
+        },
+      };
+    },
+    completeDeleteEducationalHistory(
+      state, //
+      { payload: educationalHistories }: PayloadAction<EducationalHistory[]>
+    ) {
+      const { loadings, errors } = state;
+
+      return {
+        ...state,
+        educationalHistories,
+        loadings: {
+          ...loadings,
+          deleteEducationalHistory: false,
+        },
+        errors: {
+          ...errors,
+          deleteEducationalHistory: null,
+        },
+      };
+    },
+    failDeleteEducationalHistory(state, { payload: error }) {
+      const { loadings, errors } = state;
+
+      return {
+        ...state,
+        loadings: {
+          ...loadings,
+          deleteEducation: false,
+        },
+        errors: {
+          ...errors,
+          deleteEducation: error,
+        },
+      };
+    },
   },
 });
 
@@ -224,6 +339,7 @@ export const {
   changeTitle,
   changeBasicField,
   changeEmploymentHistoryField,
+  changeEducationalHistoryField,
   startLoadResume,
   completeLoadResume,
   failLoadResume,
@@ -233,6 +349,12 @@ export const {
   startDeleteEmploymentHistory,
   completeDeleteEmploymentHistory,
   failDeleteEmploymentHistory,
+  startCreateEducationalHistory,
+  completeCreateEducationalHistory,
+  failCreateEducationalHistory,
+  startDeleteEducationalHistory,
+  completeDeleteEducationalHistory,
+  failDeleteEducationalHistory,
 } = actions;
 
 export default reducer;
