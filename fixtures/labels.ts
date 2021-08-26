@@ -14,3 +14,11 @@ export const EMPLOYMENT_HISTORY_LABELS = [
   '지역',
   '경력 기술',
 ];
+
+export const EDUCATIONAL_HISTORY_LABELS = [
+  '학교명', //
+  '전공 및 학위(예시: 경영학과 학사)',
+  '재학 기간',
+  '학점',
+  '이수과목 또는 연구내용',
+];

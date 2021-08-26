@@ -9,6 +9,7 @@ import ThumbnailUploaderContainer from '../../containers/ThumbnailUploaderContai
 import ProgressBarContainer from '../../containers/ProgressBarContainer';
 import BasicContainer from '../../containers/BasicContainer';
 import EmploymentHistoriesContainer from '../../containers/EmploymentHistoriesContainer';
+import EducationalHistoriesContainer from '../../containers/EducationalHistoriesContainer';
 
 export default function ResumeControls() {
   const dispatch = useAppDispatch();
@@ -24,6 +25,7 @@ export default function ResumeControls() {
       <ProgressBarContainer />
       <BasicContainer />
       <EmploymentHistoriesContainer />
+      <EducationalHistoriesContainer />
     </>
   );
 }

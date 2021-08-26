@@ -22,17 +22,8 @@ describe('ResumeControls', () => {
           phone: '',
           address: '',
           selfIntroduction: '',
-          employmentHistories: [
-            {
-              id: '0',
-              jobTitle: '',
-              employer: '',
-              startDate: '',
-              endDate: '',
-              address: '',
-              description: '',
-            },
-          ],
+          employmentHistories: [],
+          educationalHistories: [],
         },
       })
     );
