@@ -7,6 +7,8 @@ import {
   changeResume,
   createEmploymentHistory,
   deleteEmploymentHistory,
+  createEducationalHistory,
+  deleteEducationalHistory,
 } from '@/redux/thunks';
 
 import {
@@ -14,6 +16,8 @@ import {
   removeEmploymentHistory,
   fetchResume,
   updateResume,
+  addEducationalHistory,
+  removeEducationalHistory,
 } from '../services/resume';
 
 jest.mock('@/services/resume');
@@ -30,6 +34,8 @@ describe('thunks', () => {
       (updateResume as jest.Mock).mockResolvedValue({});
       (addEmploymentHistory as jest.Mock).mockResolvedValue([]);
       (removeEmploymentHistory as jest.Mock).mockResolvedValue([]);
+      (addEducationalHistory as jest.Mock).mockResolvedValue([]);
+      (removeEducationalHistory as jest.Mock).mockResolvedValue([]);
     });
 
     it('dispatches loadResume action', async () => {
@@ -103,6 +109,42 @@ describe('thunks', () => {
         payload: undefined,
       });
     });
+
+    it('dispatches createEducationalHistory action', async () => {
+      const store = mockStore({});
+
+      await store.dispatch(createEducationalHistory());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: 'resume/startCreateEducationalHistory',
+        payload: undefined,
+      });
+
+      expect(actions[1]).toEqual({
+        type: 'resume/completeCreateEducationalHistory',
+        payload: undefined,
+      });
+    });
+
+    it('dispatches deleteEducationalHistory action', async () => {
+      const store = mockStore({});
+
+      await store.dispatch(deleteEducationalHistory('First'));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: 'resume/startDeleteEducationalHistory',
+        payload: undefined,
+      });
+
+      expect(actions[1]).toEqual({
+        type: 'resume/completeDeleteEducationalHistory',
+        payload: undefined,
+      });
+    });
   });
 
   context('when data fetching fail', () => {
@@ -113,6 +155,8 @@ describe('thunks', () => {
       (updateResume as jest.Mock).mockRejectedValue(error);
       (addEmploymentHistory as jest.Mock).mockRejectedValue(error);
       (removeEmploymentHistory as jest.Mock).mockRejectedValue(error);
+      (addEducationalHistory as jest.Mock).mockRejectedValue(error);
+      (removeEducationalHistory as jest.Mock).mockRejectedValue(error);
     });
 
     it('dispatches loadResume action', async () => {
@@ -183,6 +227,42 @@ describe('thunks', () => {
 
       expect(actions[1]).toEqual({
         type: 'resume/failDeleteEmploymentHistory',
+        payload: error,
+      });
+    });
+
+    it('dispatches createEducationalHistory action', async () => {
+      const store = mockStore({});
+
+      await store.dispatch(createEducationalHistory());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: 'resume/startCreateEducationalHistory',
+        payload: undefined,
+      });
+
+      expect(actions[1]).toEqual({
+        type: 'resume/failCreateEducationalHistory',
+        payload: error,
+      });
+    });
+
+    it('dispatches deleteEducationalHistory action', async () => {
+      const store = mockStore({});
+
+      await store.dispatch(deleteEducationalHistory('First'));
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: 'resume/startDeleteEducationalHistory',
+        payload: undefined,
+      });
+
+      expect(actions[1]).toEqual({
+        type: 'resume/failDeleteEducationalHistory',
         payload: error,
       });
     });

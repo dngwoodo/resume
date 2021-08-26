@@ -1,11 +1,12 @@
 import { v4 as uuid } from 'uuid';
 
-import { EmploymentHistory } from '@/types/Resume';
+import { EmploymentHistory, EducationalHistory } from '@/types/Resume';
 
 import { initialState } from '@/redux/slice';
 import { store } from '@/redux/store';
 
 let dummyEmploymentHistories: EmploymentHistory[] = [];
+let dummyEducationalHistories: EducationalHistory[] = [];
 
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -20,30 +21,10 @@ export async function fetchResume() {
 export async function updateResume() {
   await sleep(200);
 
-  const {
-    resume: {
-      title, //
-      name,
-      jobTitle,
-      email,
-      phone,
-      address,
-      selfIntroduction,
-      employmentHistories,
-    },
-  } = store.getState();
+  const { resume } = store.getState();
 
   return {
-    data: {
-      title, //
-      name,
-      jobTitle,
-      email,
-      phone,
-      address,
-      selfIntroduction,
-      employmentHistories,
-    },
+    data: resume,
   };
 }
 
@@ -78,4 +59,35 @@ export async function removeEmploymentHistory(id: string) {
   );
 
   return { data: dummyEmploymentHistories };
+}
+
+export async function addEducationalHistory() {
+  await sleep(200);
+
+  const {
+    resume: { educationalHistories },
+  } = store.getState();
+
+  dummyEducationalHistories = [
+    ...educationalHistories,
+    {
+      id: uuid(),
+      school: '',
+      degree: '',
+      startDate: '',
+      endDate: '',
+      grade: '',
+      description: '',
+    },
+  ];
+
+  return { data: dummyEducationalHistories };
+}
+
+export async function removeEducationalHistory(id: string) {
+  await sleep(200);
+
+  dummyEducationalHistories = dummyEducationalHistories.filter((value) => value.id !== id);
+
+  return { data: dummyEducationalHistories };
 }
